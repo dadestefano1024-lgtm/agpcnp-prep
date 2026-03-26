@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html{height:100%;font-size:16px}
+html{height:100%;font-size:17px}
 body{height:100%;min-height:100vh;min-height:-webkit-fill-available;font-family:'DM Sans',sans-serif;background:#0f1117;color:#e8e6df;overflow:hidden;position:fixed;width:100%}
 :root{
   --bg:#0f1117;--bg2:#171b24;--bg3:#1e2332;--surface:#232838;
@@ -35,81 +35,81 @@ body{height:100%;min-height:100vh;min-height:-webkit-fill-available;font-family:
 
 /* HOME */
 #home-screen{overflow-y:auto;padding:calc(var(--safe-top) + 20px) 18px 24px;padding-bottom:calc(var(--safe-bot)+24px)}
-.home-eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:5px}
-.home-title{font-family:'DM Serif Display',serif;font-size:28px;line-height:1.15;color:var(--text);margin-bottom:3px}
-.home-sub{font-size:12px;color:var(--muted);margin-bottom:18px}
+.home-eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:5px}
+.home-title{font-family:'DM Serif Display',serif;font-size:30px;line-height:1.15;color:var(--text);margin-bottom:3px}
+.home-sub{font-size:13px;color:var(--muted);margin-bottom:18px}
 .stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:18px}
 .stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm);padding:11px 8px;text-align:center}
-.stat-val{font-size:22px;font-weight:600;color:var(--text);line-height:1}
-.stat-lbl{font-size:10px;color:var(--muted);margin-top:3px;letter-spacing:.04em;text-transform:uppercase}
-.section-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:8px;margin-top:2px}
+.stat-val{font-size:24px;font-weight:600;color:var(--text);line-height:1}
+.stat-lbl{font-size:11px;color:var(--muted);margin-top:3px;letter-spacing:.04em;text-transform:uppercase}
+.section-label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:8px;margin-top:2px}
 .mode-cards{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
 .mode-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:13px 15px;display:flex;align-items:center;gap:12px;cursor:pointer;-webkit-user-select:none;user-select:none}
 .mode-card:active{background:var(--surface)}
 .mode-card.featured{border-color:var(--gold-b);background:linear-gradient(135deg,var(--bg2) 0%,rgba(212,168,83,.06) 100%)}
 .mode-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.mode-card-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
-.mode-card-sub{font-size:11px;color:var(--muted);line-height:1.4}
+.mode-card-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:2px}
+.mode-card-sub{font-size:12px;color:var(--muted);line-height:1.4}
 .mode-arrow{color:var(--dim);font-size:18px}
 .domain-accordion{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
 .domain-acc-hdr{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm);padding:11px 13px;display:flex;align-items:center;gap:9px;cursor:pointer;-webkit-user-select:none;user-select:none}
 .domain-acc-hdr:active,.domain-acc-hdr.open{background:var(--bg3)}
 .domain-acc-hdr.open{border-radius:var(--r-sm) var(--r-sm) 0 0;border-bottom:none}
 .d-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.d-name{font-size:13px;font-weight:500;color:var(--text);flex:1}
-.d-pct{font-size:11px;font-weight:600}
-.d-chev{font-size:10px;color:var(--dim);transition:transform .2s}
+.d-name{font-size:14px;font-weight:500;color:var(--text);flex:1}
+.d-pct{font-size:12px;font-weight:600}
+.d-chev{font-size:11px;color:var(--dim);transition:transform .2s}
 .d-chev.open{transform:rotate(180deg)}
 .domain-acc-body{display:none;background:var(--bg3);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--r-sm) var(--r-sm);padding:6px 10px 8px}
 .domain-acc-body.open{display:block}
 .sys-row{display:flex;align-items:center;gap:8px;padding:6px 4px;border-radius:6px;cursor:pointer;-webkit-user-select:none;user-select:none}
 .sys-row:active{background:var(--surface)}
-.sys-chev{font-size:9px;color:var(--dim);transition:transform .15s}
+.sys-chev{font-size:10px;color:var(--dim);transition:transform .15s}
 .sys-chev.open{transform:rotate(90deg)}
-.sys-name{font-size:12px;color:var(--text);flex:1}
-.sys-pct{font-size:11px;font-weight:600}
+.sys-name{font-size:13px;color:var(--text);flex:1}
+.sys-pct{font-size:12px;font-weight:600}
 .topic-list{padding-left:18px;margin-bottom:2px}
 .topic-row{display:flex;align-items:center;gap:7px;padding:5px 5px;border-radius:6px;cursor:pointer;-webkit-user-select:none;user-select:none}
 .topic-row:active{background:var(--surface)}
-.topic-name{font-size:12px;color:var(--muted);flex:1}
-.topic-badge{font-size:10px;padding:1px 5px;border-radius:8px;background:var(--bg);color:var(--dim)}
-.topic-pct{font-size:11px;font-weight:600}
+.topic-name{font-size:13px;color:var(--muted);flex:1}
+.topic-badge{font-size:11px;padding:1px 5px;border-radius:8px;background:var(--bg);color:var(--dim)}
+.topic-pct{font-size:12px;font-weight:600}
 .drill-row{display:flex;align-items:center;gap:7px;padding:6px 4px;border-radius:6px;cursor:pointer;margin-top:3px;-webkit-user-select:none;user-select:none}
 .drill-row:active{background:var(--surface)}
 .heatmap-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
 .hm-cell{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm);padding:9px 10px;cursor:pointer}
 .hm-cell:active{background:var(--surface)}
-.hm-topic{font-size:11px;color:var(--muted);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hm-topic{font-size:12px;color:var(--muted);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hm-bar-wrap{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;margin-bottom:3px}
 .hm-bar{height:4px;border-radius:2px}
-.hm-pct{font-size:12px;font-weight:600}
-.hm-count{font-size:10px;color:var(--dim)}
+.hm-pct{font-size:13px;font-weight:600}
+.hm-count{font-size:11px;color:var(--dim)}
 
 /* QUIZ */
 #quiz-screen{background:var(--bg)}
 .quiz-topbar{display:flex;align-items:center;gap:8px;padding:calc(var(--safe-top)+10px) 14px 10px;border-bottom:1px solid var(--border);background:var(--bg);flex-shrink:0}
 .back-btn{width:34px;height:34px;border-radius:9px;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;flex-shrink:0;color:var(--text)}
 .quiz-title-area{flex:1;min-width:0}
-.quiz-mode-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-.quiz-prog-txt{font-size:13px;font-weight:600;color:var(--text)}
+.quiz-mode-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.quiz-prog-txt{font-size:14px;font-weight:600;color:var(--text)}
 .score-chips{display:flex;gap:5px}
-.chip{font-size:11px;font-weight:600;padding:3px 7px;border-radius:20px;border:1px solid}
+.chip{font-size:12px;font-weight:600;padding:3px 7px;border-radius:20px;border:1px solid}
 .chip-g{background:var(--green-bg);color:var(--green);border-color:var(--green-b)}
 .chip-r{background:var(--red-bg);color:var(--red);border-color:var(--red-b)}
 .timer-bar-wrap{height:4px;background:var(--bg3);flex-shrink:0}
 .timer-bar-fill{height:4px;border-radius:0 2px 2px 0;transition:width 1s linear,background .5s}
 .session-timer-row{display:flex;align-items:center;justify-content:space-between;padding:5px 14px;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0}
-.s-timer-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-.s-timer-val{font-size:12px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
-.q-timer-val{font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
+.s-timer-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.s-timer-val{font-size:13px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
+.q-timer-val{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
 .progress-track{height:2px;background:var(--bg3);flex-shrink:0}
 .progress-fill{height:2px;background:var(--gold);transition:width .4s ease;border-radius:0 2px 2px 0}
 .quiz-body{flex:1;overflow-y:auto;overflow-x:hidden;padding:14px 14px 0;-webkit-overflow-scrolling:touch}
-.q-domain-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:20px;border:1px solid;margin-bottom:11px}
-.q-type-badge{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;margin-left:6px;background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-b)}
-.q-text{font-size:15px;line-height:1.6;color:var(--text);margin-bottom:5px}
-.q-stem{font-family:'DM Serif Display',serif;font-size:16px;line-height:1.5;color:var(--text);margin-bottom:14px}
-.q-instruction{font-size:12px;color:var(--purple);background:var(--purple-bg);border:1px solid var(--purple-b);border-radius:6px;padding:5px 10px;margin-bottom:10px;font-weight:500}
+.q-domain-tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:20px;border:1px solid;margin-bottom:11px}
+.q-type-badge{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:3px 8px;border-radius:20px;margin-left:6px;background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-b)}
+.q-text{font-size:16px;line-height:1.6;color:var(--text);margin-bottom:5px}
+.q-stem{font-family:'DM Serif Display',serif;font-size:18px;line-height:1.5;color:var(--text);margin-bottom:14px}
+.q-instruction{font-size:13px;color:var(--purple);background:var(--purple-bg);border:1px solid var(--purple-b);border-radius:6px;padding:5px 10px;margin-bottom:10px;font-weight:500}
 .choices{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
 .choice{display:flex;align-items:flex-start;gap:10px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm);padding:11px 12px;cursor:pointer;-webkit-user-select:none;user-select:none;text-align:left;width:100%;transition:border-color .12s,background .12s}
 .choice:active:not(:disabled){background:var(--surface)}
@@ -118,28 +118,28 @@ body{height:100%;min-height:100vh;min-height:-webkit-fill-available;font-family:
 .choice.correct{background:var(--green-bg);border-color:var(--green-b)}
 .choice.wrong{background:var(--red-bg);border-color:var(--red-b)}
 .choice.missed{background:var(--green-bg);border-color:var(--green-b);opacity:.6}
-.choice-ltr{width:24px;height:24px;border-radius:50%;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--muted);flex-shrink:0}
+.choice-ltr{width:26px;height:26px;border-radius:50%;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--muted);flex-shrink:0}
 .choice.sel .choice-ltr{background:var(--gold-bg);border-color:var(--gold-b);color:var(--gold)}
 .choice.correct .choice-ltr{background:var(--green-bg);border-color:var(--green);color:var(--green)}
 .choice.wrong .choice-ltr{background:var(--red-bg);border-color:var(--red);color:var(--red)}
 .choice.missed .choice-ltr{background:var(--green-bg);border-color:var(--green);color:var(--green)}
-.choice-txt{font-size:13px;line-height:1.5;color:var(--text);padding-top:2px}
+.choice-txt{font-size:15px;line-height:1.5;color:var(--text);padding-top:2px}
 .choice.correct .choice-txt{color:var(--green)}
 .choice.wrong .choice-txt{color:var(--red)}
 .choice.missed .choice-txt{color:var(--green)}
-.multi-submit{width:100%;padding:12px;border-radius:var(--r-sm);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border:1px solid var(--gold-b);background:var(--gold-bg);color:var(--gold);margin-bottom:10px;-webkit-user-select:none;user-select:none}
+.multi-submit{width:100%;padding:12px;border-radius:var(--r-sm);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;border:1px solid var(--gold-b);background:var(--gold-bg);color:var(--gold);margin-bottom:10px;-webkit-user-select:none;user-select:none}
 .multi-submit:disabled{opacity:.35;cursor:default}
 .multi-submit:active:not(:disabled){opacity:.75}
-.explanation{border-radius:var(--r-sm);padding:11px 12px;font-size:13px;line-height:1.65;margin-bottom:9px;display:none;border:1px solid}
+.explanation{border-radius:var(--r-sm);padding:12px 13px;font-size:14px;line-height:1.65;margin-bottom:9px;display:none;border:1px solid}
 .explanation.visible{display:block}
 .explanation.correct-exp{background:var(--green-bg);border-color:var(--green-b);color:#a8d9be}
 .explanation.wrong-exp{background:var(--red-bg);border-color:var(--red-b);color:#e8a8a8}
 .explanation.partial-exp{background:var(--amber-bg);border-color:var(--amber-b);color:#e8c88a}
-.exp-lbl{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.exp-lbl{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
 .exp-lbl.c{color:var(--green)}.exp-lbl.w{color:var(--red)}.exp-lbl.p{color:var(--amber)}
-.conf-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;text-align:center}
+.conf-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;text-align:center}
 .confidence-row{display:flex;gap:7px;margin-bottom:9px}
-.conf-btn{flex:1;padding:9px 4px;border-radius:var(--r-sm);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;border:1px solid;-webkit-user-select:none;user-select:none;text-align:center}
+.conf-btn{flex:1;padding:9px 4px;border-radius:var(--r-sm);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:1px solid;-webkit-user-select:none;user-select:none;text-align:center}
 .conf-btn:active{opacity:.75}
 .conf-btn.easy{background:var(--green-bg);border-color:var(--green-b);color:var(--green)}
 .conf-btn.unsure{background:var(--amber-bg);border-color:var(--amber-b);color:var(--amber)}
@@ -148,22 +148,22 @@ body{height:100%;min-height:100vh;min-height:-webkit-fill-available;font-family:
 .ref-toggle-btn{width:100%;padding:10px 12px;margin-bottom:9px;background:var(--bg2);border:1px solid var(--gold-b);border-radius:var(--r-sm);display:none;align-items:center;justify-content:space-between;cursor:pointer;-webkit-user-select:none;user-select:none}
 .ref-toggle-btn.vis{display:flex}
 .ref-toggle-btn:active{background:var(--surface)}
-.ref-toggle-lbl{font-size:12px;font-weight:500;color:var(--gold)}
+.ref-toggle-lbl{font-size:13px;font-weight:500;color:var(--gold)}
 .ref-toggle-ico{font-size:14px;transition:transform .25s}
 .ref-toggle-ico.open{transform:rotate(180deg)}
 .ref-panel{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:0;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .2s;margin-bottom:9px}
 .ref-panel.open{max-height:3000px;padding:12px}
 .rp-section{margin-bottom:12px}.rp-section:last-child{margin-bottom:0}
-.rp-heading{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--gold);margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid var(--border)}
+.rp-heading{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--gold);margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid var(--border)}
 .rp-tile-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
 .rp-tile{background:var(--bg3);border-radius:6px;padding:7px 8px}
-.rp-tile-lbl{font-size:10px;color:var(--muted);margin-bottom:2px;text-transform:uppercase;letter-spacing:.04em}
-.rp-tile-val{font-size:11px;color:var(--text);font-weight:500;line-height:1.4}
-.rp-tile-sub{font-size:10px;color:var(--muted);line-height:1.4;margin-top:2px}
-.rp-kv{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px solid var(--border);font-size:11px}
+.rp-tile-lbl{font-size:11px;color:var(--muted);margin-bottom:2px;text-transform:uppercase;letter-spacing:.04em}
+.rp-tile-val{font-size:12px;color:var(--text);font-weight:500;line-height:1.4}
+.rp-tile-sub{font-size:11px;color:var(--muted);line-height:1.4;margin-top:2px}
+.rp-kv{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px solid var(--border);font-size:12px}
 .rp-kv:last-child{border-bottom:none}
 .rp-key{color:var(--muted);flex-shrink:0}.rp-val{color:var(--text);text-align:right;font-weight:500;word-break:break-word;text-align:right}
-.rp-banner{border-radius:6px;padding:7px 9px;font-size:11px;line-height:1.5;margin-top:4px}
+.rp-banner{border-radius:6px;padding:8px 10px;font-size:12px;line-height:1.5;margin-top:4px}
 .rp-banner-gold{background:var(--gold-bg);color:#d4c08a;border-left:2px solid var(--gold)}
 .rp-pill-row{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
 .rp-pill{font-size:10px;padding:2px 7px;border-radius:20px;background:var(--red-bg);color:#e8a8a8;border:1px solid var(--red-b)}
@@ -236,9 +236,9 @@ body{height:100%;min-height:100vh;min-height:-webkit-fill-available;font-family:
       <div style="flex:1"><div class="mode-card-title">Shuffle All</div><div class="mode-card-sub">Random questions across all domains &amp; systems</div></div>
       <div class="mode-arrow">›</div>
     </div>
-    <div class="mode-card" onclick="startQuiz({mode:'shuffle',timed:true})">
+    <div class="mode-card" onclick="startQuiz({mode:'exam',timed:true})">
       <div class="mode-icon" style="background:var(--amber-bg)">⏱</div>
-      <div style="flex:1"><div class="mode-card-title">Timed Exam Mode</div><div class="mode-card-sub">1.4 min/question · full session clock · real exam pace</div></div>
+      <div style="flex:1"><div class="mode-card-title">Timed Exam Mode</div><div class="mode-card-sub">135 Qs · 3 hr countdown · AANPCB blueprint distribution · auto-submit</div></div>
       <div class="mode-arrow">›</div>
     </div>
     <div class="mode-card" onclick="startQuiz({mode:'smart-missed'})">
@@ -280,7 +280,7 @@ body{height:100%;min-height:100vh;min-height:-webkit-fill-available;font-family:
     <div class="timer-bar-fill" id="tbar" style="width:100%;background:var(--green)"></div>
   </div>
   <div class="session-timer-row" id="stimer-row">
-    <span class="s-timer-lbl" id="stimer-label" style="display:none">Session</span>
+    <span class="s-timer-lbl" id="stimer-label" style="display:none" data-exam-label="Time Left" data-practice-label="Session">Session</span>
     <span class="s-timer-val" id="stimer-val" style="display:none">0:00</span>
     <span class="s-timer-lbl">This Q</span>
     <span class="q-timer-val" id="qtimer-val" style="color:var(--gold)">1:24</span>
@@ -313,7 +313,7 @@ body{height:100%;min-height:100vh;min-height:-webkit-fill-available;font-family:
   </div>
   <div class="res-actions">
     <button class="act-btn primary"   onclick="startQuiz({mode:'smart-missed'})">Drill Weak Topics</button>
-    <button class="act-btn secondary" onclick="startQuiz({mode:'shuffle',timed:true})">Timed Exam Mode</button>
+    <button class="act-btn secondary" onclick="startQuiz({mode:'exam',timed:true})">Timed Exam Mode</button>
     <button class="act-btn secondary" onclick="startQuiz({mode:'shuffle'})">New Shuffle</button>
     <button class="act-btn secondary" onclick="goHome()">Home</button>
   </div>
@@ -2750,6 +2750,285 @@ const QS=[
    correct:1,
    explanation:"NP role in disaster medical response: acute treatment + public health coordination. Key systems: (1) Emergency Prescription Assistance Program (EPAP): federal program — provides free medications to uninsured disaster survivors; NPs can prescribe under EPAP; (2) State disaster pharmacy protocols: many states allow emergency refills without prescription during disasters; (3) Medical needs tracking: register medically vulnerable patients with emergency management — ensures they receive evacuation and shelter-in-place priority; (4) Special Medical Needs Shelters (SMNS): for patients requiring ongoing medical care who cannot use general population shelters; (5) Mental health first aid: displacement trauma is universal — assess and refer; (6) FEMA and Red Cross coordination: know local resources. Board concept: disaster care requires clinical skills + systems navigation + public health thinking. NPs are uniquely positioned as the bridge between individual patient care and community health.",
    refKey:"prev_public_health"},
+  /* ══════════════════════════════════════════
+     ELDERLY PATIENT EXPANSION (75+)
+     Atypical presentations, geriatric pharmacology,
+     age-specific management, functional decline
+     Target: bring elderly % from 7% → 17%
+  ══════════════════════════════════════════ */
+
+  /* ── CARDIOLOGY: Elderly ── */
+  {id:"card_e01",domain:"Patient Assessment Process",system:"Cardiology",topic:"Ischemic HF",type:"mcq",
+   vignette:"An 82-year-old female presents with a 3-week history of increased fatigue, ankle swelling, and needing two extra pillows to sleep. She has no chest pain. BP 148/82, HR 88, JVD present, bibasilar crackles, pitting edema to the knees. BNP is 680 pg/mL.",
+   stem:"What is the most likely diagnosis and the most important medication dosing consideration in this elderly patient?",
+   choices:["Pneumonia — her dyspnea and crackles indicate pulmonary infection","Heart failure — start guideline-directed medical therapy; initiate all medications at the lowest available dose and titrate slowly in elderly patients due to reduced renal clearance, altered drug metabolism, and increased sensitivity to hypotension","COPD exacerbation — bronchodilators and corticosteroids are first-line","Pulmonary embolism — anticoagulate immediately"],
+   correct:1,
+   explanation:"Heart failure in elderly patients: classic symptoms (dyspnea, orthopnea, edema) present but fatigue is often the predominant complaint in the elderly — don't miss HF because chest pain and dyspnea are absent. BNP >400 pg/mL strongly supports HF diagnosis. GDMT in elderly: (1) Start ALL medications at lowest doses — renal function declines with age even with normal creatinine (use CrCl/eGFR not just Cr); (2) ACEi/ARB: start at half the usual initial dose; monitor K+ and Cr closely; (3) Beta-blockers: carvedilol 3.125 mg BID, metoprolol succinate 12.5 mg/day — titrate over weeks not days; (4) Spironolactone: high risk of hyperkalemia in elderly with CKD — start 12.5-25 mg; (5) Loop diuretics: monitor for volume depletion, orthostasis, electrolytes. Target: symptom relief over aggressive neurohormonal blockade. Elderly HF patients are at highest risk for medication-related hospitalizations.",
+   refKey:"hf"},
+  {id:"card_e02",domain:"Patient Assessment Process",system:"Cardiology",topic:"Hypertension",type:"mcq",
+   vignette:"A 78-year-old male with a history of falls has BP readings of 158/72 mmHg on three occasions. He has no symptoms of hypotension. His daughter asks if his BP should be treated — 'he's 78, isn't that normal for his age?'",
+   stem:"What is the evidence-based approach to hypertension treatment in this patient?",
+   choices:["Hypertension does not need treatment in patients over 75 — elevated BP is a normal part of aging","Treat to a systolic BP target of <130 mmHg — SPRINT trial showed mortality benefit at this target in adults ≥75 with high cardiovascular risk; use agents with low orthostatic hypotension risk","Treat only if symptoms occur — asymptomatic hypertension in the elderly requires no pharmacotherapy","Target BP 180/100 — aggressive BP lowering causes strokes in the elderly"],
+   correct:1,
+   explanation:"Hypertension in elderly: SPRINT trial specifically showed that intensive BP control (SBP <120 mmHg) reduced mortality in adults ≥75, but the ACC/AHA recommendation for most elderly is SBP <130 mmHg with individualization. Isolated systolic hypertension (wide pulse pressure) is most common in elderly — from arterial stiffness. Treatment: (1) Thiazide diuretics (chlorthalidone preferred over HCTZ), CCBs (amlodipine), and ACEi/ARBs are preferred; (2) Avoid alpha-blockers (falls — Beers Criteria), high-dose diuretics (electrolyte imbalances); (3) Monitor for orthostatic hypotension — check BP lying and standing at every visit; (4) Frail elderly or limited life expectancy: individualize target — may accept SBP <150 mmHg to avoid adverse effects. Pulse pressure >60 mmHg in elderly = significant cardiovascular risk marker.",
+   refKey:"htn"},
+  {id:"card_e03",domain:"Patient Assessment Process",system:"Cardiology",topic:"Atrial Fibrillation",type:"mcq",
+   vignette:"An 85-year-old female with AF, CKD G3b (eGFR 38), and a history of two falls in the past year is on warfarin with INR consistently 2.0-3.0. Her daughter is worried about fall and bleeding risk and asks if warfarin should be stopped.",
+   stem:"How should fall risk be weighed against stroke prevention in this elderly AF patient?",
+   choices:["Stop warfarin — elderly patients with fall risk should never be anticoagulated","Continue anticoagulation — a patient would need to fall approximately 295 times per year for the fall risk to outweigh stroke prevention benefit; anticoagulation is appropriate; switch to DOAC for easier management if CrCl allows","Switch to aspirin — safer than anticoagulation in fall-prone elderly patients","Reduce warfarin dose to keep INR 1.5-2.0 — adequate for elderly patients"],
+   correct:1,
+   explanation:"Falls vs. anticoagulation in elderly AF: landmark analysis (Man-Son-Hing) showed a patient would need to fall approximately 295 times per year for fall risk to outweigh the stroke prevention benefit of anticoagulation in AF — falls are rarely a reason to withhold anticoagulation. Stroke risk in AF is far more dangerous than fall-related bleeding in most patients. CHA₂DS₂-VASc at 85: age ≥75 alone = 2 points → score very high → anticoagulate. DOAC vs. warfarin in elderly: DOACs generally preferred (consistent anticoagulation, fewer drug interactions, no INR monitoring) but require adequate renal function. Apixaban: preferred in elderly with CKD — dose reduce if ≥2 of: age ≥80, weight ≤60 kg, Cr ≥1.5. This patient eGFR 38: apixaban 2.5 mg BID (dose-reduced) is appropriate. Aspirin has NO role in AF stroke prevention.",
+   refKey:"card_afib"},
+
+  /* ── PULMONOLOGY: Elderly ── */
+  {id:"pulm_e01",domain:"Patient Assessment Process",system:"Pulmonology",topic:"COPD",type:"mcq",
+   vignette:"An 80-year-old male with severe COPD (GOLD Stage 3, FEV1 38%) is admitted for his fourth exacerbation this year. He lives alone, uses a rollator walker, and his daughter reports he cannot perform ADLs independently anymore. He is on triple therapy (LAMA+LABA+ICS).",
+   stem:"Beyond optimizing inhaled therapy, what additional intervention is most evidence-based for reducing future exacerbations in this patient?",
+   choices:["Add azithromycin 250 mg daily — proven to reduce exacerbations in chronic COPD","Refer for lung transplant evaluation — multiple exacerbations indicate transplant candidacy","Increase ICS dose — higher corticosteroid exposure prevents exacerbations","Prescribe benzodiazepines for dyspnea — improves comfort and reduces hospitalizations"],
+   correct:0,
+   explanation:"COPD exacerbation prevention in elderly: Azithromycin 250 mg daily (or 500 mg 3×/week) — ALBERT trial: significantly reduces exacerbation frequency in patients with frequent exacerbations (≥1/year); mechanism: both antibiotic and anti-inflammatory effects. Check baseline ECG (QTc prolongation risk) and hearing (ototoxicity) before starting. Additional evidence-based interventions: (1) Pulmonary rehabilitation — most effective intervention for functional improvement and exacerbation reduction; functional decline makes this especially important; (2) Annual influenza + pneumococcal + COVID-19 vaccines; (3) LTOT if SpO2 ≤88%; (4) Home-based COPD management programs. For this patient's ADL dependence: OT assessment, caregiver support, advance care planning discussion. Lung transplant: requires BMI, cardiac, and functional criteria — inappropriate in 80-year-old with functional decline.",
+   refKey:"copd"},
+  {id:"pulm_e02",domain:"Patient Assessment Process",system:"Pulmonology",topic:"Community-Acquired Pneumonia",type:"mcq",
+   vignette:"A 79-year-old female from a nursing home presents with 3 days of confusion, decreased appetite, and mild cough. Temperature 37.4°C, HR 92, RR 22, BP 116/72, SpO2 93% on room air. Her family says she is 'not herself.' CXR shows a right lower lobe infiltrate.",
+   stem:"What atypical feature of pneumonia presentation is most important to recognize in elderly patients?",
+   choices:["Elderly patients never develop fever with pneumonia — temperature is unreliable in all age groups","Atypical presentation in elderly: confusion and functional decline (not eating, not herself) may be the primary or only presenting symptoms — classic pneumonia features (high fever, productive cough, rigors) are often absent; altered mental status in elderly = infection until proven otherwise","All elderly patients with pneumonia require ICU admission regardless of severity","Nursing home pneumonia always requires antifungal coverage"],
+   correct:1,
+   explanation:"Atypical pneumonia presentation in elderly: the classic triad (fever, productive cough, pleuritic chest pain) is frequently absent in elderly patients. Instead: (1) Altered mental status / acute confusion — often the first and most prominent symptom; (2) Functional decline — 'not herself,' decreased appetite, increased falls; (3) Minimal or absent fever — blunted febrile response in elderly (temperature ≥37.8°C in elderly = significant); (4) Tachycardia and tachypnea may be subtle. PSI/PORT score or CURB-65 for severity: this patient — CURB-65: Confusion (1) + Urea unknown + RR 22 (1) + BP 116 (0) + Age ≥65 (1) = score 3 = consider hospitalization. SpO2 93% + nursing home origin + confusion = admit. Nursing home-acquired pneumonia: broader coverage (MRSA and gram-negatives) if risk factors — vancomycin or linezolid added to standard CAP regimen.",
+   refKey:"cap"},
+  {id:"pulm_e03",domain:"Plan of Care",system:"Pulmonology",topic:"Obstructive Sleep Apnea",type:"mcq",
+   vignette:"A 77-year-old male with OSA on CPAP reports using it only 2-3 hours per night due to mask discomfort and difficulty tolerating the pressure. His wife reports he stops breathing repeatedly and snores loudly without the CPAP. Daytime sleepiness is significant (ESS 14).",
+   stem:"What OSA-related complication is of particular concern in elderly patients and what CPAP alternatives should be considered?",
+   choices:["OSA in elderly is benign — no serious complications, treatment is optional","Untreated OSA in elderly significantly increases risk of atrial fibrillation, cognitive decline, falls, and cardiovascular events; for CPAP intolerance try: auto-CPAP, different mask interface, or oral appliance referral","CPAP is the only treatment option — if intolerant, no alternatives exist","Weight loss is the only treatment needed for OSA in elderly patients"],
+   correct:1,
+   explanation:"OSA in elderly: prevalence >50% in adults >65. Specific consequences in elderly: (1) Atrial fibrillation — OSA is an independent risk factor; recurrence after cardioversion is higher without CPAP treatment; (2) Cognitive decline — sleep fragmentation worsens dementia trajectory; (3) Falls — sleep deprivation and nocturnal hypoxia impair balance and reaction time; (4) Cardiovascular events — HTN, HF, arrhythmias. CPAP alternatives when intolerant: (1) Auto-CPAP — adjusts pressure breath-by-breath, often better tolerated than fixed pressure; (2) Bilevel PAP (BiPAP) — for patients requiring high pressures or with central apneas; (3) Oral appliance — mandibular advancement device; less effective than CPAP but significantly better than nothing for mild-moderate OSA; (4) Positional therapy — if positional OSA; (5) Hypoglossal nerve stimulator (Inspire) — for CPAP-intolerant moderate-severe OSA. ESS ≥10 = significant daytime sleepiness — treatment is not optional.",
+   refKey:"osa"},
+
+  /* ── NEUROLOGY: Elderly ── */
+  {id:"neuro_e01",domain:"Patient Assessment Process",system:"Neurology",topic:"Dementia",type:"mcq",
+   vignette:"An 83-year-old male with moderate Alzheimer's disease has become increasingly agitated and aggressive in the evenings, hitting caregivers and screaming. His family is exhausted. He sleeps poorly and sundowns severely. He has no pain identified.",
+   stem:"What is the most appropriate first-line approach to behavioral and psychological symptoms of dementia (BPSD)?",
+   choices:["Start haloperidol 1 mg TID — antipsychotics are first-line for BPSD","Non-pharmacologic interventions first — consistent routine, meaningful activities, music therapy, caregiver education; if pharmacotherapy needed, use lowest effective dose of atypical antipsychotic with explicit family counseling about black box warning","Start lorazepam PRN — benzodiazepines are safest for agitation in dementia","Start sertraline — SSRIs are first-line for all BPSD"],
+   correct:1,
+   explanation:"BPSD management: non-pharmacologic interventions are first-line — always before medications. Effective strategies: (1) Consistent daily routine — predictability reduces confusion-driven agitation; (2) Music therapy — personalized music reduces agitation significantly (evidence-based); (3) Meaningful activity — engaging remaining abilities; (4) Environmental modification — reduce stimulation during sundowning hours, improve lighting; (5) Caregiver education and support — burnout is common and dangerous; (6) Identify and treat underlying causes — pain, UTI, constipation, medication side effects can trigger BPSD. If pharmacotherapy necessary: atypical antipsychotics (quetiapine, risperidone) have the most evidence — BUT carry FDA black box warning: increased mortality in elderly with dementia-related psychosis (1.6-1.7× increased death rate vs. placebo). Obtain informed consent from family. AVOID: benzodiazepines (paradoxical agitation, falls, respiratory depression), haloperidol (extrapyramidal side effects, sedation, falls). Low-dose trazodone or mirtazapine: useful for insomnia/agitation with better safety profile.",
+   refKey:"neuro_dementia"},
+  {id:"neuro_e02",domain:"Patient Assessment Process",system:"Neurology",topic:"Dementia",type:"mcq",
+   vignette:"A 76-year-old female with early Alzheimer's disease and her family ask about what to expect and how to plan for the future. She currently manages her ADLs independently but needs reminders for medications and appointments.",
+   stem:"What are the most important elements of early dementia care planning?",
+   choices:["Early dementia requires no planning — address issues as they arise","Early dementia is the optimal time for advance care planning while capacity is intact — discuss POLST/advance directives, driving safety, financial/legal planning (POA, will), home safety, caregiver resources, and referral to the Alzheimer's Association","Immediately place the patient in memory care — early dementia precludes living at home","Cholinesterase inhibitors reverse dementia — start donepezil and reassess in 3 months"],
+   correct:1,
+   explanation:"Early dementia care planning: the window of preserved decision-making capacity is the critical time to establish future plans. Key elements: (1) Advance care planning — POLST/MOLST, healthcare POA, durable POA for finances while the patient can meaningfully participate; (2) Driving — assess fitness; early AD does NOT automatically preclude driving, but formal driving evaluation and family monitoring are essential; report to DMV as required by state law; (3) Financial/legal — update will, trust, banking access before capacity deteriorates; (4) Home safety — assess for fall hazards, stove safety, medication management systems; (5) Caregiver identification and support — caregiver burnout is the leading cause of premature nursing home placement; (6) Community resources — Alzheimer's Association (24/7 helpline), adult day programs, support groups; (7) Cholinesterase inhibitors (donepezil, rivastigmine, galantamine): modest symptomatic benefit, do not reverse or halt disease; (8) Discuss expected trajectory honestly.",
+   refKey:"neuro_dementia"},
+  {id:"neuro_e03",domain:"Patient Assessment Process",system:"Neurology",topic:"Stroke & TIA",type:"mcq",
+   vignette:"An 81-year-old female presents with sudden onset right arm weakness and slurred speech that resolved completely within 45 minutes. She has no residual deficits. She has HTN and AF on aspirin.",
+   stem:"What is the diagnosis and most urgent priority in the next 24-48 hours?",
+   choices:["Resolved symptoms mean no treatment needed — follow up in 2 weeks","TIA — highest risk of stroke is in the first 48 hours; urgent evaluation (ABCD2 score, brain MRI/DWI, vascular imaging, cardiac monitoring) and optimization of secondary prevention (anticoagulation for AF) is a medical emergency","Complex migraine — no urgent workup needed","Syncope — cardiac monitoring and tilt table test"],
+   correct:1,
+   explanation:"TIA in elderly — urgent evaluation: TIA carries a 10-15% stroke risk within 90 days, with highest risk in first 24-48 hours. This is a medical emergency. ABCD2 score (Age ≥60=1, BP ≥140/90=1, Clinical features: unilateral weakness=2/speech=1, Duration ≥60min=2/10-59min=1, Diabetes=1): score ≥4 = high risk. Urgent workup: (1) Brain MRI with DWI — detects acute ischemic lesion (present in 30-50% of 'TIA'); (2) Vascular imaging — carotid ultrasound or CTA to rule out stenosis; (3) Cardiac monitoring — 72-hour telemetry or 30-day monitor to detect paroxysmal AF; (4) Echocardiogram. This patient: already has AF — the aspirin was inadequate stroke prevention. Switch to anticoagulation (DOAC) immediately — this TIA was likely cardioembolic from AF. 'TIA clinics' or express stroke pathways reduce 90-day stroke risk by 80%. Admit or very close outpatient follow-up within 24 hours.",
+   refKey:"neuro_stroke"},
+  {id:"neuro_e04",domain:"Patient Assessment Process",system:"Neurology",topic:"Peripheral Neuropathy",type:"mcq",
+   vignette:"An 80-year-old female with T2DM for 25 years complains of bilateral burning pain in her feet, worse at night, preventing sleep. She also reports numbness and tingling. Monofilament testing shows loss of protective sensation bilaterally.",
+   stem:"What is the priority intervention beyond pain management and what complication must be prevented?",
+   choices:["Pain management is the only intervention — neuropathy has no preventable complications","Comprehensive foot care and patient education — loss of protective sensation dramatically increases risk of diabetic foot ulcers and lower extremity amputation; daily foot inspection, proper footwear, and regular podiatry are mandatory","Refer to neurology — peripheral neuropathy always requires specialist management","Start high-dose B12 supplementation — deficiency is the cause of all diabetic neuropathy"],
+   correct:1,
+   explanation:"Diabetic peripheral neuropathy with loss of protective sensation: the most important intervention is PREVENTING diabetic foot ulcers and amputation — the leading preventable complication. Loss of protective sensation = inability to feel injuries → undetected wounds → ulcers → infection → amputation. Foot care bundle: (1) Daily foot inspection (patient or caregiver) — look for redness, blisters, cuts, swelling; (2) Proper footwear — well-fitting, no open toes, diabetic shoes if indicated; (3) Podiatry referral — routine nail care, callus management; (4) Never walk barefoot; (5) Monofilament testing annually — documents loss of protective sensation; (6) ABI if concern for PAD (silent in diabetics). Pain management: (1) Duloxetine (FDA-approved for DPN) or pregabalin/gabapentin; (2) Topical capsaicin or lidocaine patches; (3) Tricyclic antidepressants (low-dose amitriptyline) — use cautiously in elderly (anticholinergic, falls). Glycemic control slows but does not reverse established neuropathy.",
+   refKey:"neuro_periph"},
+  {id:"neuro_e05",domain:"Patient Assessment Process",system:"Neurology",topic:"Headache",type:"mcq",
+   vignette:"A 77-year-old male presents with new-onset severe headache that he describes as 'the worst headache of my life,' which began suddenly while lifting groceries. He vomited twice and has mild neck stiffness.",
+   stem:"What is the most critical diagnosis to rule out and the immediate management?",
+   choices:["Tension headache — reassure and prescribe NSAIDs","Subarachnoid hemorrhage — non-contrast CT head immediately; if negative, lumbar puncture to detect xanthochromia; this is a neurological emergency","Migraine — sumatriptan and antiemetic","Cervicogenic headache — physical therapy referral"],
+   correct:1,
+   explanation:"Subarachnoid hemorrhage (SAH) — thunderclap headache: sudden-onset severe headache reaching maximum intensity within seconds to minutes ('thunderclap') = SAH until proven otherwise. Classic: 'worst headache of my life.' In elderly: new headache of any type requires careful evaluation — secondary headache causes increase with age. Red flags (SNOOP4): Systemic symptoms, Neurologic signs, Onset sudden/thunderclap, Older age (new headache >50), Pattern change, Postural, Papilledema, Progressive. SAH workup: (1) Non-contrast CT head — 98% sensitive within 6 hours of onset; sensitivity decreases over time; (2) If CT negative but clinical suspicion high — lumbar puncture: xanthochromia (yellow CSF from hemoglobin breakdown) confirms SAH up to 2 weeks after onset; (3) CT angiography — identify ruptured aneurysm. SAH mortality: 25-50% at 30 days. Immediate neurosurgery/interventional neuroradiology referral. AVOID triptans — may cause vasospasm.",
+   refKey:"neuro_headache"},
+
+  /* ── ENDOCRINOLOGY: Elderly ── */
+  {id:"endo_e01",domain:"Plan of Care",system:"Endocrinology",topic:"Type 2 Diabetes",type:"mcq",
+   vignette:"An 81-year-old male with T2DM, advanced HF (EF 25%), CKD G4 (eGFR 24), and moderate dementia has an A1C of 9.4%. His daughter asks why the A1C is not being lowered aggressively.",
+   stem:"What A1C target is appropriate for this patient and why?",
+   choices:["Target A1C <7% — tight glycemic control prevents all diabetic complications","Target A1C <8.5-9.0% — in frail elderly with multiple serious comorbidities, limited life expectancy, and dementia, hypoglycemia risk outweighs the benefits of tight control; ADA recommends relaxed targets for complex/high-risk elderly patients","A1C should be normalized to <6.5% in all patients regardless of age","A1C monitoring is not useful in elderly patients — stop checking it"],
+   correct:1,
+   explanation:"A1C targets in elderly diabetic patients (ADA Standards of Care): Healthy elderly (few comorbidities, good functional status, long life expectancy): A1C <7.0-7.5%. Complex/intermediate (multiple chronic conditions, moderate cognitive/functional impairment): A1C <8.0%. Very complex/poor health (end-stage chronic illness, severe cognitive impairment, limited life expectancy): A1C <8.5% or avoid treatment beyond symptom prevention. This patient: advanced HF + CKD G4 + moderate dementia + likely limited life expectancy = very complex. Rationale: (1) Hypoglycemia is more dangerous than hyperglycemia in elderly — confusion, falls, loss of consciousness, cardiac events; (2) Tight glycemic control benefits manifest over 5-10 years — may not be realized; (3) Dementia impairs recognition of hypoglycemic symptoms. Safe medications in this context: avoid sulfonylureas (hypoglycemia), SGLT2i contraindicated (eGFR <25), GLP-1 RAs (GI side effects in frail). Consider insulin glargine at low dose with careful monitoring.",
+   refKey:"dm"},
+  {id:"endo_e02",domain:"Patient Assessment Process",system:"Endocrinology",topic:"Thyroid Disease",type:"mcq",
+   vignette:"A 78-year-old female is found to have TSH 6.8 mIU/L (normal 0.5-4.5) on routine labs. Free T4 is normal. She has no symptoms of hypothyroidism. Her last TSH 2 years ago was 4.2 mIU/L.",
+   stem:"What is the most appropriate management of subclinical hypothyroidism in this elderly patient?",
+   choices:["Start levothyroxine immediately — any TSH above normal requires treatment","Subclinical hypothyroidism in elderly (TSH 4.5-10): watchful waiting is appropriate in asymptomatic patients over 70 — physiologic TSH increases with age; treatment benefit is not established and overtreatment causes atrial fibrillation and bone loss","Recheck TSH in 10 years — subclinical hypothyroidism never progresses","Start T3 replacement — better than T4 in elderly patients"],
+   correct:1,
+   explanation:"Subclinical hypothyroidism (SCH) in elderly: TSH mildly elevated (4.5-10 mIU/L) with normal free T4. Key considerations: (1) Normal TSH range shifts upward with age — TSH 6-7 may be appropriate for an 80-year-old (NHANES data); (2) Treatment benefit for SCH in elderly not established — multiple RCTs (including TRUST trial specifically in ≥65) showed no improvement in symptoms, quality of life, or cognitive function with levothyroxine vs. placebo; (3) Overtreatment risks: atrial fibrillation (subclinical hyperthyroidism increases AF risk 3×), osteoporosis/fractures, and cardiovascular events; (4) TSH >10: stronger case for treatment regardless of age. Management: repeat TSH + free T4 in 3-6 months (rule out transient causes — illness, medications). If consistently 4.5-10 in asymptomatic elderly: watchful waiting with annual monitoring is appropriate. Treat if: TSH >10, symptomatic, or younger patient (<65).",
+   refKey:"endo_thyroid"},
+  {id:"endo_e03",domain:"Plan of Care",system:"Endocrinology",topic:"Osteoporosis",type:"mcq",
+   vignette:"An 80-year-old female with severe osteoporosis (T-score -3.4 hip) has had two vertebral compression fractures. She has been on alendronate for 8 years. Her NP is considering her next treatment step.",
+   stem:"Which agent is most appropriate for this high-risk patient who has failed bisphosphonate therapy?",
+   choices:["Continue alendronate indefinitely — no alternative treatments are available","Switch to an anabolic agent — teriparatide (Forteo) or romosozumab (Evenity) are indicated for severe osteoporosis with fractures who have been on long-term bisphosphonate; followed by antiresorptive therapy","Switch to calcium and vitamin D only — adequate for maintenance","Add estrogen therapy — most effective osteoporosis treatment for all elderly women"],
+   correct:1,
+   explanation:"Severe osteoporosis management after long-term bisphosphonate: Anabolic therapy is appropriate for very high-risk patients (T-score ≤-2.5 + fractures + long-term bisphosphonate). Teriparatide (Forteo): PTH analog — stimulates bone formation; 20 mcg SC daily × 24 months; reduces vertebral fracture risk 65% and non-vertebral 35%; must be followed by antiresorptive therapy (bisphosphonate or denosumab) to maintain gains. Romosozumab (Evenity): sclerostin inhibitor — dual anabolic+antiresorptive; 210 mg SC monthly × 12 months; then transition to antiresorptive; BLACK BOX WARNING: increased CV events (MI, stroke) — avoid in patients with prior MI or stroke in past year. Abaloparatide: alternative PTHrP analog similar to teriparatide. Denosumab: RANK-L inhibitor — option for patients intolerant of bisphosphonates; subcutaneous every 6 months; do NOT discontinue abruptly (rebound vertebral fractures). In 80-year-old with severe disease and multiple fractures: anabolic therapy offers the best fracture reduction.",
+   refKey:"endo_osteo"},
+
+  /* ── NEPHROLOGY: Elderly ── */
+  {id:"renal_e01",domain:"Patient Assessment Process",system:"Nephrology",topic:"AKI",type:"mcq",
+   vignette:"A 79-year-old male is admitted for elective total knee replacement. His baseline Cr is 1.1 (eGFR 58). On post-op day 2 his Cr rises to 1.8. He received gentamicin prophylaxis, IV contrast for a CXR, and ketorolac for pain. His urine output is 20 mL/hr.",
+   stem:"Which of his medications most likely contributed to the AKI and what is the most important preventive principle for elderly patients undergoing procedures?",
+   choices:["IV contrast is always the cause of post-procedure AKI — no other agents matter","Multiple nephrotoxins (aminoglycoside, NSAIDs, contrast) combined with post-surgical hypoperfusion and age-related reduced renal reserve are contributing; elderly patients have markedly reduced nephrotoxin tolerance — avoid stacking nephrotoxins and ensure adequate hydration perioperatively","Creatinine of 1.8 in an elderly male is normal — no AKI has occurred","Ketorolac is the only nephrotoxin — all other agents are safe in elderly"],
+   correct:1,
+   explanation:"AKI in elderly — nephrotoxin stacking: age-related renal changes (reduced nephrons, reduced renal blood flow, reduced GFR reserve) make elderly patients exquisitely sensitive to nephrotoxins. This patient received THREE nephrotoxins simultaneously: (1) Gentamicin — aminoglycoside nephrotoxicity; single daily dosing preferred in elderly if unavoidable; alternative antibiotics preferable; (2) Ketorolac (NSAID) — reduces prostaglandin-mediated afferent arteriolar dilation, causing ischemia; Beers Criteria — AVOID NSAIDs in elderly with renal impairment; (3) Iodinated contrast — contrast-induced nephropathy; ensure adequate pre-hydration. Creatinine 1.8 from baseline 1.1 = 64% increase = KDIGO Stage 1 AKI. Elderly AKI pearl: serum creatinine UNDERESTIMATES GFR in elderly (reduced muscle mass = lower creatinine production) — even small Cr increases represent significant GFR reduction. Preventive principles: avoid nephrotoxin combinations, ensure adequate volume status, use alternatives when possible.",
+   refKey:"renal_aki"},
+  {id:"renal_e02",domain:"Plan of Care",system:"Nephrology",topic:"CKD",type:"mcq",
+   vignette:"An 85-year-old female with CKD G3b (eGFR 35, stable for 3 years), HTN, and osteoarthritis takes lisinopril, amlodipine, metformin, and ibuprofen PRN for knee pain.",
+   stem:"Which medication requires the most urgent intervention and why?",
+   choices:["Lisinopril — ACEi should be avoided in all elderly patients with CKD","Ibuprofen (NSAID) — NSAIDs reduce renal prostaglandin synthesis causing afferent arteriolar constriction, acute GFR reduction, sodium retention, and hyperkalemia; particularly dangerous in CKD; switch to acetaminophen","Amlodipine — CCBs cause fluid retention that worsens CKD","Metformin — must be stopped at eGFR <45 in all elderly patients"],
+   correct:1,
+   explanation:"NSAIDs in elderly CKD: ibuprofen PRN is the most dangerous medication in this patient. NSAIDs: (1) Block prostaglandin-mediated afferent arteriolar vasodilation — causes acute GFR reduction (can precipitate AKI in CKD patients, especially with concurrent ACEi/diuretics); (2) Cause sodium and water retention — worsens HTN and edema; (3) Increase potassium (reduce aldosterone effect) — hyperkalemia risk especially with ACEi; (4) GI bleeding risk increases with age and CKD. Beers Criteria: AVOID systemic NSAIDs in elderly with eGFR <30; use with extreme caution at eGFR 30-59. Switch to acetaminophen ≤3 g/day (safe in CKD) or topical NSAIDs (diclofenac gel — minimal systemic absorption). Metformin at eGFR 35: reduce dose (maximum 1000 mg/day at eGFR 30-45) — do not stop entirely. Lisinopril: continue — nephroprotective, do not stop for CKD alone unless K+ or Cr intolerant.",
+   refKey:"renal_ckd"},
+
+  /* ── INFECTIOUS DISEASE: Elderly ── */
+  {id:"id_e01",domain:"Patient Assessment Process",system:"Infectious Disease",topic:"Sepsis",type:"mcq",
+   vignette:"A 82-year-old female from home presents with 2 days of increased confusion, decreased oral intake, and urinary incontinence (new). Temperature 37.2°C, HR 96, BP 108/64, RR 20. Her family reports she has been 'acting confused' — which is not her baseline. Urine is malodorous.",
+   stem:"What atypical sepsis feature is most important to recognize in this elderly patient?",
+   choices:["Normal temperature rules out infection — send her home with hydration instructions","Elderly patients frequently present with sepsis WITHOUT fever — altered mental status, functional decline, and subtle hemodynamic changes may be the only signs; obtain blood and urine cultures, lactate, and initiate workup for infection","Only patients with temperature >38.5°C require blood cultures","Confusion in elderly is always dementia — no infectious workup needed"],
+   correct:1,
+   explanation:"Atypical sepsis presentation in elderly: classic SIRS criteria (fever, tachycardia, tachypnea, leukocytosis) are frequently absent or blunted in elderly patients. Red flags in elderly without fever: (1) New or worsening confusion/delirium — most sensitive indicator of serious illness in elderly; (2) Functional decline — 'not herself,' not eating, increased falls; (3) New urinary incontinence — especially with malodorous urine suggests UTI; (4) Subtle vital sign changes — mild tachycardia, mild hypotension. Temperature 37.2°C in an 82-year-old may represent significant fever — elderly have lower baseline temperatures and blunted febrile response (antipyretic medications, chronic illness, impaired thermoregulation). Workup: CBC, CMP, lactate, blood cultures × 2, urinalysis + urine culture, CXR. qSOFA in elderly: confusion (1) + RR 20 (0) + SBP 108 (1) = score 2 = high risk for poor outcome. Start antibiotics within 1 hour if sepsis suspected.",
+   refKey:"id_sepsis"},
+  {id:"id_e02",domain:"Plan of Care",system:"Infectious Disease",topic:"Skin & Soft Tissue Infections",type:"mcq",
+   vignette:"An 80-year-old male with DM, PVD, and CKD G3 presents with a 2 cm ulcer on the plantar surface of his right great toe, probing to bone, with surrounding erythema and purulent drainage. He reports no pain. Temperature 37.8°C, WBC 14,200, ESR 88.",
+   stem:"What is the most concerning diagnosis and most important immediate step?",
+   choices:["Diabetic callus — debride and apply wound dressing","Osteomyelitis — probe-to-bone test has 89% positive predictive value for osteomyelitis; obtain MRI foot (most sensitive imaging), wound culture, and urgent podiatry/vascular surgery referral; painless ulcer = neuropathy, not reassuring sign","Venous stasis ulcer — compression stockings and wound care","Cellulitis only — oral antibiotics are sufficient for all diabetic foot infections"],
+   correct:1,
+   explanation:"Diabetic foot osteomyelitis — probe-to-bone test: probing to bone through a diabetic foot ulcer has 89% PPV for osteomyelitis (classic teaching — positive probe-to-bone = treat as osteomyelitis until proven otherwise). PAINLESS ulcer + DM = peripheral neuropathy — absence of pain is a warning sign that the patient cannot protect the wound, not reassurance. Osteomyelitis workup: (1) MRI foot — most sensitive (90%) and specific (83%) imaging for osteomyelitis; (2) Bone biopsy — gold standard for pathogen identification; (3) Plain X-ray — only 50% sensitive early (periosteal reaction/cortical destruction = late finding); (4) ESR >70 + WBC elevation = supports osteomyelitis. Management: surgical debridement ± bone resection + prolonged antibiotics (6 weeks IV or highly bioavailable oral — fluoroquinolone or TMP-SMX). Vascular assessment critical — PAD + DM = high amputation risk. Wagner classification grades diabetic foot wounds 0-5.",
+   refKey:"id_ssti"},
+  {id:"id_e03",domain:"Plan of Care",system:"Infectious Disease",topic:"HIV",type:"mcq",
+   vignette:"A 75-year-old male is newly diagnosed with HIV after presenting with unexplained weight loss and recurrent oral candidiasis. CD4 count is 88 cells/μL. His primary care NP did not test him sooner because 'he doesn't seem like the type.'",
+   stem:"What important public health principle does this case illustrate and what must be done immediately?",
+   choices:["HIV testing in elderly is not cost-effective — maintain the current approach","USPSTF recommends HIV screening for ALL adults 15-65 regardless of risk factors; older adults are increasingly affected (17% of new HIV diagnoses); provider assumptions about risk ('doesn't seem like the type') perpetuate late diagnoses; start ART immediately — CD4 88 requires urgent OI prophylaxis and antiretroviral therapy","HIV in elderly patients over 65 does not require treatment — immune senescence limits treatment benefits","Only patients with known risk factors require HIV testing"],
+   correct:1,
+   explanation:"HIV in older adults: USPSTF Grade A recommendation — screen ALL adults aged 15-65 at least once; screen beyond 65 for those with ongoing risk. Over 50: 17% of all new HIV diagnoses in the US and rising. Late diagnosis is more common in older adults because: (1) Providers don't consider HIV (ageism and assumption bias); (2) Symptoms mimic normal aging or other conditions; (3) Patients may not self-identify as at-risk. This patient: CD4 88 = advanced HIV/AIDS. Immediate management: (1) Start ART urgently — CD4 <200 = significant immunosuppression; (2) PCP prophylaxis (TMP-SMX) — CD4 <200; (3) MAC prophylaxis (azithromycin) — CD4 <50; (4) Treat oral candidiasis; (5) Screen for other OIs. HIV treatment in elderly: same regimens as younger patients but: monitor for drug interactions with polypharmacy, renal dosing for TAF vs TDF, metabolic complications (bone density, cardiovascular). Aging + HIV = accelerated aging phenotype.",
+   refKey:"id_hiv"},
+
+  /* ── GASTROENTEROLOGY: Elderly ── */
+  {id:"gi_e01",domain:"Patient Assessment Process",system:"Gastroenterology",topic:"GERD & PUD",type:"mcq",
+   vignette:"An 84-year-old male on naproxen 500 mg BID for osteoarthritis and clopidogrel for prior MI presents with hematemesis and melena. He is hemodynamically stable. H. pylori testing is negative.",
+   stem:"What is the most likely cause and how should his NSAID use be managed going forward?",
+   choices:["Esophageal varices — assess for liver disease immediately","NSAID-induced peptic ulcer disease — discontinue naproxen permanently; if pain management requires NSAIDs, use the lowest effective dose of a selective COX-2 inhibitor with a PPI; acetaminophen should be tried first","Continue naproxen — GI bleeding is unrelated to NSAIDs in elderly patients","Switch to aspirin — safer than naproxen for GI risk"],
+   correct:1,
+   explanation:"NSAID-induced GI complications in elderly: NSAIDs are the most common cause of drug-induced GI bleeding. Risk is dramatically higher in elderly patients (>65): (1) Age ≥65 alone = high GI risk; (2) Concurrent antiplatelet therapy (clopidogrel) multiplies risk; (3) Prior GI ulcer history, high-dose NSAIDs, corticosteroids — further increase risk. Management after NSAID-induced GI bleed: (1) STOP NSAID permanently if possible; (2) Treat ulcer — PPI × 4-8 weeks; (3) If must use NSAID: lowest effective dose + PPI (not H2 blocker — PPI superior for GI protection); (4) COX-2 selective inhibitor (celecoxib) has lower GI risk than traditional NSAIDs but NOT zero risk, especially with antiplatelet therapy; (5) AVOID: naproxen + clopidogrel combination — very high GI bleeding risk; (6) Consider acetaminophen, topical NSAIDs, physical therapy for pain. Beers Criteria: oral NSAIDs in elderly — use with extreme caution, especially with anticoagulants or antiplatelets.",
+   refKey:"gi_gerd"},
+  {id:"gi_e02",domain:"Patient Assessment Process",system:"Gastroenterology",topic:"Liver Disease",type:"mcq",
+   vignette:"An 80-year-old female with compensated cirrhosis from NASH and a baseline Cr of 1.0 is started on furosemide and spironolactone for new ascites. Three days later she presents confused, with Cr 2.1, Na 128, and urine output of 200 mL over 24 hours.",
+   stem:"What is the most likely diagnosis and management?",
+   choices:["Hepatic encephalopathy only — start lactulose and continue diuretics","Hepatorenal syndrome type 1 (HRS-AKI) precipitated by aggressive diuresis — hold all diuretics and nephrotoxins; IV albumin for volume expansion; urgent hepatology referral; liver transplant evaluation","Prerenal AKI from over-diuresis — give aggressive IV fluids and continue spironolactone","SIADH from liver disease — fluid restrict to 1 L/day"],
+   correct:1,
+   explanation:"Hepatorenal syndrome (HRS): functional renal failure in cirrhosis — renal vasoconstriction without intrinsic renal pathology. HRS-AKI (formerly Type 1): rapid progression (Cr doubles to >2.5 within 2 weeks), precipitated by: spontaneous bacterial peritonitis (SBP), aggressive diuresis, GI bleeding, large-volume paracentesis without albumin. Differentiate from prerenal: no response to volume challenge (IV albumin 1 g/kg × 2 days) = HRS; if Cr improves = prerenal. Management: (1) STOP all diuretics and nephrotoxins immediately; (2) Rule out infection (SBP — diagnostic paracentesis); (3) IV albumin (1 g/kg loading); (4) Vasoconstrictors — terlipressin (preferred, FDA-approved 2022) or norepinephrine + albumin; (5) Renal replacement therapy as bridge; (6) Liver transplant = definitive treatment — urgent evaluation. In elderly cirrhotic patients: diuretic dosing must be conservative — start spironolactone 50-100 mg/day, furosemide 20-40 mg/day, increase slowly, monitor Cr and electrolytes every 3-5 days initially.",
+   refKey:"gi_liver"},
+
+  /* ── PSYCHIATRY: Elderly ── */
+  {id:"psych_e01",domain:"Patient Assessment Process",system:"Psychiatry",topic:"Depression",type:"mcq",
+   vignette:"A 79-year-old male recently widowed (wife died 4 months ago) presents with persistent sadness, poor appetite, 12-lb weight loss, insomnia, social withdrawal, and passive suicidal ideation ('I'd rather be with my wife'). He denies being depressed — 'I'm just old and sad.'",
+   stem:"How should this presentation be distinguished from normal grief and what is the appropriate clinical response?",
+   choices:["This is normal grief — no intervention needed; grief always resolves within 6 months","This presentation meets criteria for major depressive episode complicating grief (prolonged grief disorder/major depression) — passive suicidal ideation requires immediate safety assessment; antidepressant therapy and psychotherapy are indicated; late-life depression is underdiagnosed and undertreated","Prescribe benzodiazepine for sleep — adequate treatment for bereavement-related insomnia","Refer to a grief support group only — medications are inappropriate for bereavement"],
+   correct:1,
+   explanation:"Late-life depression vs. normal grief: normal bereavement involves sadness, crying, yearning for the deceased — but maintains capacity for pleasure, does not involve persistent passive/active suicidal ideation beyond wanting to join the deceased briefly, and gradually improves. Major depression complicating grief: persistent (>2 months), pervasive loss of interest, severe functional impairment, guilt, worthlessness, significant weight loss, and suicidal ideation — requires treatment. Late-life depression is severely underdiagnosed — providers often attribute symptoms to 'normal aging' or grief. Passive SI in elderly ('better off dead,' 'rather be with my wife') = SERIOUS — elderly white males have the highest suicide completion rate of any demographic. Safety assessment: assess intent, plan, access to means (firearms in home). Treatment: SSRI (sertraline, escitalopram — lower drug interaction risk) + psychotherapy (CBT, interpersonal therapy for late-life depression). SSRIs in elderly: start low (sertraline 25 mg), titrate slowly, monitor for hyponatremia (SIADH).",
+   refKey:"psych_depression"},
+  {id:"psych_e02",domain:"Patient Assessment Process",system:"Psychiatry",topic:"Anxiety Disorders",type:"mcq",
+   vignette:"An 80-year-old female with CAD and CKD G3 presents with 6 months of excessive worry about her health, inability to relax, muscle tension, and insomnia. She was started on alprazolam 0.5 mg TID by an urgent care provider 2 months ago. She says it 'helps a lot' and does not want to stop.",
+   stem:"What is the most important intervention regarding her current anxiolytic regimen?",
+   choices:["Continue alprazolam — it is working and elderly patients tolerate benzodiazepines well","Alprazolam (benzodiazepine) is on the Beers Criteria — AVOID in elderly due to fall, fracture, sedation, cognitive impairment, and dependence risks; develop a gradual taper plan while introducing appropriate alternatives (SSRI or buspirone) and non-pharmacologic treatment (CBT)","Increase alprazolam to 1 mg TID — current dose is subtherapeutic for her anxiety severity","Switch to diazepam — longer half-life is safer in elderly"],
+   correct:1,
+   explanation:"Benzodiazepines in elderly: Beers Criteria 2023 — AVOID all benzodiazepines in older adults (regardless of indication) due to: (1) Falls and fractures (2.3× increased fall risk); (2) Motor vehicle accidents; (3) Cognitive impairment and delirium; (4) Paradoxical agitation; (5) Physical dependence (2 months = likely physiologically dependent — abrupt discontinuation risks withdrawal seizures). Taper plan: reduce dose by 10-25% every 1-2 weeks (slow taper mandatory after prolonged use). Alternatives for late-life anxiety: (1) SSRIs — first-line pharmacotherapy; escitalopram or sertraline preferred; (2) SNRIs — venlafaxine, duloxetine; (3) Buspirone — non-addictive, takes 2-4 weeks; (4) CBT — most effective non-pharmacologic; (5) Hydroxyzine PRN — antihistamine, less risky than benzodiazepines for PRN use. Diazepam is WORSE in elderly — very long half-life and active metabolites accumulate (half-life up to 200 hours in elderly vs 20-100 in young adults).",
+   refKey:"psych_anxiety"},
+
+  /* ── MSK: Elderly ── */
+  {id:"msk_e01",domain:"Patient Assessment Process",system:"Musculoskeletal",topic:"Osteoarthritis & RA",type:"mcq",
+   vignette:"An 82-year-old female with bilateral knee OA and HTN asks about pain management. She tried acetaminophen but it provides minimal relief. She requests something 'stronger.'",
+   stem:"What is the safest and most evidence-based next step for pain management in this elderly patient with inadequate response to acetaminophen?",
+   choices:["Prescribe oral oxycodone — opioids are the natural next step after acetaminophen failure","Topical diclofenac gel (Voltaren) — highly effective for knee OA with minimal systemic absorption; preferred over oral NSAIDs in elderly to reduce GI, cardiovascular, and renal risks","Start oral naproxen — most effective NSAID for OA","Prescribe celecoxib 200 mg BID — COX-2 inhibitors are safe in all elderly patients"],
+   correct:1,
+   explanation:"OA pain management in elderly — evidence-based stepwise approach: (1) Acetaminophen ≤3 g/day — safest first-line; (2) Topical NSAIDs (diclofenac 1% gel — Voltaren) — highly effective for knee/hand OA, minimal systemic absorption (<5% of oral dose), avoids GI/renal/CV risks of systemic NSAIDs; EULAR guidelines: topical NSAIDs preferred over oral in elderly for peripheral OA; (3) Duloxetine — FDA-approved for chronic musculoskeletal pain including OA; (4) Intra-articular corticosteroid injection — acute flares, short-term relief; (5) Oral NSAIDs: use at lowest effective dose with PPI if GI risk; AVOID in CKD, HF, anticoagulated elderly; (6) Opioids: last resort, significant risks in elderly — falls, constipation, sedation, hyperalgesia; tramadol especially problematic (seizure risk, serotonin syndrome, high drug interactions). Non-pharmacologic: weight loss (most effective long-term), PT, walking aids, knee brace, aquatic therapy.",
+   refKey:"msk_oa_ra"},
+  {id:"msk_e02",domain:"Patient Assessment Process",system:"Musculoskeletal",topic:"Low Back Pain",type:"mcq",
+   vignette:"A 76-year-old male presents with new-onset low back pain radiating down the left leg, worse with walking and standing, relieved by sitting or leaning forward (like pushing a shopping cart). He has no bladder/bowel symptoms. MRI shows multilevel lumbar stenosis.",
+   stem:"What is the diagnosis and appropriate conservative management?",
+   choices:["Disc herniation — immediate surgical discectomy","Neurogenic claudication from lumbar spinal stenosis — conservative management (PT with flexion-based exercises, NSAIDs or acetaminophen, epidural steroid injections for temporary relief); surgery for refractory cases with significant functional limitation","Vascular claudication — ABI and vascular surgery referral","Cauda equina syndrome — emergent MRI and surgical decompression"],
+   correct:1,
+   explanation:"Lumbar spinal stenosis (LSS): narrowing of spinal canal → neurogenic claudication. Classic: bilateral or unilateral leg pain/weakness/numbness with walking or standing (extension narrows canal), relieved by sitting or flexion (widened canal). 'Shopping cart sign' — relief leaning forward over cart. Distinguishes from vascular claudication: neurogenic = relieved by sitting (not just stopping); vascular = relieved by stopping (not needing to sit or flex). ABI normal in neurogenic claudication. Management: (1) Conservative first (most improve or stabilize without surgery): PT with Williams flexion exercises, core strengthening, aquatic therapy; (2) Analgesics — acetaminophen, topical NSAIDs (avoid systemic NSAIDs in elderly); (3) Epidural steroid injections — moderate short-term benefit (3-6 months); (4) Surgical decompression (laminectomy): for refractory symptoms with significant functional limitation — good outcomes in carefully selected elderly patients. Cauda equina: acute onset saddle anesthesia + bowel/bladder dysfunction = STAT MRI.",
+   refKey:"msk_lbp"},
+
+  /* ── PREVENTIVE CARE: Elderly ── */
+  {id:"prev_e01",domain:"Plan of Care",system:"Preventive Care",topic:"Immunizations",type:"mcq",
+   vignette:"An 82-year-old female presents for her annual wellness visit. She received Shingrix dose 1 at age 80 and never returned for dose 2. She had a PPSV23 at age 72 and PCV15 at age 76. She gets annual flu shots.",
+   stem:"Which vaccines are most immediately indicated at this visit?",
+   choices:["No vaccines needed — she is up to date on all recommended immunizations","Shingrix dose 2 (complete the series regardless of interval since dose 1), annual influenza vaccine, and COVID-19 updated booster — the Shingrix series should be completed even if the interval exceeds the recommended 2-6 months","Restart the entire Shingrix series — doses given more than 6 months apart are invalid","PPSV23 booster — annual pneumococcal vaccination is recommended after age 80"],
+   correct:1,
+   explanation:"Vaccine catch-up in elderly: (1) Shingrix (RZV): 2-dose series; recommended interval 2-6 months between doses; if dose 2 is delayed beyond 6 months — the series does NOT need to be restarted — give dose 2 whenever feasible; no maximum interval after dose 1. High priority — zoster risk increases with age, immunity wanes. (2) Annual influenza: give now. (3) COVID-19 updated booster: recommended annually for all adults, especially elderly (highest mortality risk). (4) Pneumococcal: she received PPSV23 at 72 and PCV15 at 76 — review timing: if PCV15 was given at ≥65 and PPSV23 was given ≥1 year after PCV15, series is complete; no PPSV23 repeat needed. PCV20 alone (single shot) is now an alternative to PCV15 + PPSV23. (5) Tdap/Td: if >10 years since last Td — consider Tdap booster. RSV vaccine (Abrysvo or Mresvia): single dose recommended for adults ≥60 per shared clinical decision-making (ACIP 2023).",
+   refKey:"prev_imm"},
+  {id:"prev_e02",domain:"Patient Assessment Process",system:"Preventive Care",topic:"Cancer Screening",type:"mcq",
+   vignette:"An 80-year-old male with excellent functional status, no significant comorbidities, and life expectancy estimated at 10+ years asks about ongoing colorectal cancer screening. He had a normal colonoscopy at age 75.",
+   stem:"What is the most appropriate approach to CRC screening at age 80?",
+   choices:["All CRC screening stops at age 75 — USPSTF does not recommend any screening beyond this age","USPSTF recommends individualized decision-making for CRC screening ages 76-85 — for a healthy, high-functioning 80-year-old with a normal colonoscopy at 75, continuing screening (annual FIT or colonoscopy at age 85) is reasonable; life expectancy and patient preference guide the decision","Continue annual colonoscopy regardless of age or functional status","Stop all cancer screening at age 80 — benefits never outweigh harms in octogenarians"],
+   correct:1,
+   explanation:"CRC screening in elderly: USPSTF 2021: Grade A: screen all average-risk adults 45-75. Grade C: individualized decision for adults 76-85 — benefits still likely for healthy adults, but harms (colonoscopy complications, false positives leading to procedures) increase with age. Grade D: do not screen adults >85. For this 80-year-old: normal colonoscopy at 75 = next colonoscopy due at 85 (10-year interval) OR annual FIT screening in the interim. Decision factors: life expectancy (≥10 years = worthwhile for cancer prevention), functional status, patient preference, colonoscopy complication risk. General screening principle in elderly: any cancer screening benefits require approximately 5-10 years to manifest — screen those with sufficient life expectancy to potentially benefit. Mammography (76-84): USPSTF says individualized decision (Grade I); annual mammography appropriate for healthy elderly women. PSA screening ≥70: USPSTF Grade D — recommend against.",
+   refKey:"prev_screen"},
+
+  /* ── WOMEN'S HEALTH: Elderly ── */
+  {id:"wh_e01",domain:"Patient Assessment Process",system:"Women's Health",topic:"Menopause",type:"mcq",
+   vignette:"A 78-year-old female who has been on hormone therapy (estradiol patch + progesterone) since age 52 for menopausal symptoms presents for routine follow-up. She feels well and does not want to stop. Her internist recommended stopping HT at this visit.",
+   stem:"What is the evidence-based guidance on long-term HT use in a 78-year-old woman?",
+   choices:["HT is safe indefinitely at any age — continue without reassessment","Long-term HT in women >60 or >10 years post-menopause carries increased risks of breast cancer, VTE, stroke, and possibly coronary events; the benefit-risk balance should be reassessed; if continuing, use the lowest effective dose; document shared decision-making","All women must stop HT at menopause completion — no reason to continue past age 55","HT after age 65 causes dementia — must stop immediately"],
+   correct:1,
+   explanation:"Long-term HT risks: WHI trial informed current guidelines: risks of combined estrogen-progestogen HT increase with duration and age of initiation: (1) Breast cancer: small increased risk with combined E+P >5 years (1.24× RR); estrogen-only: no increased risk (slight decrease); (2) VTE: 2× increased risk with oral HT (transdermal = lower VTE risk); (3) Stroke: small increased risk with oral estrogen; (4) Coronary events: increased risk when started >10 years post-menopause or age ≥60 ('timing hypothesis' — beneficial when started within 10 years of menopause). For this 78-year-old on HT since 52 (26 years): reassess periodically: why is she still taking it? Vasomotor symptoms persist? Bone health? Quality of life? Options: (1) Gradual taper trial — many women find symptoms did not persist; (2) Continue lowest effective dose with annual reassessment and documented shared decision-making; (3) Switch to vaginal-only estrogen if GSM is the only indication (minimal systemic absorption). Respect patient autonomy — individualized decision.",
+   refKey:"wh_meno"},
+  {id:"wh_e02",domain:"Patient Assessment Process",system:"Women's Health",topic:"Abnormal Uterine Bleeding",type:"mcq",
+   vignette:"A 72-year-old female on tamoxifen for 4 years (breast cancer adjuvant therapy) presents with new vaginal spotting. TVUS shows endometrial stripe of 8 mm.",
+   stem:"What is the most important management step and why does tamoxifen change the risk profile?",
+   choices:["Reassure — tamoxifen commonly causes benign vaginal spotting; no workup needed","Endometrial biopsy is mandatory — tamoxifen acts as a partial estrogen agonist on the endometrium causing hyperplasia and significantly increasing endometrial cancer risk; any postmenopausal bleeding on tamoxifen requires tissue sampling","Start progesterone to counteract tamoxifen's estrogenic effect — no biopsy needed","Stop tamoxifen immediately — the drug is causing the bleeding"],
+   correct:1,
+   explanation:"Tamoxifen and endometrial cancer: tamoxifen is a selective estrogen receptor modulator (SERM) — acts as estrogen ANTAGONIST in breast tissue (reducing recurrence) but as estrogen AGONIST in the uterus. Consequences of uterine estrogen agonism: endometrial hyperplasia, polyps, and endometrial cancer (2-3× increased risk in postmenopausal women on tamoxifen >2 years). Endometrial stripe 8 mm on tamoxifen: tamoxifen changes ultrasound characteristics (appears as thickened, heterogeneous stripe — less reliable than in non-tamoxifen users). Any vaginal bleeding in postmenopausal woman on tamoxifen = endometrial biopsy regardless of stripe thickness. Surveillance: routine TVUS screening of asymptomatic tamoxifen users is NOT recommended (too many false positives) — only investigate when symptomatic. Management: biopsy → if hyperplasia: may need hysteroscopy; if cancer: hysterectomy. Consider switching to aromatase inhibitor (anastrozole, letrozole) — no uterine stimulation — after discussion with oncologist.",
+   refKey:"wh_aub"},
+
+  /* ── GERIATRICS: Elderly specific ── */
+  {id:"geri_e01",domain:"Patient Assessment Process",system:"Geriatrics",topic:"Delirium",type:"mcq",
+   vignette:"A 77-year-old female with moderate dementia is admitted after a hip fracture repair. Post-op day 1 she is awake but confused, picking at her bed sheets, and calling out for her deceased husband. Overnight she became agitated and tried to climb out of bed. A physical restraint was applied by the night nurse.",
+   stem:"What is the most appropriate response to the use of physical restraints in this delirious patient?",
+   choices:["Physical restraints are appropriate for all confused post-operative elderly patients — prevents falls","Remove the physical restraint — restraints worsen delirium (increase agitation, cause injury, promote immobility and pressure injuries) and increase mortality; implement one-to-one nursing or sitter, environmental modifications, and non-pharmacologic delirium management","Apply bilateral wrist restraints — more restrictive restraints are safer","Increase opioid dosing — pain is causing agitation"],
+   correct:1,
+   explanation:"Physical restraints in elderly delirium: physical restraints are CONTRAINDICATED in delirious elderly patients. Evidence shows restraints: (1) Worsen agitation — paradoxical agitation from struggling against restraints; (2) Cause injuries — fractures, strangulation, aspiration; (3) Promote deconditioning and pressure injuries; (4) Prolong delirium duration; (5) Associated with increased mortality. Alternatives: (1) One-to-one nursing or trained sitter — most effective; (2) Bed exit alarms; (3) Bed in lowest position; (4) Keep patient in well-lit room during day; (5) Family at bedside — reassuring presence; (6) Scheduled toileting — urgency is a common cause of attempts to get out of bed; (7) Address pain — use pain scale appropriate for cognitively impaired (PAINAD scale); (8) Medication review — reduce opioids, anticholinergics. CMS: physical restraints require physician order with specific time limit, reassessment, and must use least restrictive alternative. Restraint use = quality indicator in CMS hospital surveys.",
+   refKey:"geri_delirium"},
+  {id:"geri_e02",domain:"Plan of Care",system:"Geriatrics",topic:"Polypharmacy & Deprescribing",type:"mcq",
+   vignette:"An 87-year-old male with advanced Parkinson's disease, moderate dementia, T2DM, and CHF takes 14 medications. He was recently hospitalized twice for falls and once for hypoglycemia. His family asks if all his medications are still necessary.",
+   stem:"Which principle guides medication management in patients with advanced illness and limited life expectancy?",
+   choices:["All prescribed medications should be continued — stopping medications is dangerous","Apply the STOPPFrail criteria — in patients with advanced illness and limited life expectancy, discontinue medications where the risks clearly outweigh benefits (preventive medications with >5 year time horizon, medications causing side effects that impair function or QOL); prioritize comfort and function over prevention","Add more medications — polypharmacy is necessary to manage complex elderly patients","Consult cardiology before stopping any cardiovascular medication"],
+   correct:1,
+   explanation:"STOPPFrail criteria: validated tool for deprescribing in frail/end-of-life patients. Medications to stop in advanced illness with limited life expectancy: (1) Statins — primary or secondary prevention requires years to manifest benefit; can cause myopathy in frail elderly; (2) Bisphosphonates — fracture prevention requires ≥3-5 years; (3) Aspirin primary prevention — USPSTF Grade D ≥70; (4) Tight glycemic control agents — sulfonylureas and insulin in patients with recurrent hypoglycemia; relax A1C target to <8.5%; (5) Antihypertensives — if causing orthostasis/falls, consider relaxing BP target to <150 systolic; (6) Anticoagulants — if falls are frequent and benefit-risk unfavorable. Comfort-focused medications to CONTINUE: analgesics, antiemetics, anxiolytics, antidepressants, medications for urinary symptoms. Goal: reduce pill burden → reduce adverse drug events → improve function and quality of life. Deprescribing is a proactive, patient-centered intervention — not abandonment of care.",
+   refKey:"geri_poly"},
+  {id:"geri_e03",domain:"Patient Assessment Process",system:"Geriatrics",topic:"Urinary Incontinence",type:"mcq",
+   vignette:"A 79-year-old male with BPH on tamsulosin and moderate Parkinson's disease presents with urinary incontinence. He describes urgency and inability to reach the toilet in time due to slow walking. He wears protective pads and is embarrassed.",
+   stem:"What is the most important initial assessment and management consideration in this patient?",
+   choices:["Start oxybutynin immediately — urgency incontinence requires anticholinergic treatment","Comprehensive assessment to identify the type and contributing factors: Parkinson's causes both neurogenic detrusor overactivity (urgency UI) AND impaired mobility (functional UI); bladder diary, post-void residual (BPH causes overflow), and medication review are essential before starting any treatment; avoid anticholinergics — worsen cognition in Parkinson's","TURP is the only treatment — surgical BPH management resolves all UI","Urodynamic studies are required before any treatment in elderly male UI"],
+   correct:1,
+   explanation:"UI in elderly male with Parkinson's and BPH: complex multifactorial incontinence requiring careful assessment before treatment. Contributing factors: (1) Parkinson's disease — neurogenic detrusor overactivity (urgency UI) from dopaminergic pathway dysfunction; also impaired mobility → functional UI (can't get to toilet in time); (2) BPH — may cause outlet obstruction → overflow UI (check PVR — if >200-300 mL = overflow); (3) Tamsulosin — alpha-1 blockade may worsen stress/overflow components. Assessment: bladder diary, PVR ultrasound, urinalysis (rule out UTI), medication review. Treatment: (1) If overflow (high PVR): address BPH — continue/optimize tamsulosin; consider TURP if refractory; (2) If urgency UI: bladder training, scheduled voiding, pelvic floor PT; (3) AVOID anticholinergics (oxybutynin, tolterodine) in Parkinson's — worsen cognitive impairment and confusion; use mirabegron instead; (4) Functional UI: optimize mobility, gait training, PT, bedside commode, easy-to-open clothing.",
+   refKey:"geri_ui"},
+  {id:"geri_e04",domain:"Plan of Care",system:"Geriatrics",topic:"Falls & Fall Prevention",type:"mcq",
+   vignette:"A 75-year-old male with Parkinson's disease fell three times in the past month. He uses a cane but has a festinating gait, forward-leaning posture, and slow turns. He lives alone.",
+   stem:"Beyond optimizing Parkinson's medications, what is the most effective falls intervention for this patient?",
+   choices:["Prescribe a walker — mobility aids prevent all falls in Parkinson's","Parkinson's-specific physical therapy (LSVT BIG program or Parkinson's-specific balance training) combined with a home safety assessment — PD-specific PT is significantly more effective than generic PT; living alone increases fall risk and injury severity","Prescribe alprazolam for anxiety about falling — fear of falling causes most falls in PD","Hip protectors are sufficient — no other intervention needed"],
+   correct:1,
+   explanation:"Falls in Parkinson's disease: PD-specific mechanisms — freezing of gait, festination, postural instability, reduced protective reflexes, orthostatic hypotension from autonomic dysfunction, and levodopa-related dyskinesias. General fall prevention applies but PD requires specialized interventions: (1) LSVT BIG — Lee Silverman Voice Treatment adapted for movement: high-amplitude movement training that counteracts PD's hypokinesia; significant evidence for gait and balance improvement; (2) Treadmill training, rhythmic auditory stimulation (metronome), visual cues (lines on floor) — help with freezing of gait; (3) Tai Chi — evidence-based in PD; (4) Home safety assessment — remove hazards, install grab bars (both sides of toilet, shower), handrails on both sides of stairs; (5) Parkinson's medication optimization — adequate levodopa/carbidopa timing reduces off-period freezing; (6) Orthostatic hypotension management — rise slowly, compression stockings, midodrine if severe. Living alone with PD + frequent falls = high risk for serious injury without discovery — consider medical alert device and safety check system.",
+   refKey:"geri_falls"},
+
+  /* ── HEMATOLOGY: Elderly ── */
+  {id:"hem_e01",domain:"Patient Assessment Process",system:"Hematology",topic:"Anemia",type:"mcq",
+   vignette:"An 80-year-old male has Hgb 10.1 g/dL, MCV 94 fL (normocytic), ferritin 220, normal B12 and folate, reticulocyte index 0.8, normal TSH, CRP mildly elevated at 2.1 mg/L. He has HTN and mild CKD (eGFR 52). He reports fatigue and decreased functional capacity.",
+   stem:"What is the most likely diagnosis and most appropriate next step?",
+   choices:["Iron deficiency anemia — high ferritin rules this out, so start IV iron empirically","Anemia of chronic inflammation/chronic disease — normocytic anemia in elderly with CKD and elevated CRP; screen for occult malignancy (CBC with differential, serum protein electrophoresis, PSA, CT if clinical concern) before attributing to ACI","Vitamin B12 deficiency — recheck B12 with methylmalonic acid level before concluding normal","Thalassemia trait — genetic counseling and no treatment needed"],
+   correct:1,
+   explanation:"Anemia in elderly — most common causes and workup: (1) Anemia of chronic disease/inflammation (ACI): normocytic, normal/elevated ferritin, elevated inflammatory markers, reduced reticulocyte response, associated with chronic illness (CKD, malignancy, inflammatory conditions); (2) CKD-related anemia: contributes at eGFR <45; (3) Occult malignancy: new anemia in elderly requires malignancy exclusion — myeloma (SPEP, free light chains), lymphoma (LDH, flow cytometry), solid tumor. Always work up anemia systematically in elderly — do not attribute to 'old age.' Workup: peripheral blood smear (morphology clues), SPEP (myeloma), LDH, uric acid, reticulocyte count, direct Coombs (hemolysis). SEPE: serum protein electrophoresis critical in elderly anemia workup — myeloma presents with normocytic anemia + fatigue + back pain + hypercalcemia + renal failure (CRAB criteria). Reticulocyte index <2% = hypoproliferative (bone marrow problem or substrate deficiency).",
+   refKey:"hem_anemia"},
+
+  /* ── MEN'S HEALTH: Elderly ── */
+  {id:"mens_e01",domain:"Patient Assessment Process",system:"Men's Health",topic:"Benign Prostatic Hyperplasia",type:"mcq",
+   vignette:"A 78-year-old male with BPH, HTN treated with doxazosin 4 mg daily, and a recent fall history presents for medication review. His blood pressure is well controlled. He reports dizziness when standing up from a chair.",
+   stem:"What is the most important medication safety concern in this elderly patient?",
+   choices:["Doxazosin is the safest alpha-blocker in elderly — no changes needed","Doxazosin causes significant orthostatic hypotension and is on the Beers Criteria for elderly patients — switch to tamsulosin or alfuzosin (more uroselective, less blood pressure effect) to reduce fall risk while maintaining BPH symptom control","Increase doxazosin dose — blood pressure lowering will improve his fall risk by preventing stroke","Stop all BPH treatment — urinary symptoms in elderly do not need treatment"],
+   correct:1,
+   explanation:"Alpha-1 blockers and orthostatic hypotension in elderly: Alpha-1 blockers are classified by selectivity: Non-selective (block vascular AND urinary alpha-1 receptors): doxazosin, terazosin — significant blood pressure lowering and orthostatic hypotension; Beers Criteria: AVOID doxazosin and terazosin for BPH in elderly patients with fall risk — the cardiovascular effects are not needed for BPH. Uroselective (primarily block urinary alpha-1A receptors): tamsulosin, alfuzosin, silodosin — minimal blood pressure effect; preferred for BPH in elderly patients with HTN managed by other agents. This patient: doxazosin for BPH + separate HTN treatment = double blood pressure lowering effect → orthostasis → falls. Switch to tamsulosin 0.4 mg — continues BPH symptom control without cardiovascular effect. ALLHAT trial: doxazosin arm stopped early due to increased HF compared to chlorthalidone — avoid doxazosin as antihypertensive monotherapy.",
+   refKey:"mens_bph"},
 
 ];
 
@@ -3335,6 +3614,60 @@ function startQuiz(opts){
   }
   else if(opts.mode==='unseen'){pool=QS.filter(q=>!state.answers[q.id]);ses.label='Unseen';if(!pool.length){alert("You've answered every question!");return;}}
   else if(opts.mode==='guessed'){pool=QS.filter(q=>state.answers[q.id]?.confidence==='guessed');ses.label='Drill Guesses';if(!pool.length){alert("No guessed questions yet!");return;}}
+  else if(opts.mode==='exam'){
+    // Build a 135-question exam mirroring AANPCB blueprint
+    // Domain targets (135 scored): Assess=37, Diagnose=34, Plan=34, Evaluate=30
+    // Map our domains: Patient Assessment=Assess+Diagnose, Plan of Care=Plan+Evaluate, PP=remaining
+    // System weighting mirrors clinical primary care distribution
+    const EXAM_N = 135;
+    const rng = ()=>Math.random();
+    
+    // Weighted system targets based on AANPCB content emphasis
+    const systemTargets = {
+      "Professional Practice": 13,
+      "Pulmonology": 10,
+      "Cardiology": 10,
+      "Neurology": 9,
+      "Geriatrics": 9,
+      "Endocrinology": 8,
+      "Women's Health": 8,
+      "Psychiatry": 7,
+      "Gastroenterology": 7,
+      "Musculoskeletal": 7,
+      "Infectious Disease": 7,
+      "Nephrology": 6,
+      "Preventive Care": 6,
+      "Hematology": 5,
+      "Dermatology": 4,
+      "HEENT": 4,
+      "Men's Health": 4,
+    };
+    
+    // Sample proportionally from each system
+    const selected = [];
+    const shuffled = [...QS].sort(()=>rng()-.5);
+    
+    Object.entries(systemTargets).forEach(([sys, target]) => {
+      const pool_s = shuffled.filter(q => q.system === sys);
+      // Mix of mcq and multi, prefer unseen if possible
+      const unseen = pool_s.filter(q => !state.answers[q.id]);
+      const source = unseen.length >= target ? unseen : pool_s;
+      // Take target number, or all available if fewer
+      const take = Math.min(target, source.length);
+      selected.push(...source.slice(0, take));
+    });
+    
+    // If we have fewer than 135, top up with any remaining unseen/random
+    if(selected.length < EXAM_N) {
+      const selectedIds = new Set(selected.map(q=>q.id));
+      const remaining = shuffled.filter(q => !selectedIds.has(q.id));
+      selected.push(...remaining.slice(0, EXAM_N - selected.length));
+    }
+    
+    // Cap at exactly 135, shuffle the final set
+    pool = selected.slice(0, EXAM_N).sort(()=>rng()-.5);
+    ses.label = 'Exam Mode (135 Q)';
+  }
   else if(opts.mode==='domain'){pool=QS.filter(q=>q.domain===opts.domainKey);}
   else if(opts.mode==='topic'){pool=QS.filter(q=>q.topic===opts.topic);}
   pool=pool.sort(()=>Math.random()-.5);
@@ -3346,14 +3679,34 @@ function startQuiz(opts){
   const stl=document.getElementById('stimer-label');
   const stv=document.getElementById('stimer-val');
   const tb=document.getElementById('timed-badge');
-  if(stl)stl.style.display=ses.timed?'inline':'none';
+  if(stl){stl.style.display=ses.timed?'inline':'none';stl.textContent=ses.mode==='exam'?'Time Left':'Session';}
   if(stv)stv.style.display=ses.timed?'inline':'none';
   if(tb)tb.style.display=ses.timed?'inline':'none';
   if(ses.timed)ses.sesTimer=setInterval(updateSTimer,1000);
   renderQ();
 }
 function clearTimers(){if(ses.sesTimer){clearInterval(ses.sesTimer);ses.sesTimer=null;}if(ses.qTimer){clearInterval(ses.qTimer);ses.qTimer=null;}}
-function updateSTimer(){const e=Math.floor((Date.now()-ses.sesStart)/1000);const m=Math.floor(e/60);const s=e%60;const el=document.getElementById('stimer-val');if(el)el.textContent=m+':'+(s<10?'0':'')+s;}
+function updateSTimer(){
+  const el=document.getElementById('stimer-val');
+  if(!el)return;
+  if(ses.mode==='exam'){
+    // Countdown from 3 hours (10800 seconds)
+    const EXAM_SECS=10800;
+    const elapsed=Math.floor((Date.now()-ses.sesStart)/1000);
+    const rem=Math.max(0,EXAM_SECS-elapsed);
+    const h=Math.floor(rem/3600);
+    const m=Math.floor((rem%3600)/60);
+    const s=rem%60;
+    el.textContent=h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+    el.style.color=rem<300?'var(--red)':rem<900?'var(--amber)':'var(--gold)';
+    if(rem===0){clearInterval(ses.sesTimer);ses.sesTimer=null;showResults();}
+  } else {
+    // Count up for practice modes
+    const e=Math.floor((Date.now()-ses.sesStart)/1000);
+    const m=Math.floor(e/60);const s=e%60;
+    el.textContent=m+':'+(s<10?'0':'')+s;
+  }
+}
 function startQTimer(){
   clearInterval(ses.qTimer);ses.qTimer=null;ses.qStart=Date.now();
   updateQT();
