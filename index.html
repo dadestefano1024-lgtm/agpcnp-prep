@@ -219,6 +219,30 @@ body{height:100%;min-height:100vh;min-height:-webkit-fill-available;font-family:
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--surface);border-radius:2px}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .anim{animation:fadeUp .2s ease forwards}
+
+/* ── TREND GRAPH ── */
+.trend-section{margin-bottom:20px}
+.trend-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 14px 10px;position:relative}
+.trend-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.trend-title{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.trend-summary{font-size:12px;color:var(--muted)}
+.trend-empty{font-size:12px;color:var(--dim);text-align:center;padding:20px 0}
+.trend-svg{width:100%;overflow:visible;display:block}
+.trend-axis{font-size:9px;fill:var(--dim);font-family:'DM Sans',sans-serif}
+.trend-grid-line{stroke:var(--border);stroke-width:1}
+.trend-area{fill:rgba(212,168,83,0.1)}
+.trend-line{fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.trend-dot{fill:var(--gold);stroke:var(--bg2);stroke-width:2}
+.trend-dot-bad{fill:var(--red)}
+.trend-dot-ok{fill:var(--amber)}
+.trend-dot-good{fill:var(--green)}
+.trend-labels{display:flex;justify-content:space-between;margin-top:4px;padding:0 2px}
+.trend-label-item{font-size:9px;color:var(--dim);text-align:center;max-width:30px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.trend-pass-line{stroke:rgba(76,175,125,0.4);stroke-width:1;stroke-dasharray:3,3}
+
+/* ── REF AUTO-EXPAND ── */
+.ref-panel.wrong-auto{border-color:var(--red-b)}
+.ref-panel.wrong-auto .ref-panel-inner{border-top:2px solid var(--red)}
 </style>
 </head>
 <body>
@@ -263,6 +287,16 @@ body{height:100%;min-height:100vh;min-height:-webkit-fill-available;font-family:
   </div>
   <div class="section-label">By Domain → System → Topic</div>
   <div class="domain-accordion" id="domain-acc"></div>
+  <div class="section-label">Accuracy Trend</div>
+  <div class="trend-section" id="trend-section">
+    <div class="trend-card" id="trend-card">
+      <div class="trend-header">
+        <span class="trend-title">Daily Accuracy</span>
+        <span class="trend-summary" id="trend-summary"></span>
+      </div>
+      <div id="trend-body"><div class="trend-empty">Answer 10+ questions to see your trend.</div></div>
+    </div>
+  </div>
   <div class="section-label">Topic Performance</div>
   <div class="heatmap-grid" id="heatmap"></div>
   <div style="height:14px"></div>
@@ -8483,6 +8517,91 @@ function topicPct(topic){
 function heatColor(p){if(p===null)return'var(--dim)';if(p>=80)return'var(--green)';if(p>=60)return'var(--amber)';return'var(--red)'}
 
 /* ═══════════════════ HOME ═══════════════════ */
+
+function renderTrend(){
+  const el=document.getElementById('trend-body');
+  const sum=document.getElementById('trend-summary');
+  if(!el)return;
+  const sessions=(state.sessions||[]).filter(s=>s.total>=1);
+  if(sessions.length<2){
+    // Show total answered count as encouragement
+    const total=Object.values(state.answers).length;
+    const needed=Math.max(0,10-total);
+    el.innerHTML=`<div class="trend-empty">${total>0?`${total} answered — answer ${needed} more to see your trend.`:'Answer 10+ questions to see your trend.'}</div>`;
+    sum.textContent='';
+    return;
+  }
+  // Sort by date
+  const sorted=sessions.slice().sort((a,b)=>a.date.localeCompare(b.date));
+  const last7=sorted.slice(-14); // show up to 14 days
+  // Build SVG sparkline
+  const W=320,H=80,padL=28,padR=8,padT=8,padB=4;
+  const iW=W-padL-padR,iH=H-padT-padB;
+  const pcts=last7.map(s=>Math.round(s.correct/s.total*100));
+  const minP=Math.min(...pcts,40);
+  const maxP=Math.max(...pcts,100);
+  const range=maxP-minP||20;
+  const xScale=i=>(i/(last7.length-1||1))*iW+padL;
+  const yScale=p=>padT+iH-(((p-minP)/range)*iH);
+  // Grid lines at 60% and 80%
+  let gridLines='';
+  [60,80].forEach(g=>{
+    if(g>=minP&&g<=maxP){
+      const gy=yScale(g);
+      gridLines+=`<line x1="${padL}" y1="${gy}" x2="${padL+iW}" y2="${gy}" class="trend-grid-line"/>`;
+      gridLines+=`<text x="${padL-3}" y="${gy+3}" class="trend-axis" text-anchor="end">${g}</text>`;
+    }
+  });
+  // Pass line at 70%
+  let passLine='';
+  if(70>=minP&&70<=maxP){
+    const py=yScale(70);
+    passLine=`<line x1="${padL}" y1="${py}" x2="${padL+iW}" y2="${py}" class="trend-pass-line"/>`;
+    passLine+=`<text x="${padL+iW+2}" y="${py+3}" class="trend-axis" fill="rgba(76,175,125,0.7)">70%</text>`;
+  }
+  // Area path
+  let areaD=`M${xScale(0)},${yScale(pcts[0])}`;
+  pcts.forEach((p,i)=>{if(i>0)areaD+=` L${xScale(i)},${yScale(p)}`;});
+  areaD+=` L${xScale(pcts.length-1)},${padT+iH} L${xScale(0)},${padT+iH} Z`;
+  // Line path
+  let lineD=`M${xScale(0)},${yScale(pcts[0])}`;
+  pcts.forEach((p,i)=>{if(i>0)lineD+=` L${xScale(i)},${yScale(p)}`;});
+  // Dots
+  let dots='';
+  pcts.forEach((p,i)=>{
+    const cls=p>=80?'trend-dot-good':p>=60?'trend-dot-ok':'trend-dot-bad';
+    dots+=`<circle cx="${xScale(i)}" cy="${yScale(p)}" r="3.5" class="trend-dot ${cls}"/>`;
+    // Value label on last point
+    if(i===pcts.length-1){
+      dots+=`<text x="${xScale(i)}" y="${yScale(p)-7}" class="trend-axis" text-anchor="middle" fill="var(--gold)" font-weight="600">${p}%</text>`;
+    }
+  });
+  // Date labels (first, middle, last)
+  const labelIdxs=[0,Math.floor((last7.length-1)/2),last7.length-1].filter((v,i,a)=>a.indexOf(v)===i);
+  let dateLabels='';
+  labelIdxs.forEach(i=>{
+    const d=last7[i].date.slice(5); // MM-DD
+    dateLabels+=`<div class="trend-label-item" style="width:${100/(last7.length)}%">${d}</div>`;
+  });
+  // Trend direction
+  const firstPct=pcts[0];const lastPct=pcts[pcts.length-1];
+  const diff=lastPct-firstPct;
+  const arrow=diff>2?'↑':diff<-2?'↓':'→';
+  const arrowColor=diff>2?'var(--green)':diff<-2?'var(--red)':'var(--muted)';
+  sum.innerHTML=`<span style="color:${arrowColor}">${arrow} ${lastPct}% today</span>`;
+  el.innerHTML=`
+    <svg viewBox="0 0 ${W} ${H}" class="trend-svg">
+      ${gridLines}${passLine}
+      <path d="${areaD}" class="trend-area"/>
+      <path d="${lineD}" class="trend-line"/>
+      ${dots}
+    </svg>
+    <div class="trend-labels">${last7.map((s,i)=>{
+      const show=i===0||i===last7.length-1||i===Math.floor((last7.length-1)/2);
+      return `<div class="trend-label-item" style="flex:1;text-align:center">${show?s.date.slice(5):''}</div>`;
+    }).join('')}</div>`;
+}
+
 function renderHome(){
   const all=Object.values(state.answers);
   const ans=all.length;
@@ -8529,6 +8648,9 @@ function renderHome(){
     hdr.onclick=()=>{const o=body.classList.toggle('open');hdr.classList.toggle('open',o);hdr.querySelector('.d-chev').classList.toggle('open',o)};
     acc.appendChild(hdr);acc.appendChild(body);
   });
+
+  // Trend graph
+  renderTrend();
 
   // Heatmap
   const hm=document.getElementById('heatmap');hm.innerHTML='';
@@ -8796,6 +8918,15 @@ function selMCQ(qid,idx){
   clearInterval(ses.qTimer);ses.qTimer=null;
   const q=QS.find(x=>x.id===qid);const ok=idx===q.correct;
   recordAns(qid,idx,ok,ok?1:0,null);renderQ();
+  // Auto-expand ref panel on wrong answer
+  if(!ok){setTimeout(()=>{
+    const p=document.getElementById('ref-panel');
+    const ic=document.getElementById('ref-ico');
+    if(p&&!p.classList.contains('open')){
+      p.classList.add('open','wrong-auto');
+      if(ic)ic.classList.add('open');
+    }
+  },350);}
   setTimeout(()=>{const e=document.querySelector('.explanation.visible');if(e)e.scrollIntoView({behavior:'smooth',block:'nearest'});},120);
 }
 function toggleM(qid,idx){
@@ -8819,7 +8950,18 @@ function recordAns(qid,chosen,correct,points,confidence,gotRight){
   const r={chosen,correct,points:points||0,confidence:confidence||null,timestamp:Date.now()};
   if(gotRight!==undefined)r.gotRight=gotRight;
   ses.answers[qid]=r;state.answers[qid]=r;
-  state.streak=correct?(state.streak||0)+1:0;save();
+  state.streak=correct?(state.streak||0)+1:0;
+  // Track daily session data for trend graph
+  const today=new Date().toISOString().slice(0,10);
+  if(!state.sessions)state.sessions=[];
+  // Find or create today's entry
+  let todayEntry=state.sessions.find(s=>s.date===today);
+  if(!todayEntry){todayEntry={date:today,correct:0,total:0};state.sessions.push(todayEntry);}
+  todayEntry.total++;
+  if(correct)todayEntry.correct++;
+  // Keep only last 30 days
+  if(state.sessions.length>30)state.sessions=state.sessions.slice(-30);
+  save();
 }
 function setConf(qid,conf){
   if(ses.answers[qid])ses.answers[qid].confidence=conf;
