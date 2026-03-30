@@ -243,6 +243,105 @@ body{height:100%;min-height:100vh;min-height:-webkit-fill-available;font-family:
 /* ── REF AUTO-EXPAND ── */
 .ref-panel.wrong-auto{border-color:var(--red-b)}
 .ref-panel.wrong-auto .ref-panel-inner{border-top:2px solid var(--red)}
+
+/* ── EXAM READINESS SCORE ── */
+.readiness-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:16px;display:flex;align-items:center;gap:16px}
+.readiness-ring{position:relative;width:72px;height:72px;flex-shrink:0}
+.readiness-ring svg{transform:rotate(-90deg)}
+.readiness-ring-bg{fill:none;stroke:var(--bg3);stroke-width:6}
+.readiness-ring-fill{fill:none;stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset .6s ease}
+.readiness-score{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'DM Serif Display',serif;font-size:18px;font-weight:600;color:var(--text)}
+.readiness-info{flex:1}
+.readiness-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
+.readiness-sub{font-size:11px;color:var(--muted);margin-bottom:6px}
+.readiness-systems{display:flex;flex-wrap:wrap;gap:4px}
+.readiness-sys-dot{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500}
+
+/* ── ANALYTICS DASHBOARD ── */
+.analytics-screen{overflow-y:auto;padding:calc(var(--safe-top) + 16px) 18px 24px;padding-bottom:calc(var(--safe-bot)+24px)}
+.analytics-topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.analytics-back{font-size:22px;cursor:pointer;padding:4px 8px;color:var(--text)}
+.analytics-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--text)}
+.analytics-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.an-stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px;text-align:center}
+.an-stat-val{font-size:28px;font-weight:700;line-height:1;margin-bottom:3px}
+.an-stat-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.sys-perf-row{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--border)}
+.sys-perf-row:last-child{border-bottom:none}
+.sys-perf-name{font-size:13px;color:var(--text);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sys-perf-bar-wrap{width:80px;height:6px;background:var(--bg3);border-radius:3px;flex-shrink:0}
+.sys-perf-bar{height:6px;border-radius:3px;transition:width .4s ease}
+.sys-perf-pct{font-size:12px;font-weight:600;width:35px;text-align:right;flex-shrink:0}
+.sys-perf-count{font-size:10px;color:var(--dim);width:32px;text-align:right;flex-shrink:0}
+.weak-topic-chip{display:inline-block;background:var(--red-bg);border:1px solid var(--red-b);color:var(--red);font-size:11px;padding:4px 10px;border-radius:20px;margin:3px;cursor:pointer}
+.study-rec{background:var(--gold-bg);border:1px solid var(--gold-b);border-radius:var(--r);padding:12px 14px;margin-bottom:12px}
+.study-rec-title{font-size:12px;font-weight:600;color:var(--gold);margin-bottom:4px}
+.study-rec-body{font-size:12px;color:var(--text)}
+
+/* ── NOTES ── */
+.note-section{margin-top:10px}
+.note-toggle{font-size:12px;color:var(--muted);cursor:pointer;padding:6px 0;display:flex;align-items:center;gap:6px;user-select:none}
+.note-toggle:hover{color:var(--text)}
+.note-area-wrap{display:none;margin-top:6px}
+.note-area-wrap.open{display:block}
+.note-textarea{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;padding:10px;resize:none;min-height:70px;outline:none;transition:border-color .2s}
+.note-textarea:focus{border-color:var(--gold-b)}
+.note-save-btn{margin-top:6px;font-size:12px;background:var(--gold-bg);border:1px solid var(--gold-b);color:var(--gold);padding:6px 14px;border-radius:20px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.note-saved-indicator{font-size:11px;color:var(--green);margin-left:8px;opacity:0;transition:opacity .3s}
+.note-saved-indicator.show{opacity:1}
+.note-exists-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;display:inline-block;margin-left:4px}
+
+/* ── FLASH CARD MODE ── */
+.flashcard-screen{display:flex;flex-direction:column;flex:1;overflow:hidden;background:var(--bg)}
+.fc-topbar{display:flex;align-items:center;gap:12px;padding:calc(var(--safe-top)+12px) 18px 12px;flex-shrink:0}
+.fc-back{font-size:22px;cursor:pointer;color:var(--text);padding:4px 8px}
+.fc-progress{flex:1;font-size:13px;color:var(--muted);text-align:center}
+.fc-count{font-size:13px;color:var(--muted)}
+.fc-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 24px;gap:20px}
+.fc-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);width:100%;max-width:400px;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.fc-card:active{transform:scale(0.98)}
+.fc-card-topic{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:600}
+.fc-card-system{font-size:11px;color:var(--muted);margin-bottom:14px}
+.fc-card-front{font-family:'DM Serif Display',serif;font-size:20px;color:var(--text);line-height:1.3}
+.fc-card-back{font-size:14px;color:var(--text);line-height:1.5;display:none}
+.fc-card-hint{font-size:11px;color:var(--dim);margin-top:12px}
+.fc-card.flipped .fc-card-front{display:none}
+.fc-card.flipped .fc-card-back{display:block}
+.fc-card.flipped .fc-card-hint{display:none}
+.fc-actions{display:flex;gap:12px;width:100%;max-width:400px}
+.fc-btn{flex:1;padding:14px;border-radius:var(--r);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:background .15s}
+.fc-btn-knew{background:var(--green-bg);border:1px solid var(--green-b);color:var(--green)}
+.fc-btn-missed{background:var(--red-bg);border:1px solid var(--red-b);color:var(--red)}
+.fc-btn:active{filter:brightness(1.2)}
+.fc-complete{text-align:center;padding:20px}
+.fc-complete-title{font-family:'DM Serif Display',serif;font-size:28px;color:var(--text);margin-bottom:8px}
+.fc-complete-sub{font-size:14px;color:var(--muted);margin-bottom:20px}
+
+/* ── QUICK REVIEW TOGGLE ── */
+.depth-toggle{display:flex;align-items:center;gap:8px;padding:8px 0 2px}
+.depth-toggle-lbl{font-size:11px;color:var(--muted);flex:1}
+.depth-switch{position:relative;width:36px;height:20px;cursor:pointer}
+.depth-switch input{opacity:0;width:0;height:0}
+.depth-slider{position:absolute;inset:0;background:var(--bg3);border-radius:10px;transition:.2s}
+.depth-slider::before{content:'';position:absolute;width:14px;height:14px;left:3px;top:3px;background:var(--muted);border-radius:50%;transition:.2s}
+.depth-switch input:checked + .depth-slider{background:var(--gold-bg)}
+.depth-switch input:checked + .depth-slider::before{transform:translateX(16px);background:var(--gold)}
+.quick-review-pearl{background:var(--gold-bg);border:1px solid var(--gold-b);border-radius:var(--r-sm);padding:10px 12px;margin-top:8px;font-size:13px;color:var(--text)}
+
+/* ── ENHANCED RESULTS SCREEN ── */
+.exam-results-detail{margin-top:16px}
+.exam-pass-banner{border-radius:var(--r);padding:14px 16px;margin-bottom:16px;text-align:center}
+.exam-pass-banner.pass{background:var(--green-bg);border:1px solid var(--green-b)}
+.exam-pass-banner.fail{background:var(--red-bg);border:1px solid var(--red-b)}
+.exam-pass-title{font-size:16px;font-weight:700;margin-bottom:3px}
+.exam-pass-sub{font-size:12px;opacity:.8}
+.sys-result-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border)}
+.sys-result-row:last-child{border-bottom:none}
+.sys-result-name{font-size:12px;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sys-result-bar-wrap{width:70px;height:5px;background:var(--bg3);border-radius:3px;flex-shrink:0}
+.sys-result-bar{height:5px;border-radius:3px}
+.sys-result-pct{font-size:12px;font-weight:600;width:32px;text-align:right;flex-shrink:0}
+.sys-result-n{font-size:10px;color:var(--dim);width:28px;text-align:right;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -256,6 +355,21 @@ body{height:100%;min-height:100vh;min-height:-webkit-fill-available;font-family:
     <div class="stat-card"><div class="stat-val" id="s-answered">0</div><div class="stat-lbl">Answered</div></div>
     <div class="stat-card"><div class="stat-val" id="s-pct" style="color:var(--gold)">—</div><div class="stat-lbl">Accuracy</div></div>
     <div class="stat-card"><div class="stat-val" id="s-streak">0</div><div class="stat-lbl">Streak</div></div>
+  </div>
+  <div class="section-label">Board Readiness</div>
+  <div class="readiness-card" id="readiness-card" onclick="showScreen('analytics-screen')">
+    <div class="readiness-ring">
+      <svg viewBox="0 0 72 72" width="72" height="72">
+        <circle class="readiness-ring-bg" cx="36" cy="36" r="30"/>
+        <circle class="readiness-ring-fill" id="readiness-fill" cx="36" cy="36" r="30" stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+      </svg>
+      <div class="readiness-score" id="readiness-pct">—</div>
+    </div>
+    <div class="readiness-info">
+      <div class="readiness-title" id="readiness-title">Start answering questions</div>
+      <div class="readiness-sub" id="readiness-sub">Tap to see full analytics →</div>
+      <div class="readiness-systems" id="readiness-systems"></div>
+    </div>
   </div>
   <div class="section-label">Study Modes</div>
   <div class="mode-cards">
@@ -282,6 +396,16 @@ body{height:100%;min-height:100vh;min-height:-webkit-fill-available;font-family:
     <div class="mode-card" onclick="startQuiz({mode:'guessed'})">
       <div class="mode-icon" style="background:var(--purple-bg)">🎲</div>
       <div style="flex:1"><div class="mode-card-title">Drill My Guesses</div><div class="mode-card-sub">Questions you got right but flagged as guessed</div></div>
+      <div class="mode-arrow">›</div>
+    </div>
+    <div class="mode-card" onclick="startFlashcards('all')">
+      <div class="mode-icon" style="background:var(--blue-bg)">🃏</div>
+      <div style="flex:1"><div class="mode-card-title">Board Pearl Flash Cards</div><div class="mode-card-sub">Topic on front · Pearl on back · Swipe to know or miss</div></div>
+      <div class="mode-arrow">›</div>
+    </div>
+    <div class="mode-card" onclick="startQuiz({mode:'spaced'})">
+      <div class="mode-icon" style="background:var(--green-bg)">🔁</div>
+      <div style="flex:1"><div class="mode-card-title">Spaced Repetition</div><div class="mode-card-sub">Due cards only — optimally timed for long-term retention</div></div>
       <div class="mode-arrow">›</div>
     </div>
   </div>
@@ -349,11 +473,60 @@ body{height:100%;min-height:100vh;min-height:-webkit-fill-available;font-family:
     <div class="cs-row"><span class="cs-lbl" style="color:var(--amber)">Unsure</span><div class="cs-bar-wrap"><div class="cs-bar" id="cs-unsure" style="background:var(--amber);width:0%"></div></div><span class="cs-val" id="csv-unsure" style="color:var(--amber)">0</span></div>
     <div class="cs-row"><span class="cs-lbl" style="color:var(--red)">Guessed</span><div class="cs-bar-wrap"><div class="cs-bar" id="cs-guess" style="background:var(--red);width:0%"></div></div><span class="cs-val" id="csv-guess" style="color:var(--red)">0</span></div>
   </div>
+  <div class="exam-results-detail" id="exam-results-detail"></div>
   <div class="res-actions">
     <button class="act-btn primary"   onclick="startQuiz({mode:'smart-missed'})">Drill Weak Topics</button>
     <button class="act-btn secondary" onclick="startQuiz({mode:'exam',timed:true})">Timed Exam Mode</button>
     <button class="act-btn secondary" onclick="startQuiz({mode:'shuffle'})">New Shuffle</button>
     <button class="act-btn secondary" onclick="goHome()">Home</button>
+  </div>
+</div>
+
+
+<!-- ANALYTICS SCREEN -->
+<div id="analytics-screen" class="screen">
+  <div class="analytics-screen">
+    <div class="analytics-topbar">
+      <span class="analytics-back" onclick="showScreen('home-screen')">←</span>
+      <span class="analytics-title">Analytics</span>
+    </div>
+    <div class="analytics-grid" id="an-grid"></div>
+    <div class="section-label">Study Recommendation</div>
+    <div id="an-rec"></div>
+    <div class="section-label">System Performance</div>
+    <div id="an-sys-list"></div>
+    <div class="section-label" style="margin-top:16px">Weakest Topics</div>
+    <div id="an-weak-topics" style="margin-bottom:20px"></div>
+  </div>
+</div>
+
+<!-- FLASHCARD SCREEN -->
+<div id="flashcard-screen" class="screen">
+  <div class="flashcard-screen">
+    <div class="fc-topbar">
+      <span class="fc-back" onclick="exitFlashcards()">←</span>
+      <span class="fc-progress" id="fc-prog">0 / 0</span>
+      <span class="fc-count" id="fc-score">0 knew</span>
+    </div>
+    <div class="fc-body">
+      <div class="fc-card" id="fc-card" onclick="flipCard()">
+        <div class="fc-card-topic" id="fc-topic"></div>
+        <div class="fc-card-system" id="fc-system"></div>
+        <div class="fc-card-front" id="fc-front"></div>
+        <div class="fc-card-back" id="fc-back"></div>
+        <div class="fc-card-hint">Tap to reveal</div>
+      </div>
+      <div class="fc-actions" id="fc-actions" style="display:none">
+        <button class="fc-btn fc-btn-missed" onclick="fcAnswer(false)">✗ Missed</button>
+        <button class="fc-btn fc-btn-knew" onclick="fcAnswer(true)">✓ Knew it</button>
+      </div>
+      <div class="fc-complete" id="fc-complete" style="display:none">
+        <div class="fc-complete-title">Done! 🎯</div>
+        <div class="fc-complete-sub" id="fc-complete-sub"></div>
+        <button class="act-btn primary" onclick="startFlashcards('missed')" style="margin-bottom:10px">Drill Missed Pearls</button>
+        <button class="act-btn secondary" onclick="exitFlashcards()">Home</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -9082,6 +9255,8 @@ function renderHome(){
 
   // Trend graph
   renderTrend();
+  // Readiness score
+  renderReadiness();
 
   // Heatmap
   const hm=document.getElementById('heatmap');hm.innerHTML='';
@@ -9114,6 +9289,16 @@ function startQuiz(opts){
       pool.push(...(notWrong.length?notWrong:tqs));
     });
     ses.label='Drill Weak Topics';
+  }
+  else if(opts.mode==='spaced'){
+    const due = getSRQueue();
+    pool = due.map(id => QS.find(q => q.id === id)).filter(Boolean);
+    ses.label = 'Spaced Repetition';
+    if(!pool.length){alert('No cards due for review right now. Come back later or try Shuffle All.');return;}
+  }
+  else if(opts.mode==='topic-sys'){
+    pool = QS.filter(q => q.system === opts.system);
+    ses.label = opts.label || opts.system;
   }
   else if(opts.mode==='unseen'){pool=QS.filter(q=>!state.answers[q.id]);ses.label='Unseen';if(!pool.length){alert("You've answered every question!");return;}}
   else if(opts.mode==='guessed'){pool=QS.filter(q=>state.answers[q.id]?.confidence==='guessed');ses.label='Drill Guesses';if(!pool.length){alert("No guessed questions yet!");return;}}
@@ -9314,7 +9499,24 @@ function renderQ(){
     const cls='explanation visible '+(isc?'correct-exp':isP?'partial-exp':'wrong-exp');
     const lc=isc?'c':isP?'p':'w';
     const lt=isc?'✓ Correct':isP?`◑ Partial Credit (${Math.round(prev.points*100)}%)`:'✗ Incorrect';
-    expHTML=`<div class="${cls}"><div class="exp-lbl ${lc}">${lt}</div>${q.explanation}</div>`;
+    const quickReview = state.quickReview || false;
+    const pearlOnly = quickReview && q.boardPearl;
+    expHTML=`<div class="${cls}">
+      <div class="exp-lbl ${lc}">${lt}</div>
+      ${pearlOnly ? 
+        `<div class="quick-review-pearl">⭐ ${q.boardPearl}</div>` : 
+        `${q.explanation}${q.boardPearl ? `<div class="quick-review-pearl" style="margin-top:8px">⭐ <strong>Board Pearl:</strong> ${q.boardPearl}</div>` : ''}`
+      }
+      <div class="note-section">
+        <div class="note-toggle" onclick="toggleNote('${q.id}')">
+          📝 ${(state.notes&&state.notes[q.id]) ? '<span style="color:var(--gold)">My Note</span>' : 'Add Note'}<span id="note-dot-${q.id}">${(state.notes&&state.notes[q.id])?'<span class=\"note-exists-dot\"></span>':''}</span>
+        </div>
+        <div class="note-area-wrap ${(state.notes&&state.notes[q.id])?'open':''}" id="note-wrap-${q.id}">
+          <textarea class="note-textarea" id="note-ta-${q.id}" placeholder="Type your note here..." oninput="autoSaveNote('${q.id}')">${(state.notes&&state.notes[q.id])||''}</textarea>
+          <span class="note-saved-indicator" id="note-saved-${q.id}">✓ Saved</span>
+        </div>
+      </div>
+    </div>`
   }
   let confHTML='';
   if(answered){
@@ -9382,6 +9584,8 @@ function recordAns(qid,chosen,correct,points,confidence,gotRight){
   if(gotRight!==undefined)r.gotRight=gotRight;
   ses.answers[qid]=r;state.answers[qid]=r;
   state.streak=correct?(state.streak||0)+1:0;
+  // Update spaced repetition schedule
+  updateSR(qid, correct);
   // Track daily session data for trend graph
   const today=new Date().toISOString().slice(0,10);
   if(!state.sessions)state.sessions=[];
@@ -9455,12 +9659,407 @@ function showResults(){
   document.getElementById('cs-easy').style.width=(easy/mx*100)+'%';document.getElementById('csv-easy').textContent=easy;
   document.getElementById('cs-unsure').style.width=(unsure/mx*100)+'%';document.getElementById('csv-unsure').textContent=unsure;
   document.getElementById('cs-guess').style.width=(guess/mx*100)+'%';document.getElementById('csv-guess').textContent=guess;
+  // Enhanced exam results
+  if(ses.mode==='exam'){renderExamResults();}
+  else{const d=document.getElementById('exam-results-detail');if(d)d.innerHTML='';}
   showScreen('results-screen');save();
 }
 
 /* ═══════════════════ ROUTING ═══════════════════ */
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home-screen')renderHome();}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home-screen')renderHome();if(id==='analytics-screen')renderAnalytics();}
 function goHome(){clearTimers();showScreen('home-screen');}
+
+
+
+/* ═══════════════════ SPACED REPETITION ═══════════════════ */
+function srNextReview(correct, prevInterval, prevEF) {
+  // SM-2 algorithm simplified
+  const ef = Math.max(1.3, (prevEF || 2.5) + (correct ? 0.1 : -0.3));
+  let interval;
+  if (!correct) {
+    interval = 1; // review tomorrow if wrong
+  } else if (!prevInterval) {
+    interval = 1;
+  } else if (prevInterval === 1) {
+    interval = 3;
+  } else {
+    interval = Math.round(prevInterval * ef);
+  }
+  return { interval, ef };
+}
+
+function getSRQueue() {
+  const now = Date.now();
+  const msPerDay = 86400000;
+  const due = [];
+  QS.forEach(q => {
+    const a = state.answers[q.id];
+    if (!a) {
+      due.push(q.id); // never seen = due
+      return;
+    }
+    const sr = state.sr && state.sr[q.id];
+    if (!sr) {
+      // answered but no SR data — schedule based on correctness
+      const daysSince = (now - (a.timestamp || 0)) / msPerDay;
+      if (a.correct && daysSince < 3) return; // seen recently and correct, skip
+      due.push(q.id);
+      return;
+    }
+    if (now >= sr.nextReview) due.push(q.id);
+  });
+  return due;
+}
+
+function updateSR(qid, correct) {
+  if (!state.sr) state.sr = {};
+  const prev = state.sr[qid] || { interval: 0, ef: 2.5 };
+  const { interval, ef } = srNextReview(correct, prev.interval, prev.ef);
+  state.sr[qid] = {
+    interval,
+    ef,
+    nextReview: Date.now() + interval * 86400000,
+    lastReviewed: Date.now()
+  };
+}
+
+/* ═══════════════════ NOTES ═══════════════════ */
+function toggleNote(qid) {
+  const wrap = document.getElementById('note-wrap-' + qid);
+  if (!wrap) return;
+  wrap.classList.toggle('open');
+  if (wrap.classList.contains('open')) {
+    setTimeout(() => {
+      const ta = document.getElementById('note-ta-' + qid);
+      if (ta) ta.focus();
+    }, 100);
+  }
+}
+
+let noteSaveTimers = {};
+function autoSaveNote(qid) {
+  clearTimeout(noteSaveTimers[qid]);
+  noteSaveTimers[qid] = setTimeout(() => {
+    const ta = document.getElementById('note-ta-' + qid);
+    if (!ta) return;
+    if (!state.notes) state.notes = {};
+    const val = ta.value.trim();
+    if (val) {
+      state.notes[qid] = val;
+    } else {
+      delete state.notes[qid];
+    }
+    save();
+    // Show saved indicator
+    const ind = document.getElementById('note-saved-' + qid);
+    if (ind) {
+      ind.classList.add('show');
+      setTimeout(() => ind.classList.remove('show'), 1500);
+    }
+  }, 600);
+}
+
+/* ═══════════════════ READINESS SCORE ═══════════════════ */
+function calcReadiness() {
+  const systemTargets = {
+    "Cardiology":12,"Professional Practice":11,"Pulmonology":10,"Neurology":9,"Geriatrics":9,
+    "Endocrinology":8,"Women's Health":8,"Psychiatry":7,"Gastroenterology":7,"Musculoskeletal":7,
+    "Infectious Disease":7,"Nephrology":6,"Preventive Care":6,"Pharmacology":5,"Hematology":5,
+    "Dermatology":4,"HEENT":4,"Men's Health":4,"Adolescent Health":3,"Reproductive/OB":3
+  };
+  const totalWeight = 135;
+  let weightedScore = 0;
+  let weightedAnswered = 0;
+  const sysScores = {};
+
+  Object.entries(systemTargets).forEach(([sys, weight]) => {
+    const sysQs = QS.filter(q => q.system === sys);
+    const sysAns = sysQs.filter(q => state.answers[q.id]);
+    if (!sysAns.length) {
+      sysScores[sys] = { pct: null, n: 0, total: sysQs.length, weight };
+      return;
+    }
+    const pts = sysAns.reduce((s, q) => s + (state.answers[q.id].correct ? 1 : 0), 0);
+    const pct = Math.round(pts / sysAns.length * 100);
+    sysScores[sys] = { pct, n: sysAns.length, total: sysQs.length, weight };
+    const coverage = Math.min(1, sysAns.length / (sysQs.length * 0.3)); // coverage factor
+    weightedScore += pct * weight * coverage;
+    weightedAnswered += weight * coverage;
+  });
+
+  const overall = weightedAnswered > 0 ? Math.round(weightedScore / weightedAnswered) : null;
+  return { overall, sysScores };
+}
+
+function renderReadiness() {
+  const { overall, sysScores } = calcReadiness();
+  const pctEl = document.getElementById('readiness-pct');
+  const fillEl = document.getElementById('readiness-fill');
+  const titleEl = document.getElementById('readiness-title');
+  const subEl = document.getElementById('readiness-sub');
+  const sysEl = document.getElementById('readiness-systems');
+  if (!pctEl) return;
+
+  if (overall === null) {
+    pctEl.textContent = '—';
+    titleEl.textContent = 'Answer questions to see readiness';
+    subEl.textContent = 'Tap to see full analytics →';
+    sysEl.innerHTML = '';
+    return;
+  }
+
+  // Ring animation
+  const circumference = 188.5;
+  const offset = circumference - (overall / 100) * circumference;
+  fillEl.style.strokeDashoffset = offset;
+  const color = overall >= 75 ? 'var(--green)' : overall >= 60 ? 'var(--gold)' : 'var(--red)';
+  fillEl.style.stroke = color;
+  pctEl.textContent = overall + '%';
+  pctEl.style.color = color;
+
+  const msg = overall >= 80 ? 'Strong — keep it up' : overall >= 70 ? 'On track for passing' : overall >= 60 ? 'Getting there' : 'Keep drilling';
+  titleEl.textContent = msg;
+  titleEl.style.color = color;
+  subEl.textContent = 'Tap for full analytics →';
+
+  // Weak system dots
+  const weak = Object.entries(sysScores)
+    .filter(([, v]) => v.pct !== null && v.pct < 70)
+    .sort((a, b) => a[1].pct - b[1].pct)
+    .slice(0, 4);
+  sysEl.innerHTML = weak.map(([sys, v]) =>
+    `<span class="readiness-sys-dot" style="background:var(--red-bg);border:1px solid var(--red-b);color:var(--red)">${sys.split(' ')[0]} ${v.pct}%</span>`
+  ).join('');
+}
+
+/* ═══════════════════ ANALYTICS DASHBOARD ═══════════════════ */
+function renderAnalytics() {
+  const { overall, sysScores } = calcReadiness();
+  const all = Object.values(state.answers);
+  const totalAns = all.length;
+  const totalCorrect = all.filter(a => a.correct).length;
+  const streak = state.streak || 0;
+  const sessions = (state.sessions || []);
+  const todaySes = sessions[sessions.length - 1];
+  const todayPct = todaySes && todaySes.total > 0 ? Math.round(todaySes.correct / todaySes.total * 100) : null;
+
+  // Stats grid
+  document.getElementById('an-grid').innerHTML = `
+    <div class="an-stat-card">
+      <div class="an-stat-val" style="color:${overall !== null ? (overall>=70?'var(--green)':'var(--red)') : 'var(--muted)'}">${overall !== null ? overall + '%' : '—'}</div>
+      <div class="an-stat-lbl">Readiness</div>
+    </div>
+    <div class="an-stat-card">
+      <div class="an-stat-val" style="color:var(--text)">${totalAns}</div>
+      <div class="an-stat-lbl">Answered</div>
+    </div>
+    <div class="an-stat-card">
+      <div class="an-stat-val" style="color:var(--gold)">${totalAns > 0 ? Math.round(totalCorrect/totalAns*100) + '%' : '—'}</div>
+      <div class="an-stat-lbl">Overall Accuracy</div>
+    </div>
+    <div class="an-stat-card">
+      <div class="an-stat-val" style="color:var(--amber)">${todayPct !== null ? todayPct + '%' : '—'}</div>
+      <div class="an-stat-lbl">Today</div>
+    </div>
+  `;
+
+  // Study recommendation
+  const weakSys = Object.entries(sysScores)
+    .filter(([, v]) => v.pct !== null && v.pct < 70)
+    .sort((a, b) => a[1].pct - b[1].pct);
+  const unstarted = Object.entries(sysScores)
+    .filter(([, v]) => v.pct === null)
+    .sort((a, b) => b[1].weight - a[1].weight);
+
+  let recHTML = '';
+  if (weakSys.length > 0) {
+    const top = weakSys[0];
+    recHTML = `<div class="study-rec">
+      <div class="study-rec-title">📍 Focus Area</div>
+      <div class="study-rec-body"><strong>${top[0]}</strong> — ${top[1].pct}% accuracy (${top[1].n} answered). Drill this system to move your readiness score.</div>
+    </div>`;
+  } else if (unstarted.length > 0) {
+    const top = unstarted[0];
+    recHTML = `<div class="study-rec">
+      <div class="study-rec-title">📍 Unstarted System</div>
+      <div class="study-rec-body"><strong>${top[0]}</strong> — ${top[1].weight} exam questions. Start here to fill your coverage gap.</div>
+    </div>`;
+  } else {
+    recHTML = `<div class="study-rec"><div class="study-rec-title">✅ Looking Strong</div><div class="study-rec-body">All systems above 70%. Keep your streak going and use Spaced Repetition to lock in retention.</div></div>`;
+  }
+  document.getElementById('an-rec').innerHTML = recHTML;
+
+  // System performance list
+  const sysList = Object.entries(sysScores).sort((a, b) => {
+    if (a[1].pct === null && b[1].pct === null) return 0;
+    if (a[1].pct === null) return 1;
+    if (b[1].pct === null) return -1;
+    return a[1].pct - b[1].pct;
+  });
+
+  document.getElementById('an-sys-list').innerHTML = sysList.map(([sys, v]) => {
+    const pct = v.pct;
+    const color = pct === null ? 'var(--dim)' : pct >= 80 ? 'var(--green)' : pct >= 60 ? 'var(--amber)' : 'var(--red)';
+    const barW = pct !== null ? pct : 0;
+    return `<div class="sys-perf-row" onclick="startQuiz({mode:'topic-sys',system:'${sys}',label:'${sys}'})">
+      <div class="sys-perf-name">${sys}</div>
+      <div class="sys-perf-bar-wrap"><div class="sys-perf-bar" style="width:${barW}%;background:${color}"></div></div>
+      <div class="sys-perf-pct" style="color:${color}">${pct !== null ? pct + '%' : '—'}</div>
+      <div class="sys-perf-count">${v.n}/${v.total}</div>
+    </div>`;
+  }).join('');
+
+  // Weak topics
+  const topicMap = {};
+  QS.forEach(q => {
+    const a = state.answers[q.id];
+    if (!a) return;
+    if (!topicMap[q.topic]) topicMap[q.topic] = { correct: 0, total: 0 };
+    topicMap[q.topic].total++;
+    if (a.correct) topicMap[q.topic].correct++;
+  });
+  const weakTopics = Object.entries(topicMap)
+    .filter(([, v]) => v.total >= 3 && v.correct / v.total < 0.65)
+    .sort((a, b) => (a[1].correct / a[1].total) - (b[1].correct / b[1].total))
+    .slice(0, 12);
+
+  document.getElementById('an-weak-topics').innerHTML = weakTopics.length
+    ? weakTopics.map(([t, v]) =>
+        `<span class="weak-topic-chip" onclick="startQuiz({mode:'topic',topic:'${t.replace(/'/g,"\'")}',label:'${t.replace(/'/g,"\'")}'})">${t} ${Math.round(v.correct/v.total*100)}%</span>`
+      ).join('')
+    : '<span style="font-size:12px;color:var(--dim)">Answer more questions to see weak topics.</span>';
+}
+
+/* ═══════════════════ FLASH CARDS ═══════════════════ */
+let fc = { queue: [], cur: 0, knew: 0, missed: [] };
+
+function startFlashcards(mode) {
+  let pool;
+  if (mode === 'missed') {
+    pool = fc.missed.length ? [...fc.missed] : QS.filter(q => q.boardPearl).map(q => q.id);
+  } else {
+    pool = QS.filter(q => q.boardPearl).map(q => q.id);
+    // Shuffle
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    pool = pool.slice(0, 50); // cap at 50 per session
+  }
+  fc = { queue: pool, cur: 0, knew: 0, missed: [] };
+  renderFlashcard();
+  showScreen('flashcard-screen');
+}
+
+function renderFlashcard() {
+  const card = document.getElementById('fc-card');
+  const actions = document.getElementById('fc-actions');
+  const complete = document.getElementById('fc-complete');
+  const prog = document.getElementById('fc-prog');
+  const score = document.getElementById('fc-score');
+
+  if (fc.cur >= fc.queue.length) {
+    // Complete
+    card.style.display = 'none';
+    actions.style.display = 'none';
+    complete.style.display = 'block';
+    document.getElementById('fc-complete-sub').textContent =
+      `${fc.knew} of ${fc.queue.length} known · ${fc.missed.length} to review`;
+    return;
+  }
+
+  card.style.display = 'flex';
+  complete.style.display = 'none';
+  card.classList.remove('flipped');
+  actions.style.display = 'none';
+
+  const qid = fc.queue[fc.cur];
+  const q = QS.find(x => x.id === qid);
+  if (!q) { fc.cur++; renderFlashcard(); return; }
+
+  prog.textContent = `${fc.cur + 1} / ${fc.queue.length}`;
+  score.textContent = `${fc.knew} knew`;
+  document.getElementById('fc-topic').textContent = q.topic || q.system;
+  document.getElementById('fc-system').textContent = q.system;
+  document.getElementById('fc-front').textContent = q.topic || q.system;
+  document.getElementById('fc-back').textContent = q.boardPearl || q.explanation?.substring(0, 200) || '—';
+}
+
+function flipCard() {
+  const card = document.getElementById('fc-card');
+  if (fc.cur >= fc.queue.length) return;
+  if (!card.classList.contains('flipped')) {
+    card.classList.add('flipped');
+    document.getElementById('fc-actions').style.display = 'flex';
+  }
+}
+
+function fcAnswer(knew) {
+  if (knew) {
+    fc.knew++;
+  } else {
+    fc.missed.push(fc.queue[fc.cur]);
+  }
+  fc.cur++;
+  renderFlashcard();
+}
+
+function exitFlashcards() {
+  showScreen('home-screen');
+}
+
+/* ═══════════════════ ENHANCED RESULTS SCREEN ═══════════════════ */
+function renderExamResults() {
+  // System breakdown for timed exam
+  const examEl = document.getElementById('exam-results-detail');
+  if (!examEl) return;
+
+  const systemTargets = {
+    "Cardiology":12,"Professional Practice":11,"Pulmonology":10,"Neurology":9,"Geriatrics":9,
+    "Endocrinology":8,"Women's Health":8,"Psychiatry":7,"Gastroenterology":7,"Musculoskeletal":7,
+    "Infectious Disease":7,"Nephrology":6,"Preventive Care":6,"Pharmacology":5,"Hematology":5,
+    "Dermatology":4,"HEENT":4,"Men's Health":4,"Adolescent Health":3,"Reproductive/OB":3
+  };
+
+  const answered = Object.entries(ses.answers);
+  const sysResults = {};
+  answered.forEach(([qid, a]) => {
+    const q = QS.find(x => x.id === qid);
+    if (!q) return;
+    if (!sysResults[q.system]) sysResults[q.system] = { correct: 0, total: 0 };
+    sysResults[q.system].total++;
+    if (a.correct) sysResults[q.system].correct++;
+  });
+
+  const totalCorrect = answered.filter(([, a]) => a.correct).length;
+  const totalQ = answered.length;
+  const pct = totalQ > 0 ? Math.round(totalCorrect / totalQ * 100) : 0;
+  const passing = pct >= 65;
+
+  let html = `
+    <div class="exam-pass-banner ${passing ? 'pass' : 'fail'}">
+      <div class="exam-pass-title" style="color:${passing ? 'var(--green)' : 'var(--red)'}">${passing ? '✓ Passing Score' : '✗ Below Passing Threshold'}</div>
+      <div class="exam-pass-sub">${pct}% · ${totalCorrect}/${totalQ} correct · Passing threshold: 65%</div>
+    </div>
+    <div class="section-label" style="margin-bottom:8px">System Breakdown</div>
+  `;
+
+  const sysOrder = Object.keys(systemTargets);
+  sysOrder.forEach(sys => {
+    const r = sysResults[sys];
+    if (!r) return;
+    const p = Math.round(r.correct / r.total * 100);
+    const color = p >= 75 ? 'var(--green)' : p >= 60 ? 'var(--amber)' : 'var(--red)';
+    html += `<div class="sys-result-row">
+      <div class="sys-result-name">${sys}</div>
+      <div class="sys-result-bar-wrap"><div class="sys-result-bar" style="width:${p}%;background:${color}"></div></div>
+      <div class="sys-result-pct" style="color:${color}">${p}%</div>
+      <div class="sys-result-n">${r.correct}/${r.total}</div>
+    </div>`;
+  });
+
+  examEl.innerHTML = html;
+}
 
 /* ═══════════════════ SERVICE WORKER ═══════════════════ */
 if('serviceWorker' in navigator){
