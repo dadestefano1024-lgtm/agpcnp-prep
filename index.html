@@ -10377,11 +10377,10 @@ function renderExamResults() {
   examEl.innerHTML = html;
 }
 
-/* ═══════════════════ SERVICE WORKER ═══════════════════ */
+/* ═══════════════════ SERVICE WORKER REMOVED ═══════════════════ */
 if('serviceWorker' in navigator){
-  const sw=`const C='agpcnp-v5';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['/'])));self.skipWaiting();});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{return caches.open(C).then(c=>{c.put(e.request,res.clone());return res;});})));});`;
-  const blob=new Blob([sw],{type:'application/javascript'});
-  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+  navigator.serviceWorker.getRegistrations().then(regs=>{regs.forEach(r=>r.unregister());});
+  caches.keys().then(keys=>{keys.forEach(k=>caches.delete(k));});
 }
 renderHome();
 </script>
