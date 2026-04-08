@@ -10377,10 +10377,35 @@ function renderExamResults() {
   examEl.innerHTML = html;
 }
 
-/* ═══════════════════ SERVICE WORKER REMOVED ═══════════════════ */
+/* ═══════════════════ SERVICE WORKER ═══════════════════ */
 if('serviceWorker' in navigator){
-  navigator.serviceWorker.getRegistrations().then(regs=>{regs.forEach(r=>r.unregister());});
-  caches.keys().then(keys=>{keys.forEach(k=>caches.delete(k));});
+  const sw=`
+const CACHE='agpcnp-v6';
+const URLS=['/agpcnp-prep/','/agpcnp-prep/index.html'];
+self.addEventListener('install',e=>{
+  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(URLS).catch(()=>{})));
+  self.skipWaiting();
+});
+self.addEventListener('activate',e=>{
+  e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));
+  self.clients.claim();
+});
+self.addEventListener('fetch',e=>{
+  e.respondWith(
+    caches.match(e.request).then(cached=>{
+      if(cached) return cached;
+      return fetch(e.request).then(res=>{
+        if(res && res.status===200 && res.type==='basic'){
+          const clone=res.clone();
+          caches.open(CACHE).then(c=>c.put(e.request,clone));
+        }
+        return res;
+      }).catch(()=>cached);
+    })
+  );
+});`;
+  const blob=new Blob([sw],{type:'application/javascript'});
+  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
 }
 renderHome();
 </script>
