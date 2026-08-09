@@ -1,7 +1,7 @@
 {
-  "name": "AGPCNP Board Prep",
-  "short_name": "AGPCNP",
-  "description": "AGPCNP board exam practice — 938 questions, timed exams, visual reference sheets",
+  "name": "Pass My Boards",
+  "short_name": "PassMyBoards",
+  "description": "3,928 practice questions across five nursing board exams — adaptive practice, timed exam simulations, and visual reference sheets. Works offline; all progress stays on your device.",
   "start_url": "/agpcnp-prep/",
   "scope": "/agpcnp-prep/",
   "display": "standalone",
