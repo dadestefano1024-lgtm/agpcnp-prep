@@ -5570,7 +5570,52 @@ function loadState(){
   // 3. New user — needs onboarding
   return { onboarded:false, answers:{}, streak:0, sessions:[], schemaVersion:4 };
 }
-function save(){try{localStorage.setItem(SK,JSON.stringify(state))}catch(e){}}
+
+/* ═══════════════════ DURABLE STORAGE ═══════════════════ */
+/* Browsers may evict localStorage; this app has no server copy, so eviction = total loss. */
+function isNative(){
+  try{
+    return !!(window.Capacitor && typeof window.Capacitor.isNativePlatform==='function'
+              && window.Capacitor.isNativePlatform());
+  }catch(e){ return false; }
+}
+function nativePrefs(){
+  try{ return (window.Capacitor&&window.Capacitor.Plugins&&window.Capacitor.Plugins.Preferences)||null; }
+  catch(e){ return null; }
+}
+/* mirror a write into OS-level storage; silent no-op on the web */
+function mirrorWrite(key,value){
+  const P=nativePrefs(); if(!P) return;
+  try{ const r=P.set({key:key,value:value}); if(r&&r.catch) r.catch(()=>{}); }catch(e){}
+}
+/* ask the browser not to evict us. Free to call, and the only lever the web version has. */
+async function requestPersistentStorage(){
+  try{
+    if(!navigator.storage||!navigator.storage.persist) return 'unsupported';
+    if(navigator.storage.persisted&&await navigator.storage.persisted()) return 'already';
+    return (await navigator.storage.persist()) ? 'granted' : 'denied';
+  }catch(e){ return 'error'; }
+}
+/* if localStorage was wiped but the native mirror survived, put it back */
+async function restoreFromNative(){
+  const P=nativePrefs(); if(!P) return 'not-native';
+  try{
+    if(localStorage.getItem(SK)) return 'intact';
+    if(sessionStorage.getItem('pmb_restored')) return 'already-tried';  // no reload loops
+    const r=await P.get({key:SK});
+    if(!r||!r.value) return 'nothing-to-restore';
+    sessionStorage.setItem('pmb_restored','1');
+    localStorage.setItem(SK,r.value);
+    try{ const t=await P.get({key:'pmb_theme'}); if(t&&t.value) localStorage.setItem('pmb_theme',t.value); }catch(e){}
+    location.reload();
+    return 'restored';
+  }catch(e){ return 'error'; }
+}
+function save(){
+  const v=JSON.stringify(state);
+  try{localStorage.setItem(SK,v)}catch(e){}
+  mirrorWrite(SK,v);
+}
 let state=loadState();
 // Eligible question pool, refreshed whenever cert changes
 let EQ = [];
@@ -6204,7 +6249,7 @@ function showResults(){
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home-screen')renderHome();if(id==='analytics-screen')renderAnalytics();if(id==='custom-screen')renderCustomBuilder();if(id==='about-screen')renderAbout();}
 
 /* ═══════════════════ ABOUT / DATA ═══════════════════ */
-const APP_VERSION='v21';
+const APP_VERSION='v23';
 const ABOUT_HTML=`
 <div class="section-label" style="margin-top:0">Educational Disclaimer</div>
 <p style="margin-bottom:10px">Boards to Bedside is a study tool built for one purpose: helping you prepare for your board certification exam. It is not medical advice, and nothing in this app should be used to diagnose, treat, or make decisions about real patients. Practice questions and explanations are written for exam preparation and may simplify clinical scenarios in ways that do not apply at the bedside. Always rely on your own clinical judgment, your institution's protocols, and current official guidelines — and verify any clinical information here against up-to-date sources before applying it in practice.</p>
@@ -6237,6 +6282,7 @@ function importProgress(){
     if(!confirm('Import backup with '+Object.keys(s.answers).length+' answered questions? This replaces the progress on this device.'))return;
     s.schemaVersion=4;s.onboarded=true;
     localStorage.setItem(SK,JSON.stringify(s));
+    mirrorWrite(SK,JSON.stringify(s));
     location.reload();
   }catch(e){alert('That text is not a valid Boards to Bedside backup.');}
 }
@@ -6295,6 +6341,7 @@ function setTheme(t){
   if(t)document.documentElement.dataset.theme=t;
   else delete document.documentElement.dataset.theme;
   try{localStorage.setItem('pmb_theme',t);}catch(e){}
+  mirrorWrite('pmb_theme',t);
   const m=document.querySelector('meta[name="theme-color"]');
   if(m)m.setAttribute('content',THEME_BGS[t]||'#0f1117');
   syncThemeDots();
@@ -6821,35 +6868,28 @@ function renderExamResults() {
 }
 
 /* ═══════════════════ SERVICE WORKER ═══════════════════ */
-if('serviceWorker' in navigator){
-  const sw=`
-const CACHE='agpcnp-v21';
-const URLS=['/agpcnp-prep/','/agpcnp-prep/index.html'];
-self.addEventListener('install',e=>{
-  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(URLS).catch(()=>{})));
-  self.skipWaiting();
-});
-self.addEventListener('activate',e=>{
-  e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));
-  self.clients.claim();
-});
-self.addEventListener('fetch',e=>{
-  e.respondWith(
-    caches.match(e.request).then(cached=>{
-      if(cached) return cached;
-      return fetch(e.request).then(res=>{
-        if(res && res.status===200 && res.type==='basic'){
-          const clone=res.clone();
-          caches.open(CACHE).then(c=>c.put(e.request,clone));
-        }
-        return res;
-      }).catch(()=>cached);
-    })
-  );
-});`;
-  const blob=new Blob([sw],{type:'application/javascript'});
-  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+/* Registered from a REAL file at the origin. The previous version built the worker as a
+   string and registered a blob: URL, which browsers reject for service-worker scripts
+   ("The URL protocol of the script is not supported") — so it never registered, and the app
+   never actually worked offline. sw.js is generated by build_ship.py so the cache version
+   has exactly one source.
+   Skipped in native builds: Capacitor serves these files from the device already, so a
+   service worker would only add a second cache competing with the app bundle.
+   Skipped on file:, where service workers cannot register at all. */
+if('serviceWorker' in navigator && !isNative() && location.protocol !== 'file:'){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
 }
+
+/* ═══════════════════ STORAGE DURABILITY BOOT ═══════════════════ */
+/* Deferred to idle: neither call blocks first paint, and restoreFromNative only acts in the
+   rare case where localStorage came up empty but the native mirror survived. */
+(function(){
+  const go=()=>{ requestPersistentStorage(); restoreFromNative(); };
+  if('requestIdleCallback' in window) requestIdleCallback(go,{timeout:2000});
+  else setTimeout(go,600);
+})();
 
 /* ═══════════════════ ONBOARDING + SPECIALTY SWITCHER ═══════════════════ */
 let _onboardSpecialty = null;
