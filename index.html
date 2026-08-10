@@ -9,7 +9,10 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Boards to Bedside">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='32' fill='%230f1117'/><text y='138' x='96' text-anchor='middle' font-size='120' font-family='serif' fill='%23d4a853'>⚕</text></svg>">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="icon" href="favicon.ico" sizes="any">
 <meta name="theme-color" content="#0f1117">
 <meta name="application-name" content="Boards to Bedside">
 <title>Boards to Bedside — NP Board Prep</title>
@@ -340,8 +343,15 @@ html[data-theme="sage"]{
 
 /* ── NOTES ── */
 .note-section{margin-top:10px}
+.note-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .note-toggle{font-size:12px;color:var(--muted);cursor:pointer;padding:6px 0;display:flex;align-items:center;gap:6px;user-select:none}
 .note-toggle:hover{color:var(--text)}
+.flag-toggle{font-size:12px;color:var(--dim);cursor:pointer;padding:6px 0;display:flex;align-items:center;gap:5px;user-select:none;white-space:nowrap}
+.flag-toggle:hover{color:var(--text)}
+.flag-reason{display:block;width:100%;text-align:left;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);color:var(--text);font:inherit;font-size:14px;padding:13px 14px;margin-bottom:8px;cursor:pointer}
+.flag-reason:hover{border-color:var(--gold-b);background:var(--surface)}
+.flag-meta{font-size:12px;color:var(--muted);line-height:1.6;margin-top:14px;padding-top:12px;border-top:1px solid var(--border)}
+.flag-meta b{color:var(--text);user-select:all;-webkit-user-select:all}
 .note-area-wrap{display:none;margin-top:6px}
 .note-area-wrap.open{display:block}
 .note-textarea{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;padding:10px;resize:none;min-height:70px;outline:none;transition:border-color .2s}
@@ -649,6 +659,20 @@ html[data-theme="sage"]{
   <div style="background:var(--bg2,var(--bg));border:1px solid var(--border);border-radius:16px;max-width:560px;width:100%;max-height:80vh;overflow-y:auto;padding:20px">
     <div style="text-align:right;margin-bottom:4px"><span style="cursor:pointer;color:var(--muted);font-size:20px;padding:4px" onclick="closeSearchRef()">✕</span></div>
     <div id="search-ref-inner"></div>
+  </div>
+</div>
+
+<div id="flag-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;padding:20px" onclick="if(event.target===this)closeFlag()">
+  <div style="background:var(--bg2,var(--bg));border:1px solid var(--border);border-radius:16px;max-width:440px;width:100%;max-height:85vh;overflow-y:auto;padding:20px">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:4px">
+      <div style="font-size:16px;font-weight:600">What's wrong with this question?</div>
+      <span style="cursor:pointer;color:var(--muted);font-size:20px;padding:0 4px;line-height:1" onclick="closeFlag()">&#10005;</span>
+    </div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:14px">Pick the closest match. This opens your email app so you can add details.</div>
+    <div id="flag-reasons"></div>
+    <div class="flag-meta">
+      No email app? Write to <b>support@boardstobedside.com</b> and mention question <b id="flag-qid"></b>.
+    </div>
   </div>
 </div>
 
@@ -5984,8 +6008,11 @@ function renderQ(){
         `${q.explanation}${(state.cert==='NCSBN-NCLEX-RN'&&q.nclexExtra&&q.nclexExtra.w)?' '+q.nclexExtra.w:''}${q.boardPearl ? `<div class="quick-review-pearl" style="margin-top:8px">⭐ <strong>Board Pearl:</strong> ${q.boardPearl}</div>` : ''}`
       }
       <div class="note-section">
+        <div class="note-row">
         <div class="note-toggle" onclick="toggleNote('${q.id}')">
           📝 ${(state.notes&&state.notes[q.id]) ? '<span style="color:var(--gold)">My Note</span>' : 'Add Note'}<span id="note-dot-${q.id}">${(state.notes&&state.notes[q.id])?'<span class=\"note-exists-dot\"></span>':''}</span>
+        </div>
+        <div class="flag-toggle" onclick="openFlag('${q.id}')" title="Report a problem with this question">⚑ Report an issue</div>
         </div>
         <div class="note-area-wrap ${(state.notes&&state.notes[q.id])?'open':''}" id="note-wrap-${q.id}">
           <textarea class="note-textarea" id="note-ta-${q.id}" placeholder="Type your note here..." oninput="autoSaveNote('${q.id}')">${(state.notes&&state.notes[q.id])||''}</textarea>
@@ -6177,7 +6204,7 @@ function showResults(){
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home-screen')renderHome();if(id==='analytics-screen')renderAnalytics();if(id==='custom-screen')renderCustomBuilder();if(id==='about-screen')renderAbout();}
 
 /* ═══════════════════ ABOUT / DATA ═══════════════════ */
-const APP_VERSION='v19';
+const APP_VERSION='v20';
 const ABOUT_HTML=`
 <div class="section-label" style="margin-top:0">Educational Disclaimer</div>
 <p style="margin-bottom:10px">Boards to Bedside is a study tool built for one purpose: helping you prepare for your board certification exam. It is not medical advice, and nothing in this app should be used to diagnose, treat, or make decisions about real patients. Practice questions and explanations are written for exam preparation and may simplify clinical scenarios in ways that do not apply at the bedside. Always rely on your own clinical judgment, your institution's protocols, and current official guidelines — and verify any clinical information here against up-to-date sources before applying it in practice.</p>
@@ -6212,6 +6239,54 @@ function importProgress(){
     localStorage.setItem(SK,JSON.stringify(s));
     location.reload();
   }catch(e){alert('That text is not a valid Boards to Bedside backup.');}
+}
+
+/* ═══════════════════ REPORT AN ISSUE ═══════════════════ */
+const SUPPORT_EMAIL='support@boardstobedside.com';
+const FLAG_REASONS=[
+  ['key','The answer marked correct looks wrong'],
+  ['exp','The explanation contradicts the answer'],
+  ['old','The guideline or drug info is out of date'],
+  ['txt','Typo, or the wording is confusing'],
+  ['ref','The reference sheet is wrong or missing'],
+  ['oth','Something else']
+];
+let flagQid=null;
+
+function openFlag(qid){
+  flagQid=qid;
+  document.getElementById('flag-qid').textContent=qid;
+  document.getElementById('flag-reasons').innerHTML=FLAG_REASONS
+    .map(r=>`<button class="flag-reason" onclick="sendFlag('${r[0]}')">${r[1]}</button>`).join('');
+  document.getElementById('flag-modal').style.display='flex';
+}
+function closeFlag(){document.getElementById('flag-modal').style.display='none';flagQid=null;}
+
+function sendFlag(code){
+  const qid=flagQid; if(!qid)return;
+  const q=QS.find(x=>x.id===qid)||{};
+  const label=(FLAG_REASONS.find(r=>r[0]===code)||[,'Issue'])[1];
+  // what they picked, so Danny can see whether the key or the distractor is the problem
+  const a=(ses.answers&&ses.answers[qid])||(state.answers&&state.answers[qid])||{};
+  let picked='not answered';
+  if(typeof a.chosen==='number'&&q.choices&&q.choices[a.chosen]!==undefined)picked=q.choices[a.chosen];
+  else if(Array.isArray(a.chosen))picked=a.chosen.map(i=>(q.choices||[])[i]).join(' | ');
+  const trim=s=>String(s||'').replace(/\s+/g,' ').slice(0,70);
+  const body=[
+    label+'.','',
+    'Please describe what looks wrong (a sentence is plenty):','','',
+    '--- details, please leave these in ---',
+    'Question: '+qid,
+    'Certification: '+(state.cert||'-'),
+    'Topic: '+trim(q.system)+' / '+trim(q.topic),
+    'They picked: '+trim(picked),
+    'App version: '+APP_VERSION
+  ].join('\n');
+  const url='mailto:'+SUPPORT_EMAIL
+    +'?subject='+encodeURIComponent('['+code+'] Question issue — '+qid)
+    +'&body='+encodeURIComponent(body);
+  closeFlag();
+  window.location.href=url;
 }
 
 /* ═══════════════════ THEMES ═══════════════════ */
@@ -6748,7 +6823,7 @@ function renderExamResults() {
 /* ═══════════════════ SERVICE WORKER ═══════════════════ */
 if('serviceWorker' in navigator){
   const sw=`
-const CACHE='agpcnp-v19';
+const CACHE='agpcnp-v20';
 const URLS=['/agpcnp-prep/','/agpcnp-prep/index.html'];
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE).then(c=>c.addAll(URLS).catch(()=>{})));
