@@ -38,10 +38,10 @@ body{height:100%;min-height:100vh;min-height:-webkit-fill-available;font-family:
 /* THEMES — soft alternates, toggled via data-theme on <html> */
 html[data-theme="rose"]{
   --exp-green:#2e6b4e;--exp-red:#9c3f3f;--exp-amber:#8a5c26;
-  --bg:#f7efec;--bg2:#fdf8f6;--bg3:#f0e2dd;--surface:#ead9d3;
-  --border:rgba(96,52,58,0.14);--border2:rgba(96,52,58,0.24);
-  --text:#4a3238;--muted:#8f757b;--dim:#b19ba0;
-  --gold:#b76e79;--gold-bg:rgba(183,110,121,0.13);--gold-b:rgba(183,110,121,0.34);
+  --bg:#f0ddd8;--bg2:#faece8;--bg3:#e6cdc5;--surface:#dbbdb4;
+  --border:rgba(96,52,58,0.20);--border2:rgba(96,52,58,0.34);
+  --text:#402730;--muted:#856068;--dim:#a1858c;
+  --gold:#a94f5e;--gold-bg:rgba(169,79,94,0.16);--gold-b:rgba(169,79,94,0.42);
   --green:#3e8a66;--green-bg:rgba(62,138,102,0.12);--green-b:rgba(62,138,102,0.32);
   --red:#c25555;--red-bg:rgba(194,85,85,0.11);--red-b:rgba(194,85,85,0.3);
   --blue:#5b86ae;--blue-bg:rgba(91,134,174,0.12);--blue-b:rgba(91,134,174,0.3);
@@ -50,10 +50,10 @@ html[data-theme="rose"]{
 }
 html[data-theme="lavender"]{
   --exp-green:#2e6b4e;--exp-red:#9c3f3f;--exp-amber:#8a5c26;
-  --bg:#f3f1f9;--bg2:#fbfaff;--bg3:#e9e5f4;--surface:#e1dbf0;
-  --border:rgba(70,60,110,0.14);--border2:rgba(70,60,110,0.24);
-  --text:#3c3552;--muted:#807a99;--dim:#a7a1bd;
-  --gold:#8b74c9;--gold-bg:rgba(139,116,201,0.13);--gold-b:rgba(139,116,201,0.34);
+  --bg:#e8e2f6;--bg2:#f4f0fc;--bg3:#dbd2ef;--surface:#cbc0e6;
+  --border:rgba(70,60,110,0.20);--border2:rgba(70,60,110,0.34);
+  --text:#332b4b;--muted:#6f6890;--dim:#9990b5;
+  --gold:#6d51bd;--gold-bg:rgba(109,81,189,0.16);--gold-b:rgba(109,81,189,0.42);
   --green:#3e8a66;--green-bg:rgba(62,138,102,0.12);--green-b:rgba(62,138,102,0.32);
   --red:#c25555;--red-bg:rgba(194,85,85,0.11);--red-b:rgba(194,85,85,0.3);
   --blue:#5b86ae;--blue-bg:rgba(91,134,174,0.12);--blue-b:rgba(91,134,174,0.3);
@@ -62,10 +62,10 @@ html[data-theme="lavender"]{
 }
 html[data-theme="sage"]{
   --exp-green:#2e6b4e;--exp-red:#9c3f3f;--exp-amber:#8a5c26;
-  --bg:#f1f5ef;--bg2:#f9fbf7;--bg3:#e5ece1;--surface:#dce5d7;
-  --border:rgba(58,78,60,0.14);--border2:rgba(58,78,60,0.24);
-  --text:#35443a;--muted:#7d8d81;--dim:#a2afa5;
-  --gold:#987053;--gold-bg:rgba(152,112,83,0.13);--gold-b:rgba(152,112,83,0.34);
+  --bg:#e2ece0;--bg2:#eff6ed;--bg3:#d3e2cf;--surface:#c2d5bd;
+  --border:rgba(58,78,60,0.20);--border2:rgba(58,78,60,0.34);
+  --text:#2c3b31;--muted:#68796d;--dim:#93a396;
+  --gold:#7c5136;--gold-bg:rgba(124,81,54,0.16);--gold-b:rgba(124,81,54,0.42);
   --green:#3e8a66;--green-bg:rgba(62,138,102,0.12);--green-b:rgba(62,138,102,0.32);
   --red:#c25555;--red-bg:rgba(194,85,85,0.11);--red-b:rgba(194,85,85,0.3);
   --blue:#5b86ae;--blue-bg:rgba(91,134,174,0.12);--blue-b:rgba(91,134,174,0.3);
@@ -409,7 +409,7 @@ html[data-theme="sage"]{
 .sys-result-pct{font-size:12px;font-weight:600;width:32px;text-align:right;flex-shrink:0}
 .sys-result-n{font-size:10px;color:var(--dim);width:28px;text-align:right;flex-shrink:0}
 </style>
-<script>try{var _t=localStorage.getItem('pmb_theme');if(_t){document.documentElement.dataset.theme=_t;var _m=document.querySelector('meta[name="theme-color"]');var _b={'rose':'#f7efec','lavender':'#f3f1f9','sage':'#f1f5ef'}[_t];if(_m&&_b)_m.setAttribute('content',_b);}}catch(e){}</script>
+<script>try{var _t=localStorage.getItem('pmb_theme');if(_t){document.documentElement.dataset.theme=_t;var _m=document.querySelector('meta[name="theme-color"]');var _b={'rose':'#f0ddd8','lavender':'#e8e2f6','sage':'#e2ece0'}[_t];if(_m&&_b)_m.setAttribute('content',_b);}}catch(e){}</script>
 </head>
 <body>
 <div id="app">
@@ -417,9 +417,9 @@ html[data-theme="sage"]{
 <div id="home-screen" class="screen active">
   <div class="home-eyebrow" style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span id="specialty-chip" onclick="openSpecialtySwitcher()" style="cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px">AGPCNP · ANCC</span><span id="theme-dots" style="display:inline-flex;gap:8px;align-items:center">
     <span class="theme-dot" data-thm="" title="Ink" onclick="setTheme('')" style="background:#171b24;border-color:#d4a853"></span>
-    <span class="theme-dot" data-thm="rose" title="Rosé" onclick="setTheme('rose')" style="background:#f7efec;border-color:#b76e79"></span>
-    <span class="theme-dot" data-thm="lavender" title="Lavender" onclick="setTheme('lavender')" style="background:#f3f1f9;border-color:#8b74c9"></span>
-    <span class="theme-dot" data-thm="sage" title="Sage" onclick="setTheme('sage')" style="background:#f1f5ef;border-color:#987053"></span>
+    <span class="theme-dot" data-thm="rose" title="Rosé" onclick="setTheme('rose')" style="background:#f0ddd8;border-color:#a94f5e"></span>
+    <span class="theme-dot" data-thm="lavender" title="Lavender" onclick="setTheme('lavender')" style="background:#e8e2f6;border-color:#6d51bd"></span>
+    <span class="theme-dot" data-thm="sage" title="Sage" onclick="setTheme('sage')" style="background:#e2ece0;border-color:#7c5136"></span>
   </span></div>
   <div class="home-title">Boards<br>to <em>bedside</em>.</div>
   <div class="home-sub">Progress saves automatically.</div>
@@ -6177,7 +6177,7 @@ function showResults(){
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home-screen')renderHome();if(id==='analytics-screen')renderAnalytics();if(id==='custom-screen')renderCustomBuilder();if(id==='about-screen')renderAbout();}
 
 /* ═══════════════════ ABOUT / DATA ═══════════════════ */
-const APP_VERSION='v18';
+const APP_VERSION='v19';
 const ABOUT_HTML=`
 <div class="section-label" style="margin-top:0">Educational Disclaimer</div>
 <p style="margin-bottom:10px">Boards to Bedside is a study tool built for one purpose: helping you prepare for your board certification exam. It is not medical advice, and nothing in this app should be used to diagnose, treat, or make decisions about real patients. Practice questions and explanations are written for exam preparation and may simplify clinical scenarios in ways that do not apply at the bedside. Always rely on your own clinical judgment, your institution's protocols, and current official guidelines — and verify any clinical information here against up-to-date sources before applying it in practice.</p>
@@ -6215,7 +6215,7 @@ function importProgress(){
 }
 
 /* ═══════════════════ THEMES ═══════════════════ */
-const THEME_BGS={'':'#0f1117','rose':'#f7efec','lavender':'#f3f1f9','sage':'#f1f5ef'};
+const THEME_BGS={'':'#0f1117','rose':'#f0ddd8','lavender':'#e8e2f6','sage':'#e2ece0'};
 function setTheme(t){
   if(t)document.documentElement.dataset.theme=t;
   else delete document.documentElement.dataset.theme;
@@ -6748,7 +6748,7 @@ function renderExamResults() {
 /* ═══════════════════ SERVICE WORKER ═══════════════════ */
 if('serviceWorker' in navigator){
   const sw=`
-const CACHE='agpcnp-v18';
+const CACHE='agpcnp-v19';
 const URLS=['/agpcnp-prep/','/agpcnp-prep/index.html'];
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE).then(c=>c.addAll(URLS).catch(()=>{})));
