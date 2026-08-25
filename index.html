@@ -909,6 +909,20 @@ const BLUEPRINTS = {
                                title: 'Built for the new ANCC outline, effective October 30, 2026.',
                                body: 'If you test on or before October 18 you sit the previous '
                                    + 'outline — the same content, weighted slightly differently.' },
+                     /* ITEM SHAPE — BORROWED FROM ANCC-AGPCNP, AND AN INFERENCE, NOT EVIDENCE.
+                        Neither certifying body publishes a recall/brief/vignette distribution.
+                        A-GNP's figures came from commercial Adult-Gerontology practice tests
+                        Danny supplied, which say so on line one and are not evidence about FNP.
+                        What IS defensible: this is the same certifying body and the same
+                        item-writing house as ANCC-AGPCNP, whose 4/40/56 was measured. Without a
+                        target the sampler falls back to bank counts and serves 80% heavy
+                        vignettes — nothing like a real ANCC form. Danny: "its better to be a
+                        little more well rounded than just laying heavy vignetts the whole time,
+                        the real test is likely to be somewhat balanced."
+                        REPLACE THIS the moment an FNP practice form can be measured — see
+                        calibration/FNP_BLUEPRINTS.md. Brief is the binding constraint: 350 held
+                        against 60 per form is 5.8 forms deep, thinner than every domain. */
+                     shapes: { recall: 4, brief: 40, vignette: 56 },
                      domains: { 'Assessment': 26, 'Diagnosis': 25, 'Planning': 29, 'Implementation': 50, 'Evaluation': 20 } },
    /* AANPCB PUBLISHES THIS ONE — unlike ANCC, which gives age groups with no percentages.
       Straight from candidateportal.aanpcert.org/certs/fnp, summing to the 135 scored items.
@@ -6927,7 +6941,7 @@ function showResults(){
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home-screen')renderHome();if(id==='analytics-screen')renderAnalytics();if(id==='custom-screen')renderCustomBuilder();if(id==='about-screen')renderAbout();}
 
 /* ═══════════════════ ABOUT / DATA ═══════════════════ */
-const APP_VERSION='v58';
+const APP_VERSION='v59';
 const ABOUT_HTML=`
 <div class="section-label" style="margin-top:0">Educational Disclaimer</div>
 <p style="margin-bottom:10px">Boards to Bedside is a study tool built for one purpose: helping you prepare for your board certification exam. It is not medical advice, and nothing in this app should be used to diagnose, treat, or make decisions about real patients. Practice questions and explanations are written for exam preparation and may simplify clinical scenarios in ways that do not apply at the bedside. Always rely on your own clinical judgment, your institution's protocols, and current official guidelines — and verify any clinical information here against up-to-date sources before applying it in practice.</p>
