@@ -894,7 +894,26 @@ const BLUEPRINTS = {
       take the examination". The app carried 210, which is ANCC's 3.5 hours — AANPCB's other
       two exams both correctly say 180, so this row was filled from the wrong neighbour. A
       candidate practising with 30 extra minutes is being trained on the wrong pacing. */
-  'AANPCB-FNP-C':   { total: 150, scored: 135, timeMin: 180, ages: { 'Newborn': 3, 'Infant': 4, 'Toddler': 5, 'Child': 6, 'Adolescent': 12, 'Young Adult': 30, 'Middle Adult': 35, 'Older Adult': 40 }, domains: { 'Assess': 43, 'Diagnose': 36, 'Plan': 36, 'Evaluate': 20 } },
+   /* ITEM SHAPE. Only the BRIEF share is evidenced; the other two are a deliberate hedge.
+
+      Shape varies more than any axis we measure, and it tracks the BODY rather than the
+      specialty. Measured: ANCC-AGPCNP 4/40/56 and ANCC-FNP 0/24/76, both from ANCC's own
+      published samples; AANPCB-A-GNP 25/26/49 from three Springer forms (n~475). The two
+      ANCC exams cluster at 0-4% recall and the one AANPCB exam sits at 25% — a six-fold gap.
+      Nothing at all is published for AANPCB-FNP.
+
+      BRIEF is the one number both sources agree on: 24% (ANCC) and 26% (Springer). We were
+      serving 13.7%, about 15 items a form short, and 359 held items is 10.6 forms deep at
+      25%. Raising it is not a bet on which body this exam resembles.
+
+      RECALL is held at roughly what the pool already served (10.3%). Going to 25% would bet
+      that shape follows the body; going to 0% would bet the opposite. Between the poles is
+      the honest position while no FNP-specific source exists — and Danny's instinct that
+      'having some recall seems appropriate' is also what the body's other exam does.
+
+      VIGNETTE takes the remainder. Replace all three the moment an FNP practice form can be
+      measured; see calibration/FNP_BLUEPRINTS.md. */
+  'AANPCB-FNP-C':   { total: 150, scored: 135, timeMin: 180, shapes: { recall: 10, brief: 25, vignette: 65 }, ages: { 'Newborn': 3, 'Infant': 4, 'Toddler': 5, 'Child': 6, 'Adolescent': 12, 'Young Adult': 30, 'Middle Adult': 35, 'Older Adult': 40 }, domains: { 'Assess': 43, 'Diagnose': 36, 'Plan': 36, 'Evaluate': 20 } },
   /* ANCC prints its answer options in ALPHABETICAL order — 25 of 25 on its own published
      sample questions, against 4% in our bank and 4% by chance. Applied at render time by
      shuffleChoices(); the comment there explains why it must not go in the data. No `ages` and
@@ -6867,7 +6886,7 @@ function showResults(){
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home-screen')renderHome();if(id==='analytics-screen')renderAnalytics();if(id==='custom-screen')renderCustomBuilder();if(id==='about-screen')renderAbout();}
 
 /* ═══════════════════ ABOUT / DATA ═══════════════════ */
-const APP_VERSION='v56';
+const APP_VERSION='v57';
 const ABOUT_HTML=`
 <div class="section-label" style="margin-top:0">Educational Disclaimer</div>
 <p style="margin-bottom:10px">Boards to Bedside is a study tool built for one purpose: helping you prepare for your board certification exam. It is not medical advice, and nothing in this app should be used to diagnose, treat, or make decisions about real patients. Practice questions and explanations are written for exam preparation and may simplify clinical scenarios in ways that do not apply at the bedside. Always rely on your own clinical judgment, your institution's protocols, and current official guidelines — and verify any clinical information here against up-to-date sources before applying it in practice.</p>
