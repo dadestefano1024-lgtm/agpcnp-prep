@@ -904,6 +904,61 @@ const ANCC_SYSTEM_MIX = {
    REPLACE IT the day anyone measures a real FNP form. Until then it is the honest best
    available, and it is better than serving whatever the pool happens to hold — which was one
    ophthalmology question a form. */
+/* ANCC-FNP clinical mix — DERIVED 25 Aug 2026 by the method already used for ANCC-AGPCNP.
+
+   THE METHOD IS ESTABLISHED; ONE INPUT IS NOT. calibration/ancc_mix.py built the AGPCNP mix by
+   keeping the NPCB CLINICAL measurement — both bodies certify the same practice, so the mix of
+   the practice is the same — and rescaling only the professional block to the percentage ANCC
+   publishes for its Professional Practice domain. That is exactly what is done here, with the
+   clinical shape taken from FNP_SYSTEM_MIX because ANCC-FNP and AANPCB-FNP certify the same
+   family practice across the same lifespan.
+
+   THE INPUT THAT IS BORROWED, and the weakest link: ANCC-AGPCNP publishes a Professional
+   Practice DOMAIN worth 24 of 150 items, 16%. ANCC-FNP has no professional domain at all — its
+   five domains are Assessment, Diagnosis, Planning, Implementation and Evaluation, all clinical
+   process — so there is nothing to rescale against and the 16% is borrowed from the sibling.
+
+   THREE ESTIMATES DISAGREED and 16 was chosen deliberately:
+     16.0%  ANCC-AGPCNP published domain — the only calibrated ANCC number that exists
+     16.7-23.3%  what ANCC-FNP blueprint implies IF its ten Implementation statements are
+            equally weighted. They are not: IV.B.6 pharmacotherapeutics is a far larger item
+            pool than IV.A.3 Scope and Standards, so this over-reads.
+      8.4%  what our own domain derivation actually assigned to professional statements
+
+   FEASIBLE, and the cleanest of the four exams: greedy assignment reaches 3.6 points of error
+   with ZERO unreachable systems. Today this exam sits at 43.5 points against the same table,
+   serving 19.8 Professional Practice items a form and 2.2 Ophthalmology.
+
+   THIS IS INFERENCE STACKED ON INFERENCE and should be replaced by measurement of a real ANCC
+   FNP form the moment one is available. It is defended not as evidence but against the
+   alternative, which is serving whatever the pool happens to hold. */
+const ANCC_FNP_SYSTEM_MIX = {
+    'Preventive Care': 10.7,
+    'Pediatrics': 6.5,
+    'Cardiology': 5.8,
+    'Dermatology': 5.8,
+    'Musculoskeletal': 5.8,
+    "Women's Health": 5.6,
+    'Pulmonology': 5.3,
+    'Professional Practice': 5.3,
+    'Endocrinology': 4.6,
+    'Gastroenterology': 4.4,
+    'Infectious Disease': 4.2,
+    'Pharmacology': 4.0,
+    'Neurology': 3.9,
+    'Adolescent Health': 3.4,
+    "Men's Health": 3.4,
+    'Mental Health': 3.4,
+    'Ophthalmology': 3.0,
+    'HEENT': 2.9,
+    'Hematology': 2.7,
+    'Rheumatology': 2.6,
+    'Obstetrics': 2.4,
+    'Nephrology': 2.1,
+    'Geriatrics': 1.8,
+    'Urology': 0.5,
+};
+
 const FNP_SYSTEM_MIX = {
     'Preventive Care': 7.5,
     'Pediatrics': 6.9,
@@ -995,6 +1050,7 @@ const BLUEPRINTS = {
                         calibration/FNP_BLUEPRINTS.md. Brief is the binding constraint: 350 held
                         against 60 per form is 5.8 forms deep, thinner than every domain. */
                      shapes: { recall: 4, brief: 40, vignette: 56 },
+                     systemMix: ANCC_FNP_SYSTEM_MIX,
                      domains: { 'Assessment': 26, 'Diagnosis': 25, 'Planning': 29, 'Implementation': 50, 'Evaluation': 20 } },
    /* AANPCB PUBLISHES THIS ONE — unlike ANCC, which gives age groups with no percentages.
       Straight from candidateportal.aanpcert.org/certs/fnp, summing to the 135 scored items.
@@ -7049,7 +7105,7 @@ function showResults(){
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home-screen')renderHome();if(id==='analytics-screen')renderAnalytics();if(id==='custom-screen')renderCustomBuilder();if(id==='about-screen')renderAbout();}
 
 /* ═══════════════════ ABOUT / DATA ═══════════════════ */
-const APP_VERSION='v67';
+const APP_VERSION='v68';
 const ABOUT_HTML=`
 <div class="section-label" style="margin-top:0">Educational Disclaimer</div>
 <p style="margin-bottom:10px">Boards to Bedside is a study tool built for one purpose: helping you prepare for your board certification exam. It is not medical advice, and nothing in this app should be used to diagnose, treat, or make decisions about real patients. Practice questions and explanations are written for exam preparation and may simplify clinical scenarios in ways that do not apply at the bedside. Always rely on your own clinical judgment, your institution's protocols, and current official guidelines — and verify any clinical information here against up-to-date sources before applying it in practice.</p>
