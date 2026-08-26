@@ -803,7 +803,7 @@ const QS=JSON.parse("[{\"id\":\"hf_001\",\"domain\":\"Patient Assessment Process
    `eps` keeps the ratio finite when a system has not been drawn yet. Raising cap tightens the
    mix and repeats questions sooner; lowering it does the reverse. Measured over ten simulated
    135-item forms — see calibration/simulate.md for the sweep that chose these. */
-const MIX_TUNE = { cap: 6, eps: 0.005 };
+const MIX_TUNE = { floor: 0.02 }   /* cap/eps belonged to the old per-question weighting */;
 
 /*
    RECLASSIFIED 12 Aug 2026, and the first version was wrong in an instructive way. Infectious
@@ -6299,17 +6299,51 @@ function startQuiz(opts){
        unreachable. */
     const byNeed = arr => {
       if(!sysShare) return arr;
+      /* MEASURED REWRITE, 25 Aug 2026. The previous version weighted each QUESTION by its
+         system's debt and drew Efraimidis-Spirakis. It did not work: clinical-mix error sat at
+         28.7 points on A-GNP with dermatology served 6.9 against a target of 10, and sweeping
+         MIX_TUNE.cap from 6 to 1000 moved the error to 28.0 — the knob did nothing. The reason
+         is that `have` was the system's share of what was already placed, so at the start of a
+         form every system's weight pinned to the cap, and a system that got one early draw had
+         its weight collapse. A greedy assignment proved the pool could reach 5.7 points, so
+         24 of those 28 were the sampler's, not the bank's.
+
+         TWO DECISIONS, SEPARATED. Which SYSTEM fills the next slot is chosen by how far behind
+         its share it is; WHICH QUESTION of that system is uniform random from a shuffled group.
+         Accuracy comes from the first choice, variety from the second — the earlier hard sort
+         destroyed variety precisely because it ordered questions, not systems.
+
+         THE SYSTEM CHOICE IS PROBABILISTIC, NOT ARGMAX. Taking the neediest system every time
+         reaches 4.8 points but collapses variety: distinct questions over 15 forms fell from
+         1073 to 444 and consecutive forms shared 71 of 135 items, because a deterministic
+         system order keeps reaching for the same scarce systems. Sampling proportional to
+         deficit keeps mix accuracy and most of the variety. Power 1 is the measured knee:
+         A-GNP goes 28.7 -> 6.4 points for 12% -> 18% consecutive overlap. */
+      const groups = {};
+      arr.forEach(q => { (groups[q.system] = groups[q.system] || []).push(q); });
+      Object.keys(groups).forEach(s => { groups[s] = shuffle(groups[s]); });
       let placed = 0;
       for(const k in sysSent) placed += sysSent[k];
-      const keyed = arr.map(q => {
-        const want = (sysShare[q.system] != null ? sysShare[q.system] : 0.3) / sysTotal;
-        const have = placed ? (sysSent[q.system]||0)/placed : 0;
-        const w = Math.min(MIX_TUNE.cap, Math.max(1/MIX_TUNE.cap,
-          (want + MIX_TUNE.eps) / (have + MIX_TUNE.eps)));
-        return { q, k: Math.pow(Math.random(), 1/w) };
-      });
-      keyed.sort((a, b) => b.k - a.k);
-      return keyed.map(x => x.q);
+      const sent = Object.assign({}, sysSent);
+      const out = [];
+      while(true){
+        const ks = Object.keys(groups).filter(s => groups[s].length);
+        if(!ks.length) break;
+        const wts = ks.map(s => {
+          const want = (sysShare[s] != null ? sysShare[s] : 0.3) / sysTotal;
+          /* deficit = how many of this system SHOULD be placed by now, minus how many are.
+             The floor keeps an on-target system reachable instead of unreachable. */
+          const deficit = want * (placed + out.length + 1) - (sent[s] || 0);
+          return Math.max(deficit, 0) + MIX_TUNE.floor;
+        });
+        const tot = wts.reduce((a,b) => a+b, 0);
+        let r = Math.random() * tot, pick = ks.length - 1;
+        for(let n = 0; n < ks.length; n++){ r -= wts[n]; if(r <= 0){ pick = n; break; } }
+        const s = ks[pick];
+        out.push(groups[s].shift());
+        sent[s] = (sent[s] || 0) + 1;
+      }
+      return out;
     };
     const note = q => { sysSent[q.system] = (sysSent[q.system]||0) + 1; };
 
@@ -6942,7 +6976,7 @@ function showResults(){
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home-screen')renderHome();if(id==='analytics-screen')renderAnalytics();if(id==='custom-screen')renderCustomBuilder();if(id==='about-screen')renderAbout();}
 
 /* ═══════════════════ ABOUT / DATA ═══════════════════ */
-const APP_VERSION='v64';
+const APP_VERSION='v65';
 const ABOUT_HTML=`
 <div class="section-label" style="margin-top:0">Educational Disclaimer</div>
 <p style="margin-bottom:10px">Boards to Bedside is a study tool built for one purpose: helping you prepare for your board certification exam. It is not medical advice, and nothing in this app should be used to diagnose, treat, or make decisions about real patients. Practice questions and explanations are written for exam preparation and may simplify clinical scenarios in ways that do not apply at the bedside. Always rely on your own clinical judgment, your institution's protocols, and current official guidelines — and verify any clinical information here against up-to-date sources before applying it in practice.</p>
