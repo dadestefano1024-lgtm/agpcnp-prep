@@ -859,6 +859,78 @@ const ANCC_SYSTEM_MIX = {
     'Obstetrics': 0.4,
 };
 
+/* AANPCB-FNP clinical mix — CONSTRUCTED 25 Aug 2026, and every part of it is labelled.
+
+   NOBODY PUBLISHES THIS. Searched properly before building it: ANCC's FNP outline lists 13
+   body systems with no percentages; ANCC's FNP Role Delineation Study (exec summary, 29 Oct
+   2025) was retrieved and text-extracted and carries no content weightings at all; AANPCB's
+   candidate portal gives domains and all eight age bands but names its knowledge areas without
+   numbers. NPCB sells four 50-item practice exams at $50 which would settle it; Danny declined,
+   so this is built from what we already hold.
+
+   EVIDENCED. AANPCB DOES publish the FNP age distribution. Its paediatric bands — Newborn 2,
+   Infant 3, Toddler 4, Child 4, Adolescent 9 — sum to 22.2%, adults to 77.8%. The adult clinical
+   shape underneath is AGNP_SYSTEM_MIX, itself counted from 494 commercial practice questions.
+
+   MEASURED FROM OUR OWN BANK. Only 31.6% of paediatric-aged questions are filed under the
+   Pediatrics system; the rest sit in the organ system they belong to, which is correct — a child
+   with asthma is Pulmonology. The AGE axis already serves 22.2% paediatric PATIENTS and the
+   sampler already enforces it, so the SYSTEM axis must not double-count them. Pediatrics =
+   22.2% x 31.6% = 7.0%. An earlier draft put 18.4% here and would have demanded that 84% of
+   every paediatric slot be Pediatrics-labelled.
+
+   REASONED, NOT MEASURED — the three family-practice uplifts over adult-gero, and the weakest
+   part of this table: Obstetrics 0.4 -> 2.5, Women's Health 4.0 -> 6.0, Preventive Care
+   3.2 -> 6.0. An exam that publishes a Newborn band must carry prenatal and perinatal content,
+   and well-child visits are eight in the first year alone. If these are wrong they are wrong by
+   two or three items each.
+
+   CAPPED. Adolescent Health is held at 3.7% because the pool can only serve 3.0 items a form
+   against a want of 5.0. Setting a target the bank cannot reach buys repetition, not accuracy —
+   that is what ANCC-AGPCNP Ophthalmology taught.
+
+   FEASIBLE. Greedy assignment over the domain x age cells reaches 6.1 points of error from this
+   pool, against 7.1 for A-GNP. This is a reachable target, not an aspiration.
+
+   PREVENTIVE CARE RAISED 6.0 -> 7.5 after Danny pushed back that a 30%% drop felt like a lot on
+   a primary-care exam. He was right and the measurement backed him. Only 53%% of prevention
+   content carries the Preventive Care LABEL - the rest sits in Women's Health, Pediatrics and
+   Endocrinology - so the system target does not cap prevention. Even so, at 6.0 the FORM served
+   21.2 prevention items against 27.0 before any target; at 7.5 it serves 25.0, a 7%% drop
+   instead of 19%%, for 0.6 points of mix error and 0.4 of an ophthalmology question. Swept
+   4.5/6/7.5/9/11: returns flatten hard past 7.5 and mix error is flat across the range, so
+   this is close to a free choice.
+
+   REPLACE IT the day anyone measures a real FNP form. Until then it is the honest best
+   available, and it is better than serving whatever the pool happens to hold — which was one
+   ophthalmology question a form. */
+const FNP_SYSTEM_MIX = {
+    'Preventive Care': 7.5,
+    'Pediatrics': 6.9,
+    'Cardiology': 6.1,
+    'Dermatology': 6.1,
+    'Musculoskeletal': 6.1,
+    "Women's Health": 5.9,
+    'Pulmonology': 5.6,
+    'Endocrinology': 4.9,
+    'Gastroenterology': 4.6,
+    'Infectious Disease': 4.4,
+    'Pharmacology': 4.2,
+    'Neurology': 4.1,
+    'Professional Practice': 3.7,
+    'Adolescent Health': 3.6,
+    "Men's Health": 3.6,
+    'Mental Health': 3.6,
+    'Ophthalmology': 3.2,
+    'HEENT': 3.1,
+    'Hematology': 2.8,
+    'Rheumatology': 2.7,
+    'Obstetrics': 2.5,
+    'Nephrology': 2.2,
+    'Geriatrics': 1.9,
+    'Urology': 0.5,
+};
+
 const AGNP_SYSTEM_MIX = {
     'Cardiology': 7.4,
     'Dermatology': 7.4,
@@ -952,7 +1024,8 @@ const BLUEPRINTS = {
 
       VIGNETTE takes the remainder. Replace all three the moment an FNP practice form can be
       measured; see calibration/FNP_BLUEPRINTS.md. */
-  'AANPCB-FNP-C':   { total: 150, scored: 135, timeMin: 180, shapes: { recall: 10, brief: 25, vignette: 65 }, ages: { 'Newborn': 3, 'Infant': 4, 'Toddler': 5, 'Child': 6, 'Adolescent': 12, 'Young Adult': 30, 'Middle Adult': 35, 'Older Adult': 40 }, domains: { 'Assess': 43, 'Diagnose': 36, 'Plan': 36, 'Evaluate': 20 } },
+  'AANPCB-FNP-C':   { total: 150, scored: 135, timeMin: 180, shapes: { recall: 10, brief: 25, vignette: 65 }, ages: { 'Newborn': 3, 'Infant': 4, 'Toddler': 5, 'Child': 6, 'Adolescent': 12, 'Young Adult': 30, 'Middle Adult': 35, 'Older Adult': 40 }, systemMix: FNP_SYSTEM_MIX,
+                     domains: { 'Assess': 43, 'Diagnose': 36, 'Plan': 36, 'Evaluate': 20 } },
   /* ANCC prints its answer options in ALPHABETICAL order — 25 of 25 on its own published
      sample questions, against 4% in our bank and 4% by chance. Applied at render time by
      shuffleChoices(); the comment there explains why it must not go in the data. No `ages` and
@@ -6976,7 +7049,7 @@ function showResults(){
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home-screen')renderHome();if(id==='analytics-screen')renderAnalytics();if(id==='custom-screen')renderCustomBuilder();if(id==='about-screen')renderAbout();}
 
 /* ═══════════════════ ABOUT / DATA ═══════════════════ */
-const APP_VERSION='v66';
+const APP_VERSION='v67';
 const ABOUT_HTML=`
 <div class="section-label" style="margin-top:0">Educational Disclaimer</div>
 <p style="margin-bottom:10px">Boards to Bedside is a study tool built for one purpose: helping you prepare for your board certification exam. It is not medical advice, and nothing in this app should be used to diagnose, treat, or make decisions about real patients. Practice questions and explanations are written for exam preparation and may simplify clinical scenarios in ways that do not apply at the bedside. Always rely on your own clinical judgment, your institution's protocols, and current official guidelines — and verify any clinical information here against up-to-date sources before applying it in practice.</p>
