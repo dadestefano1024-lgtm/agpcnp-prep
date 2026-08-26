@@ -834,13 +834,13 @@ const MIX_TUNE = { floor: 0.02 }   /* cap/eps belonged to the old per-question w
    put it inside the BLUEPRINTS object literal, which broke the whole script — the same mistake
    the playbook already records from the last time a mix table was added, made again. */
 const ANCC_SYSTEM_MIX = {
-    'Professional Practice': 9.4,
-    'Cardiology': 6.8,
-    'Dermatology': 6.8,
-    'Musculoskeletal': 6.8,
-    'Preventive Care': 6.6,
-    'Pulmonology': 6.2,
-    'Endocrinology': 5.5,
+    'Professional Practice': 9.5,
+    'Cardiology': 6.9,
+    'Dermatology': 6.9,
+    'Musculoskeletal': 6.9,
+    'Preventive Care': 6.7,
+    'Pulmonology': 6.3,
+    'Endocrinology': 5.6,
     'Gastroenterology': 5.1,
     'Infectious Disease': 5.0,
     'Pharmacology': 4.8,
@@ -854,7 +854,7 @@ const ANCC_SYSTEM_MIX = {
     'Rheumatology': 2.9,
     'Nephrology': 2.4,
     'Geriatrics': 2.2,
-    'Adolescent Health': 2.0,
+    'Adolescent Health': 1.1,
     'Urology': 0.6,
     'Obstetrics': 0.4,
 };
@@ -933,67 +933,76 @@ const ANCC_SYSTEM_MIX = {
    FNP form the moment one is available. It is defended not as evidence but against the
    alternative, which is serving whatever the pool happens to hold. */
 const ANCC_FNP_SYSTEM_MIX = {
-    'Preventive Care': 10.7,
-    'Pediatrics': 6.5,
-    'Cardiology': 5.8,
-    'Dermatology': 5.8,
-    'Musculoskeletal': 5.8,
-    "Women's Health": 5.6,
-    'Pulmonology': 5.3,
-    'Professional Practice': 5.3,
-    'Endocrinology': 4.6,
-    'Gastroenterology': 4.4,
-    'Infectious Disease': 4.2,
-    'Pharmacology': 4.0,
-    'Neurology': 3.9,
-    'Adolescent Health': 3.4,
-    "Men's Health": 3.4,
-    'Mental Health': 3.4,
-    'Ophthalmology': 3.0,
-    'HEENT': 2.9,
-    'Hematology': 2.7,
-    'Rheumatology': 2.6,
+    'Preventive Care': 10.9,
+    'Pediatrics': 6.6,
+    'Cardiology': 5.9,
+    'Dermatology': 5.9,
+    'Musculoskeletal': 5.9,
+    "Women's Health": 5.7,
+    'Pulmonology': 5.4,
+    'Professional Practice': 5.4,
+    'Endocrinology': 4.7,
+    'Gastroenterology': 4.5,
+    'Infectious Disease': 4.3,
+    'Pharmacology': 4.1,
+    'Neurology': 4.0,
+    "Men's Health": 3.5,
+    'Mental Health': 3.5,
+    'Ophthalmology': 3.1,
+    'HEENT': 3.0,
+    'Hematology': 2.8,
+    'Rheumatology': 2.7,
     'Obstetrics': 2.4,
     'Nephrology': 2.1,
     'Geriatrics': 1.8,
+    'Adolescent Health': 1.5,
     'Urology': 0.5,
 };
 
 const FNP_SYSTEM_MIX = {
-    'Preventive Care': 7.5,
-    'Pediatrics': 6.9,
-    'Cardiology': 6.1,
-    'Dermatology': 6.1,
-    'Musculoskeletal': 6.1,
-    "Women's Health": 5.9,
-    'Pulmonology': 5.6,
-    'Endocrinology': 4.9,
-    'Gastroenterology': 4.6,
-    'Infectious Disease': 4.4,
-    'Pharmacology': 4.2,
-    'Neurology': 4.1,
-    'Professional Practice': 3.7,
-    'Adolescent Health': 3.6,
-    "Men's Health": 3.6,
-    'Mental Health': 3.6,
-    'Ophthalmology': 3.2,
-    'HEENT': 3.1,
-    'Hematology': 2.8,
-    'Rheumatology': 2.7,
-    'Obstetrics': 2.5,
+    'Preventive Care': 7.7,
+    'Pediatrics': 7.1,
+    'Cardiology': 6.2,
+    'Dermatology': 6.2,
+    'Musculoskeletal': 6.2,
+    "Women's Health": 6.0,
+    'Pulmonology': 5.7,
+    'Endocrinology': 5.0,
+    'Gastroenterology': 4.7,
+    'Infectious Disease': 4.5,
+    'Pharmacology': 4.3,
+    'Neurology': 4.2,
+    'Professional Practice': 3.8,
+    "Men's Health": 3.7,
+    'Mental Health': 3.7,
+    'Ophthalmology': 3.3,
+    'HEENT': 3.2,
+    'Hematology': 2.9,
+    'Rheumatology': 2.8,
+    'Obstetrics': 2.6,
     'Nephrology': 2.2,
     'Geriatrics': 1.9,
+    'Adolescent Health': 1.5,
     'Urology': 0.5,
 };
 
+/* ADOLESCENT HEALTH CORRECTED 25 Aug 2026 — an over-constrained target, not a content gap.
+   An Adolescent Health question is necessarily adolescent-aged, so its SYSTEM share can never
+   exceed its AGE share and must sit well below it, because adolescents also get asthma and acne.
+   ANCC-AGPCNP was asking for 3.0 items a form from an age band that holds 3.0 — 100% of every
+   adolescent slot; A-GNP 99%; AANPCB-FNP 41%. The sampler then hunted Adolescent Health inside
+   Older Adult and Elderly cells, which cannot exist, and the shortfall read as a content gap.
+   Corrected to age share x the fraction of adolescent-aged questions actually filed under that
+   system (53%, 56%, 16% measured). This is the SAME fault already caught for Pediatrics on the
+   FNP mix, 18.4% -> 7.0%; the inherited adult-gero table was never re-checked for it. */
 const AGNP_SYSTEM_MIX = {
-    'Cardiology': 7.4,
-    'Dermatology': 7.4,
-    'Musculoskeletal': 7.4,
-    'Pulmonology': 6.8,
-    'Endocrinology': 6.0,
-    'Gastroenterology': 5.6,
-    'Infectious Disease': 5.4,
+    'Cardiology': 7.5,
+    'Dermatology': 7.5,
+    'Musculoskeletal': 7.5,
+    'Pulmonology': 6.9,
+    'Endocrinology': 6.1,
+    'Gastroenterology': 5.7,
+    'Infectious Disease': 5.5,
     'Pharmacology': 5.2,
     'Neurology': 5.0,
     'Professional Practice': 4.6,
@@ -1007,7 +1016,7 @@ const AGNP_SYSTEM_MIX = {
     'Rheumatology': 3.2,
     'Nephrology': 2.6,
     'Geriatrics': 2.4,
-    'Adolescent Health': 2.2,
+    'Adolescent Health': 1.3,
     'Urology': 0.6,
     'Obstetrics': 0.4,
 };
@@ -7105,7 +7114,7 @@ function showResults(){
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home-screen')renderHome();if(id==='analytics-screen')renderAnalytics();if(id==='custom-screen')renderCustomBuilder();if(id==='about-screen')renderAbout();}
 
 /* ═══════════════════ ABOUT / DATA ═══════════════════ */
-const APP_VERSION='v68';
+const APP_VERSION='v69';
 const ABOUT_HTML=`
 <div class="section-label" style="margin-top:0">Educational Disclaimer</div>
 <p style="margin-bottom:10px">Boards to Bedside is a study tool built for one purpose: helping you prepare for your board certification exam. It is not medical advice, and nothing in this app should be used to diagnose, treat, or make decisions about real patients. Practice questions and explanations are written for exam preparation and may simplify clinical scenarios in ways that do not apply at the bedside. Always rely on your own clinical judgment, your institution's protocols, and current official guidelines — and verify any clinical information here against up-to-date sources before applying it in practice.</p>
