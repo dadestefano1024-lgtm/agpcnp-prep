@@ -1111,7 +1111,20 @@ const BLUEPRINTS = {
      AANPCB's published adult-gero age mix scaled to a 150-item form, adopted because it is the
      only published evidence for what this population looks like by age and because it keeps our
      two adult-gero exams consistent with each other. If ANCC ever publishes its own, theirs win. */
-  'ANCC-AGPCNP-BC': { total: 175, scored: 150, timeMin: 210, optionOrder: 'alphabetical', systemMix: ANCC_SYSTEM_MIX, shapes: { recall: 4, brief: 40, vignette: 56 }, ages: { 'Adolescent': 3, 'Young Adult': 20, 'Adult': 43, 'Older Adult': 60, 'Elderly': 24 }, domains: { 'Patient Assessment Process': 36, 'Plan of Care': 90, 'Professional Practice': 24 } },
+  'ANCC-AGPCNP-BC': { total: 175, scored: 150,
+    /* Fresh draw, exam 4. FIRST ONE WITH systemMix, and it only works because the freshness
+       preference now lives INSIDE byNeed's per-system group rather than layered before it -- see
+       the note there. Measured over 3 runs of 10 forms each, flag off then on:
+           systemMix  17.49/15.83/17.18  ->  16.19/17.30/17.80   overlapping, no degradation
+           shape       6.80/7.20/7.40    ->   7.40/6.40/6.40     overlapping
+           age, domain          identical, 1.00 and 0.00
+           distinct over 10 forms   734  ->  847                 +15%
+           repeats            0,36,60,71 ->  0,27,44,55          about 25% fewer
+       PARTIAL BY DESIGN, not a shortfall. This exam constrains domain x age x shape x system and
+       ships four item types, so its cells are narrow and some revisiting is forced. It cannot
+       reach the zero-repeat result the unconstrained exams get, and buying more would mean
+       loosening a blueprint target, which is the wrong trade. */
+    freshDraw: true, timeMin: 210, optionOrder: 'alphabetical', systemMix: ANCC_SYSTEM_MIX, shapes: { recall: 4, brief: 40, vignette: 56 }, ages: { 'Adolescent': 3, 'Young Adult': 20, 'Adult': 43, 'Older Adult': 60, 'Elderly': 24 }, domains: { 'Patient Assessment Process': 36, 'Plan of Care': 90, 'Professional Practice': 24 } },
   /* A-GNP spec confirmed against the NPCB AGNP Candidate Handbook (June 2026), Appendix A.
    Domain I  — Assess 37 (28%), Diagnose 34 (25%), Plan 34 (25%), Evaluate 30 (22%) = 135.
    Domain II — Adolescent 3 (2%), Young Adult 18 (13%), Adult 38 (28%), Older Adult 54 (40%),
@@ -6625,7 +6638,15 @@ function startQuiz(opts){
          A-GNP goes 28.7 -> 6.4 points for 12% -> 18% consecutive overlap. */
       const groups = {};
       arr.forEach(q => { (groups[q.system] = groups[q.system] || []).push(q); });
-      Object.keys(groups).forEach(s => { groups[s] = shuffle(groups[s]); });
+      /* FRESH DRAW INSIDE byNeed, not before it. Layering the freshness preference outside this
+         function does nothing for a systemMix exam: byNeed re-groups and re-shuffles, so the outer
+         ordering is discarded. Measured before this line existed -- ANCC-AGPCNP repeats went
+         39,47,75,80 to 43,52,84 with the flag on, i.e. no benefit and a small perturbation.
+         Applying it HERE changes only WHICH QUESTION of a chosen system is taken. The system
+         CHOICE above is untouched, so clinical-mix accuracy cannot move -- and this comment block
+         already says that is the right split: accuracy comes from the system choice, variety from
+         the question choice. `ord` is inert unless the exam sets freshDraw. */
+      Object.keys(groups).forEach(s => { groups[s] = ord(groups[s]); });
       let placed = 0;
       for(const k in sysSent) placed += sysSent[k];
       const sent = Object.assign({}, sysSent);
@@ -7287,7 +7308,7 @@ function showResults(){
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home-screen')renderHome();if(id==='analytics-screen')renderAnalytics();if(id==='custom-screen')renderCustomBuilder();if(id==='about-screen')renderAbout();}
 
 /* ═══════════════════ ABOUT / DATA ═══════════════════ */
-const APP_VERSION='v78';
+const APP_VERSION='v79';
 const ABOUT_HTML=`
 <div class="section-label" style="margin-top:0">Educational Disclaimer</div>
 <p style="margin-bottom:10px">Boards to Bedside is a study tool built for one purpose: helping you prepare for your board certification exam. It is not medical advice, and nothing in this app should be used to diagnose, treat, or make decisions about real patients. Practice questions and explanations are written for exam preparation and may simplify clinical scenarios in ways that do not apply at the bedside. Always rely on your own clinical judgment, your institution's protocols, and current official guidelines — and verify any clinical information here against up-to-date sources before applying it in practice.</p>
