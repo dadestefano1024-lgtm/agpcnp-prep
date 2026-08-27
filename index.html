@@ -1058,6 +1058,25 @@ const BLUEPRINTS = {
                         REPLACE THIS the moment an FNP practice form can be measured — see
                         calibration/FNP_BLUEPRINTS.md. Brief is the binding constraint: 350 held
                         against 60 per form is 5.8 forms deep, thinner than every domain. */
+                     /* Fresh draw, exam 7 and the last one to get it. Measured on THIS exam's
+                        own blueprint, which is not the AANPCB FNP cert's: FIVE domains in ANCC
+                        vocabulary (Assessment/Diagnosis/Planning/Implementation/Evaluation, where
+                        AANPCB files Assess/Diagnose/Plan/Evaluate), a 150-item form rather than
+                        135, ANCC_FNP_SYSTEM_MIX, and NO `ages` axis at all — so the age-orphan
+                        problem that dominated AANPCB-FNP-C cannot arise here.
+                        Three runs of 10 forms, flag off then on:
+                            domain     0.00 / 0.00 / 0.00  ->  0.00 / 0.00 / 0.00   identical
+                            shape      0.00 / 0.00 / 0.00  ->  0.00 / 0.00 / 0.00   identical
+                            distinct over 10 forms   852   -> 1044                  +22%
+                            second form repeats  31,28,24  ->  15,19,13             about 45% fewer
+                        systemMix looked like it degraded on three runs (10.44 -> 10.93 mean) and
+                        did not. Eight runs each: 10.83 +/- 0.10 off against 10.62 +/- 0.20 on, a
+                        difference of -0.21 +/- 0.23 — inside noise, and signed the other way.
+                        CAPPED BY THE BRIEF BUCKET, as the shape note below predicted: 420 held
+                        against 60 a form is 7.0 forms deep, against vignette 19.3 and recall 43.2.
+                        (That note says 350 and 5.8; the bank has grown since it was written.)
+                        Freshness cannot outrun the thinnest constrained bucket. */
+                     freshDraw: true,
                      shapes: { recall: 4, brief: 40, vignette: 56 },
                      systemMix: ANCC_FNP_SYSTEM_MIX,
                      domains: { 'Assessment': 26, 'Diagnosis': 25, 'Planning': 29, 'Implementation': 50, 'Evaluation': 20 } },
@@ -7372,7 +7391,7 @@ function showResults(){
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home-screen')renderHome();if(id==='analytics-screen')renderAnalytics();if(id==='custom-screen')renderCustomBuilder();if(id==='about-screen')renderAbout();}
 
 /* ═══════════════════ ABOUT / DATA ═══════════════════ */
-const APP_VERSION='v82';
+const APP_VERSION='v83';
 const ABOUT_HTML=`
 <div class="section-label" style="margin-top:0">Educational Disclaimer</div>
 <p style="margin-bottom:10px">Boards to Bedside is a study tool built for one purpose: helping you prepare for your board certification exam. It is not medical advice, and nothing in this app should be used to diagnose, treat, or make decisions about real patients. Practice questions and explanations are written for exam preparation and may simplify clinical scenarios in ways that do not apply at the bedside. Always rely on your own clinical judgment, your institution's protocols, and current official guidelines — and verify any clinical information here against up-to-date sources before applying it in practice.</p>
