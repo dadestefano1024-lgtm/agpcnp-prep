@@ -1152,8 +1152,22 @@ const BLUEPRINTS = {
      is nothing to enforce. No `systemMix`: same, thirteen body systems with no counts.
      Domain V is ANCC's own wording — "Ethics, Legal Principles, and Cultural Care" — corrected
      from "Ethics, Legal, and Cultural Considerations", which was ours. */
-  'ANCC-PMHNP-BC':  { total: 175, scored: 150, timeMin: 210, optionOrder: 'alphabetical', shapes: { recall: 12, brief: 28, vignette: 60 }, domains: { 'Scientific Foundation': 33, 'Advanced Practice Skills': 41, 'Diagnosis and Treatment': 33, 'Psychotherapy and Related Theories': 17, 'Ethics, Legal Principles, and Cultural Care': 26 } },
-  'AANPCB-PMHNP-C': { total: 150, scored: 135, timeMin: 180, domains: { 'Assess': 45, 'Diagnose': 28, 'Plan': 35, 'Evaluate': 27 } },
+  'ANCC-PMHNP-BC':  { total: 175, scored: 150, timeMin: 210,
+    /* Fresh draw, exam 3 of 3. This one takes the SHAPE-BUCKET path, unlike the other two, so it
+       behaves differently and that is expected: measured before enabling, repeats on the second
+       form 50 -> 22 rather than to zero, because the recall bucket holds 141 questions against 18
+       a form and exhausts long before the pool does. Freshness YIELDS to the shape target rather
+       than breaking it -- shape error 36 before and 36 after. Distinct questions across 8 forms
+       629 -> 812. byNeed is inert here (no systemMix), which is what makes it safe; the four
+       exams that DO have systemMix get no benefit from this and are deliberately left alone. */
+    freshDraw: true, optionOrder: 'alphabetical', shapes: { recall: 12, brief: 28, vignette: 60 }, domains: { 'Scientific Foundation': 33, 'Advanced Practice Skills': 41, 'Diagnosis and Treatment': 33, 'Psychotherapy and Related Theories': 17, 'Ethics, Legal Principles, and Cultural Care': 26 } },
+  'AANPCB-PMHNP-C': { total: 150, scored: 135, timeMin: 180,
+    /* First exam to carry the fresh-draw flag, 27 Aug 2026. Measured on this exam through the
+       shipped startQuiz: repeats per form went 0,14,34,51,57 to 0,0,0,0,0 and distinct questions
+       across 8 forms rose 686 -> 877. Domain error stayed 0.00. Chosen first because it has no
+       shapes, no ages and no systemMix, so `pick` returns on its first line and never reaches
+       byNeed -- the one interaction that still needs resolving before any other exam gets this. */
+    freshDraw: true, domains: { 'Assess': 45, 'Diagnose': 28, 'Plan': 35, 'Evaluate': 27 } },
   /* NCC alphabetises, and says so outright: "The answer options are alphabetized by the first
      word in each answer option to randomize the answers" (2026 Candidate Guide, EXAM FORMAT).
      All five of its published sample questions obey it. Our bank obeyed it in 227 of 1,000,
@@ -1164,7 +1178,12 @@ const BLUEPRINTS = {
      other exams whose domains are process labels. A system-keyed mix would constrain the same
      thing twice and could not discriminate anyway -- nearly every question is Women's Health or
      Obstetrics. There is also no age or shape target because NCC publishes neither. */
-  'NCC-WHNP-BC':    { total: 175, scored: 150, timeMin: 180, optionOrder: 'alphabetical', domains: { 'Gynecologic and Reproductive Health': 49, 'Obstetrics': 44, 'Primary Care': 19, 'Assessment, Diagnostic Testing and Interpretation': 18, 'Pharmacology': 15, 'Professional Practice Issues': 5 } }
+  'NCC-WHNP-BC':    { total: 175, scored: 150, timeMin: 180,
+    /* Fresh draw, exam 2 of 3. Measured through the shipped startQuiz before enabling: repeats on
+       the second form 23 -> 0, distinct questions across 8 forms 727 -> 934, domain error 0.00
+       unchanged. Same code path as AANPCB-PMHNP-C -- no shapes, no ages, no systemMix, so `pick`
+       returns on its first line and byNeed is never reached. */
+    freshDraw: true, optionOrder: 'alphabetical', domains: { 'Gynecologic and Reproductive Health': 49, 'Obstetrics': 44, 'Primary Care': 19, 'Assessment, Diagnostic Testing and Interpretation': 18, 'Pharmacology': 15, 'Professional Practice Issues': 5 } }
 };
 
 
@@ -6527,6 +6546,38 @@ function startQuiz(opts){
        returns 20.3. Every question added since the last release sits at the END of the array,
        so the newest content was being served roughly a twelfth as often as it should be. */
     const shuffle = fyShuffle;
+    /* FRESH DRAW — opt in per exam with `freshDraw: true` in BLUEPRINTS, and inert for every exam
+       that does not set it. Measured on AANPCB-PMHNP-C through this very function: a uniform draw
+       repeats 20 of 135 items on the SECOND form and 36 on the third, because overlap is simply
+       formSize/poolSize. That gives away the depth the bank was built to hold — every exam here is
+       stocked to 5 forms of material and the sampler was spending four of those five on repetition.
+
+       IT IS A PREFERENCE, NOT A FILTER. Candidates are shuffled FIRST and then stably split into
+       not-yet-served and already-served, so randomness inside each group is untouched and a form
+       can always be filled even when everything has been seen.
+
+       THIS IS NOT THE FAILURE RECORDED IN byNeed BELOW. That one sorted a large candidate list on
+       a FIXED property, so the same questions won every time and two consecutive forms shared 90
+       items. This ranks on a property that FLIPS the instant a question is served — winning
+       removes you from the front — so it is self-correcting rather than self-reinforcing.
+
+       THE CYCLE RESETS when fewer unseen remain than one whole form, rather than degrading: five
+       clean forms, then five more, instead of a slow slide back into repetition.
+
+       BEFORE ENABLING THIS ON AN EXAM THAT HAS systemMix, resolve the ordering against byNeed —
+       byNeed re-sorts by system debt and would undo the freshness preference. AANPCB-PMHNP-C has
+       no systemMix, no shapes and no ages, so `pick` returns on its first line and byNeed is never
+       reached, which is why it is the first exam to carry the flag. */
+    const served = (state.servedExam = state.servedExam || {});
+    let seenIds = new Set(bp.freshDraw ? (served[cert] || []) : []);
+    if(bp.freshDraw && EQ.length - seenIds.size < bp.scored) seenIds = new Set();
+    const ord = arr => {
+      const s = shuffle(arr);
+      if(!bp.freshDraw) return s;
+      const fresh = [], stale = [];
+      s.forEach(q => (seenIds.has(q.id) ? stale : fresh).push(q));
+      return fresh.concat(stale);
+    };
     const selected = [];
     const used = new Set();
     const ageShort = {};
@@ -6622,16 +6673,16 @@ function startQuiz(opts){
        be 60 cells for 135 items and fragment into noise. Falls back to a plain shuffle when
        the cert declares no shape mix, so the other certs are untouched. */
     const pick = (cands, n) => {
-      if(!bp.shapes || n <= 0) return shuffle(cands).slice(0, n);
+      if(!bp.shapes || n <= 0) return ord(cands).slice(0, n);
       const bucket = { recall: [], brief: [], vignette: [] };
       cands.forEach(q => bucket[shapeOf(q)].push(q));
       // shuffle for fairness, then bring the most under-served systems to the front
-      Object.keys(bucket).forEach(k => bucket[k] = byNeed(shuffle(bucket[k])));
+      Object.keys(bucket).forEach(k => bucket[k] = byNeed(ord(bucket[k])));
       const out = [];
       // splice() so anything not taken stays available for the top-up below
       Object.entries(apportion(n, bp.shapes)).forEach(([s, k]) => out.push(...bucket[s].splice(0, k)));
       if(out.length < n){
-        const rest = byNeed(shuffle([].concat(bucket.recall, bucket.brief, bucket.vignette)));
+        const rest = byNeed(ord([].concat(bucket.recall, bucket.brief, bucket.vignette)));
         out.push(...rest.slice(0, n - out.length));
       }
       out.forEach(note);
@@ -6688,12 +6739,19 @@ function startQuiz(opts){
       selected.push(...picked);
     });
     if(selected.length < bp.scored){
-      const fill = shuffle(EQ.filter(q => !used.has(q.id))).slice(0, bp.scored - selected.length);
+      const fill = ord(EQ.filter(q => !used.has(q.id))).slice(0, bp.scored - selected.length);
       fill.forEach(q => used.add(q.id));
       selected.push(...fill);
     }
     ses.ageShortfall = ageShort;
     pool = shuffle(selected.slice(0, bp.scored));
+    /* Record what this form served, per cert, so the next one can avoid it. Written at assembly
+       rather than on answer: the candidate has seen these questions whether or not they finished. */
+    if(bp.freshDraw){
+      pool.forEach(q => seenIds.add(q.id));
+      served[cert] = [...seenIds];
+      save();
+    }
     /* Show the certifying body's display name, not the internal cert key — the key is a
        storage identifier and carries the pre-rebrand AANPCB spelling. */
     ses.label = `${CERT_LABELS[cert]||cert} ${state.specialty||''} Exam (${bp.scored} Q)`.replace(/\s+/g,' ');
@@ -7229,7 +7287,7 @@ function showResults(){
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home-screen')renderHome();if(id==='analytics-screen')renderAnalytics();if(id==='custom-screen')renderCustomBuilder();if(id==='about-screen')renderAbout();}
 
 /* ═══════════════════ ABOUT / DATA ═══════════════════ */
-const APP_VERSION='v77';
+const APP_VERSION='v78';
 const ABOUT_HTML=`
 <div class="section-label" style="margin-top:0">Educational Disclaimer</div>
 <p style="margin-bottom:10px">Boards to Bedside is a study tool built for one purpose: helping you prepare for your board certification exam. It is not medical advice, and nothing in this app should be used to diagnose, treat, or make decisions about real patients. Practice questions and explanations are written for exam preparation and may simplify clinical scenarios in ways that do not apply at the bedside. Always rely on your own clinical judgment, your institution's protocols, and current official guidelines — and verify any clinical information here against up-to-date sources before applying it in practice.</p>
