@@ -1134,7 +1134,22 @@ const BLUEPRINTS = {
    set Evaluate to 20 where it should be 30 — a third fewer Evaluate items than the real exam.
    ⚠️ The age BAND BOUNDARIES are ours, not NPCB's. The handbook states plainly that "Age
    Parameters are not defined for any population" — see calibration/AANPCB_DOMAIN_DEFINITIONS.md. */
-'AANPCB-A-GNP':   { total: 150, scored: 135, timeMin: 180, domains: { 'Assess': 37, 'Diagnose': 34, 'Plan': 34, 'Evaluate': 30 },
+'AANPCB-A-GNP':   { total: 150, scored: 135, timeMin: 180,
+    /* Fresh draw, exam 5. Measured on THIS exam's own blueprint, not inherited from the other
+       adult-gero cert -- AANPCB's 4 domains (37/34/34/30), its own 5-band age scheme
+       (Adolescent/Young Adult/Adult/Older Adult/Elderly, which is NOT ANCC's), its Springer-derived
+       shapes and its 23-system mix. Three runs of 10 forms, flag off then on:
+           domain     0.00 / 0.00 / 0.00  ->  0.00 / 0.00 / 0.00   identical
+           age        4.00 / 4.00 / 4.00  ->  4.00 / 4.00 / 4.00   identical
+           shape      9.70 / 9.70 / 9.70  ->  9.70 / 9.70 / 9.70   identical
+           systemMix  8.02 / 8.13 / 9.42  ->  7.65 / 8.61 / 8.26   overlapping, no degradation
+           distinct over 10 forms   759   ->  844                  +11%
+           repeats           0,33,38,49,67 -> 0,23,25,49,45        about 30% fewer
+       CAPPED BY THE RECALL BUCKET, which holds 234 questions against 34 a form -- 6.9 forms of
+       material, the shallowest of the three shape bands (brief 9.9, vignette 22.5). Freshness
+       cannot outrun the thinnest constrained bucket, and stretching it would mean missing the
+       shape target, which is the wrong trade. */
+    freshDraw: true, domains: { 'Assess': 37, 'Diagnose': 34, 'Plan': 34, 'Evaluate': 30 },
                     ages: { 'Adolescent': 3, 'Young Adult': 18, 'Adult': 38, 'Older Adult': 54, 'Elderly': 22 },
                     /* How an exam should be split by ITEM SHAPE, measured off Springer Practice
                        Test II (the AANPCB-blueprint one): 25.3% short recall items with no patient,
@@ -7308,7 +7323,7 @@ function showResults(){
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home-screen')renderHome();if(id==='analytics-screen')renderAnalytics();if(id==='custom-screen')renderCustomBuilder();if(id==='about-screen')renderAbout();}
 
 /* ═══════════════════ ABOUT / DATA ═══════════════════ */
-const APP_VERSION='v79';
+const APP_VERSION='v80';
 const ABOUT_HTML=`
 <div class="section-label" style="margin-top:0">Educational Disclaimer</div>
 <p style="margin-bottom:10px">Boards to Bedside is a study tool built for one purpose: helping you prepare for your board certification exam. It is not medical advice, and nothing in this app should be used to diagnose, treat, or make decisions about real patients. Practice questions and explanations are written for exam preparation and may simplify clinical scenarios in ways that do not apply at the bedside. Always rely on your own clinical judgment, your institution's protocols, and current official guidelines — and verify any clinical information here against up-to-date sources before applying it in practice.</p>
